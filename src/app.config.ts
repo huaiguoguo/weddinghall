@@ -1,6 +1,6 @@
 export default {
   pages: [
-    'pages/index/index',
+    'pages/home/index',
     'pages/opus/index',
     'pages/nested/index',
     'pages/mine/index',
@@ -10,7 +10,7 @@ export default {
       {
         iconPath: 'assets/images/test.png',
         selectedIconPath: 'assets/images/test.png',
-        pagePath: 'pages/index/index',
+        pagePath: 'pages/home/index',
         text: '首页',
       },
       {
