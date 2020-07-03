@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
-import './index.scss'
 
 function Index() {
   return (
-    <View className='index'>
-      <Text>这是asdasdhelloworld</Text>
+    <View>
+      <Text>这是作品页面</Text>
     </View>
   )
 }
