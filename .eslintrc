@@ -1,3 +1,7 @@
 {
-  'extends': ['taro/react']
+  "extends": ["taro/react"]
+  // "jsx-quotes": ["error", "prefer-single"],
+  // "rule": {
+  //   "quotes": ["error", "single"]
+  // }
 }
