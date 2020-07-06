@@ -1,35 +1,29 @@
 export default {
   pages: [
     'pages/home/index',
-    'pages/opus/index',
-    'pages/nested/index',
-    'pages/mine/index',
+    'pages/appointment/index',
+    'pages/business/index',
   ],
   tabBar: {
+    custom: true,
     list: [
       {
-        iconPath: 'assets/images/test.png',
-        selectedIconPath: 'assets/images/test.png',
+        iconPath: 'assets/images/abc_1.png',
+        selectedIconPath: 'assets/images/abc_1.png',
         pagePath: 'pages/home/index',
-        text: '首页',
+        text: '婚嫁馆',
       },
       {
         iconPath: 'assets/images/abc_1.png',
         selectedIconPath: 'assets/images/abc_1.png',
-        pagePath: 'pages/opus/index',
-        text: '作品',
+        pagePath: 'pages/appointment/index',
+        text: '专属热线',
       },
       {
         iconPath: 'assets/images/abc_2.png',
-        selectedIconPath: 'assets/images/abc_2.png',
-        pagePath: 'pages/nested/index',
-        text: '套系',
-      },
-      {
-        iconPath: 'assets/images/abc_2.png',
-        selectedIconPath: 'assets/images/abc_2.png',
-        pagePath: 'pages/mine/index',
-        text: '我的',
+        selectedIconPath: 'assets/images/ttt.png',
+        pagePath: 'pages/business/index',
+        text: '商家中心',
       },
     ],
     color: '#000',

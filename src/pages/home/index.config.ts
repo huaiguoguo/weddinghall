@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '首abc页',
+  navigationBarTitleText: '婚嫁馆',
 }

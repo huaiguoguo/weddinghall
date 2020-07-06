@@ -1,0 +1,22 @@
+.bottom-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bottom-tab-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-tab-item-img {
+  width: 70rpx;
+  height: 70rpx;
+}
+.bottom-tab-item-text {
+  font-style: bold;
+  font-size: 30rpx;
+}
