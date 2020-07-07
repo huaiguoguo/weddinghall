@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, CoverView, CoverImage } from '@tarojs/components'
 import './tabbar.scss'
@@ -9,54 +9,46 @@ interface IItem {
   selectedIconPath: string
   pagePath: string
   text: string
-}
-
-interface ITabBar {
-  selected: number
-  color: string
-  selectedColor: string
-  list: IItem[]
+  color?: string
 }
 
 function CustomTabBar(props: any) {
   const [selected, setSelected] = useState<number>(10)
-  const [color, setColor] = useState<string>('black')
+  const [color, setColor] = useState<string>('#ffffff')
   const [selectedColor, setSelectedColor] = useState<string>('blue')
   const [tabBarList, setTabBarList] = useState<IItem[]>([
     {
       index: 1,
-      iconPath: '/assets/images/abc_1.png',
-      selectedIconPath: '/assets/images/abc_1.png',
+      iconPath: '/assets/images/millennium_icon@2x.png',
+      selectedIconPath: '/assets/images/millennium_icon@2x.png',
       pagePath: 'pages/home/index',
-      text: '婚嫁馆',
+      text: '',
     },
     {
       index: 2,
-      iconPath: '/assets/images/abc_1.png',
-      selectedIconPath: '/assets/images/abc_1.png',
+      iconPath: '/assets/images/phone@2x.png',
+      selectedIconPath: '/assets/images/phone@2x.png',
       pagePath: 'pages/appointment/index',
       text: '专属热线',
     },
     {
       index: 3,
-      iconPath: '/assets/images/abc_2.png',
-      selectedIconPath: '/assets/images/ttt.png',
+      iconPath: '/assets/images/business@2x.png',
+      selectedIconPath: '/assets/images/business@2x.png',
       pagePath: 'pages/business/index',
       text: '商家中心',
     },
   ])
 
-  const switchTab = (item: IItem) => {
+  const switchTab = (item: IItem, index: number) => {
     if (item.text == '专属热线') {
       Taro.makePhoneCall({
-        phoneNumber: '18xxxxxxxx',
+        phoneNumber: '18595820892',
       })
       return false
     }
 
-    console.log('=================这是index值:', item.index)
-    setSelected(item.index)
-    console.log('=================这是selected:', selected)
+    setSelected(index)
     const url = '/' + item.pagePath
     Taro.switchTab({
       url: url,
@@ -67,29 +59,21 @@ function CustomTabBar(props: any) {
     <View>
       <CoverView className='bottom-tab'>
         {tabBarList.map((item, index) => {
-          console.log(
-            '这是遍历索引: ',
-            index,
-            '++++++++这是selected:',
-            selected
-          )
           return (
             <CoverView
               className='bottom-tab-item'
-              onClick={() => switchTab(item)}
+              onClick={() => switchTab(item, index)}
               data-path={item.pagePath}
               key={item.text}
             >
               <CoverImage
                 className='bottom-tab-item-img'
-                src={
-                  selected === index + 1 ? item.selectedIconPath : item.iconPath
-                }
+                src={selected === index ? item.selectedIconPath : item.iconPath}
               />
               <CoverView
                 className='bottom-tab-item-text'
                 style={{
-                  color: selected === index + 1 ? selectedColor : color,
+                  color: 2 === index ? 'rgba(81,81,81,1)' : color,
                 }}
               >
                 {item.text}

@@ -12,7 +12,7 @@ function Index() {
 
   return (
     <View>
-      <Text>这是套系页面</Text>
+      <Text>这是专属热线页面</Text>
     </View>
   )
 }
