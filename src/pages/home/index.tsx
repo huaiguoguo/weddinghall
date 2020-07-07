@@ -8,6 +8,10 @@ import './index.scss'
 
 import Swiper from '../../components/Swiper/Swiper'
 
+import dress from '../../assets/images/dress.png'
+import scene from '../../assets/images/scene.png'
+import flower from '../../assets/images/flower.png'
+
 function Index() {
   return (
     <View className='index'>
@@ -17,27 +21,21 @@ function Index() {
         <View className='item dress'>
           <Image src={dress_appointment} className='item_bg' />
           <View className='item_content'>
-            <Image src='' className='title_icon' />
+            <Image src={dress} className='title_icon' />
             <Text className='title_text'>礼服预约</Text>
           </View>
         </View>
         <View className='item scene'>
           <Image src={scene_appointment} className='item_bg' />
           <View className='item_content'>
-            <Image
-              src={require('../../assets/images/scene.png')}
-              className='title_icon'
-            />
+            <Image src={scene} className='title_icon' />
             <Text className='title_text'>场景预约</Text>
           </View>
         </View>
         <View className='item flower'>
           <Image src={flower_appointment} className='item_bg' />
           <View className='item_content'>
-            <Image
-              src={require('../../assets/images/flower.png')}
-              className='title_icon'
-            />
+            <Image src={flower} className='title_icon' />
             <Text className='title_text'>鲜花预约</Text>
           </View>
         </View>
