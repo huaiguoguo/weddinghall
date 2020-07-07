@@ -14,7 +14,7 @@ function SwiperCustom(props: any) {
       circular
       indicatorDots
     >
-      <SwiperItem className='item'>
+      <SwiperItem className='swiper-item'>
         <Image src={banner} className='item-img' />
       </SwiperItem>
     </Swiper>

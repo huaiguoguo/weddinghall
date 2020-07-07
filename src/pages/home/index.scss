@@ -1,35 +1,133 @@
-.index {
+.container {
   color: red;
+  // background-color: orange;
+}
+
+.logo {
+  width: 100%;
+  height: 420px;
 }
 
 .menu {
   width: 100%;
-  background-color: orange;
+  height: 100%;
+  // background-color: olive;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .item {
   width: 100%;
-  height: 120px;
-  background-color: red;
+  height: 200px;
+  // background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // margin-top: 20px;
 }
 
-.item .item_bg {
-}
-.item .item_content {
-}
-
-.item .item_content .title_icon {
-}
-.item .item_content .title_text {
+.item .item_content_top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
+.item .item_content_top .title_icon {
+  // background-color: blue;
+}
+
+.item .item_content_top .title_text {
+  font-size: 42px;
+  font-family: Source Han Sans SC;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 1);
+  margin-left: 20px;
+  // background-color: blue;
+}
+
+.item .item_content_bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.item .item_content_bottom .item_content_bottom_text {
+  color: rgba(255, 255, 255, 1);
+  opacity: 0.6;
+  font-size: 22px;
+  width: 385px;
+  height: 24px;
+  display: block;
+}
+
+// 礼服预约
 .dress {
-  // background: url('../../assets/images/dress_appointment_bg@2x.png');
+  background-image: url('../../assets/images/dress_appointment_bg@2x.png');
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
+.dress .item_content_top .title_icon {
+  width: 41px;
+  height: 45px;
+}
+
+//场景预约
 .scene {
+  background-image: url('../../assets/images/scene_appointment_bg@2x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
+.scene .item_content_top .title_icon {
+  width: 63px;
+  height: 63px;
+}
+
+//鲜花预约
 .flower {
+  background-image: url('../../assets/images/flower_appointment_bg@2x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.flower .item_content_top .title_icon {
+  width: 45px;
+  height: 46px;
+}
+
+.coupon_container {
+  width: 138px;
+  height: 159px;
+  background-image: url('../../assets/images/coupon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: fixed;
+  right: 0px;
+  bottom: 250px;
+  // background-color: burlywood;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupon_container .coupon_text {
+  width: 59px;
+  height: 62px;
+
+  font-size: 30px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  // background-color: red;
+  text-align: center;
+  display: block;
+  padding-left: 15px;
 }
