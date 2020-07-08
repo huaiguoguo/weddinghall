@@ -7,5 +7,7 @@
   "prettier.jsxBracketSameLine": true,
   "prettier.semi": false,
   "prettier.requireConfig": true,
-  "prettier.trailingComma": "all"
+  "prettier.trailingComma": "all",
+  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "editor.fontSize": 13
 }
