@@ -1,19 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
+import http from '../../api/interceptor'
 
-import Swiper from '../../components/Swiper/Swiper'
+import Swiper, { ISwiperItem } from '../../components/Swiper/Swiper'
 import dress from '../../assets/images/dress.png'
 import scene from '../../assets/images/scene.png'
 import flower from '../../assets/images/flower.png'
-import coupon from '../../assets/images/coupon.png'
+
+import enjoy from '../../assets/images/enjoy.png'
+import millennium from '../../assets/images/millennium@2x.png'
 
 import './index.scss'
 
 function Index() {
+  const [swiperList, setSwiperList] = useState<ISwiperItem[]>([])
+
+  useDidShow(() => {
+    http
+      .get('/adszone/getAdsByMark', {
+        mark: 'wxapp_index',
+      })
+      .then((res) => {
+        console.log(res.data)
+        setSwiperList(res.data)
+      })
+  })
+
   return (
     <View className='container'>
-      <Swiper />
-      <View className='logo'></View>
+      <Swiper data={swiperList} />
+      <View className='logo_container'>
+        <Image src={enjoy} className='leftLogo' />
+        <Image src={millennium} className='rightLogo' />
+      </View>
       <View className='menu'>
         <View className='item dress'>
           <View className='item_content_top'>

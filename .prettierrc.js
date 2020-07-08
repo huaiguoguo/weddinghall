@@ -4,7 +4,7 @@ module.exports = {
   jsxSingleQuote: true,
 
   /*  prettier的配置 */
-  // "prettier.printWidth": 100, // 超过最大值换行
+  'prettier.printWidth': 500, // 超过最大值换行
   // "prettier.tabWidth": 4, // 缩进字节数
   // "prettier.useTabs": false, // 缩进不使用tab，使用空格
   // "prettier.semi": true, // 句尾添加分号

@@ -1,0 +1,49 @@
+.categoryContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.categoryContainer .itemContainer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+.categoryContainer .itemContainer .itemContainerContent {
+  flex: 1;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: blue;
+}
+
+.categoryContainer .itemContainer .itemContainerContent .titleEn {
+}
+
+.categoryContainer .itemContainer .itemContainerContent .title {
+}
+
+.categoryContainer .itemContainer .itemContainerContent .btn {
+}
+
+.categoryContainer .itemContainer .itemContainerImg {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+}
+
+.categoryContainer .itemContainer .itemContainerImg .img {
+}

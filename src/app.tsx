@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
 import './app.scss'
 
