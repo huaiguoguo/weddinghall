@@ -1,5 +1,4 @@
 import React from 'react'
-import Taro, { useTabItemTap } from '@tarojs/taro'
 import { Swiper, SwiperItem, Image } from '@tarojs/components'
 import './swiper.scss'
 
@@ -20,10 +19,11 @@ function SwiperCustom(props: any) {
     <Swiper
       className='swiperContent'
       indicatorColor='#999'
-      indicatorActiveColor='#333'
+      indicatorActiveColor='orange'
       vertical={false}
       circular
       indicatorDots
+      autoplay
     >
       {data &&
         data.map((item: ISwiperItem, index: number) => {

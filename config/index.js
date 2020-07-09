@@ -1,3 +1,5 @@
+import path from 'path'
+
 const config = {
   projectName: 'weddingHall',
   date: '2020-7-2',
@@ -16,6 +18,19 @@ const config = {
     options: {},
   },
   framework: 'react',
+  alias: {
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@api': path.resolve(__dirname, '..', 'src/api'),
+    '@assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@common': path.resolve(__dirname, '..', 'src/common'),
+    '@models': path.resolve(__dirname, '..', 'src/models'),
+    '@pages': path.resolve(__dirname, '..', 'src/pages'),
+    '@store': path.resolve(__dirname, '..', 'src/store'),
+    '@styles': path.resolve(__dirname, '..', 'src/styles'),
+    '@utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@package': path.resolve(__dirname, '..', 'package.json'),
+    '@project': path.resolve(__dirname, '..', 'project.config.json'),
+  },
   mini: {
     postcss: {
       pxtransform: {
@@ -23,7 +38,7 @@ const config = {
         config: {},
       },
       url: {
-        enable: true,
+        enable: false,
         config: {
           limit: 1024, // 设定转换尺寸上限
         },

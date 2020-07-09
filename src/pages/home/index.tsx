@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import http from '../../api/interceptor'
 
-import Swiper, { ISwiperItem } from '../../components/Swiper/Swiper'
-import dress from '../../assets/images/dress.png'
-import scene from '../../assets/images/scene.png'
-import flower from '../../assets/images/flower.png'
-
-import enjoy from '../../assets/images/enjoy.png'
-import millennium from '../../assets/images/millennium@2x.png'
+import http from '@api/interceptor'
+import { imageUrl } from '@api/baseUrl'
+import Swiper, { ISwiperItem } from '@components/Swiper/Swiper'
 
 import './index.scss'
 
@@ -27,17 +22,23 @@ function Index() {
       })
   })
 
+  const category = () => {
+    Taro.redirectTo({
+      url: '/pages/home/category/index',
+    })
+  }
+
   return (
     <View className='container'>
       <Swiper data={swiperList} />
       <View className='logo_container'>
-        <Image src={enjoy} className='leftLogo' />
-        <Image src={millennium} className='rightLogo' />
+        <Image src={`${imageUrl}enjoy.png`} className='leftLogo' />
+        <Image src={`${imageUrl}millennium.png`} className='rightLogo' />
       </View>
       <View className='menu'>
-        <View className='item dress'>
+        <View className='item dress' onClick={category}>
           <View className='item_content_top'>
-            <Image src={dress} className='title_icon' />
+            <Image src={`${imageUrl}dress.png`} className='title_icon' />
             <Text className='title_text'>礼服预约</Text>
           </View>
           <View className='item_content_bottom'>
@@ -46,9 +47,9 @@ function Index() {
             </Text>
           </View>
         </View>
-        <View className='item scene'>
+        <View className='item scene' onClick={category}>
           <View className='item_content_top'>
-            <Image src={scene} className='title_icon' />
+            <Image src={`${imageUrl}scene.png`} className='title_icon' />
             <Text className='title_text'>场景预约</Text>
           </View>
           <View className='item_content_bottom'>
@@ -57,9 +58,9 @@ function Index() {
             </Text>
           </View>
         </View>
-        <View className='item flower'>
+        <View className='item flower' onClick={category}>
           <View className='item_content_top'>
-            <Image src={flower} className='title_icon' />
+            <Image src={`${imageUrl}flower.png`} className='title_icon' />
             <Text className='title_text'>鲜花预约</Text>
           </View>
           <View className='item_content_bottom'>
