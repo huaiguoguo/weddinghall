@@ -9,19 +9,15 @@ interface IGoods {}
 function Goods(props: any) {
   const [goods, setGoods] = useState<IGoods[]>([])
 
-  useDidShow(() => {
-    http
-      .get('/goods.lists/index', {
-        tid: 1,
-        title: '',
-        page: 1,
-        order: 'create_time',
-        sort: 'desc',
-      })
-      .then((res) => {
-        console.log(res)
-        setGoods(res)
-      })
+  useDidShow(async () => {
+    const res = await http.get('/goods.lists/index', {
+      tid: 1,
+      title: '',
+      page: 1,
+      order: 'create_time',
+      sort: 'desc',
+    })
+    setGoods(res)
   })
   return (
     <View className='goodsContainer'>
@@ -29,14 +25,16 @@ function Goods(props: any) {
       <View className='filter_goods'>
         <View className='filter'>这是筛选导航</View>
         <View className='goods_list'>
-          <View className='goods'>
-            <Image src='' className='goods_img' />
-            <View>
-              <Image src='' className='reduce' />
-              <Input name='goods_num' value='1' />
-              <Image src='plus' />
+          {goods.length && (
+            <View className='goods'>
+              <Image src='' className='goods_img' />
+              <View>
+                <Image src='' className='reduce' />
+                <Input name='goods_num' value='1' />
+                <Image src='plus' />
+              </View>
             </View>
-          </View>
+          )}
         </View>
       </View>
       <View>

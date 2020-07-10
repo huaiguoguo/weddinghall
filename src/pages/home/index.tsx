@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 
 import http from '@api/interceptor'
 import { imageUrl } from '@api/baseUrl'
-import Swiper, { ISwiperItem } from '@components/Swiper/Swiper'
+import SwiperCustom, { ISwiperItem } from '@components/Swiper/Swiper'
 
 import './index.scss'
 
 function Index() {
-  const [swiperList, setSwiperList] = useState<ISwiperItem[]>([])
+  const [swiperList, setSwiperList] = useState<ISwiperItem[]>()
 
-  useDidShow(() => {
-    http
-      .get('/adszone/getAdsByMark', {
-        mark: 'wxapp_index',
-      })
-      .then((res) => {
-        console.log(res.data)
-        setSwiperList(res.data)
-      })
+  useDidShow(async () => {
+    const { data } = await http.get('/adszone/getAdsByMark', {
+      mark: 'wxapp_index',
+    })
+    setSwiperList(data)
   })
 
   const category = () => {
@@ -30,7 +26,7 @@ function Index() {
 
   return (
     <View className='container'>
-      <Swiper data={swiperList} />
+      {!!swiperList && <SwiperCustom data={swiperList} />}
       <View className='logo_container'>
         <Image src={`${imageUrl}enjoy.png`} className='leftLogo' />
         <Image src={`${imageUrl}millennium.png`} className='rightLogo' />

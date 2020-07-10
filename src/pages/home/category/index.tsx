@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { View, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
 import Taro, { useDidShow } from '@tarojs/taro'
 
-import { ISwiperItem } from '@components/Swiper/Swiper'
-import CustomTabBar from '@components/CustomerTabBar'
 import http from '@api/interceptor'
+import CustomTabBar from '@components/CustomerTabBar'
+import { ISwiperItem } from '@components/Swiper/Swiper'
 
 import './index.scss'
 
@@ -18,13 +18,11 @@ export interface ICategoryItem {
 }
 
 function Category(props: any) {
-  const [category, setCategory] = useState<ICategoryItem[]>([])
+  const [category, setCategory] = useState<ICategoryItem[]>()
 
-  useDidShow(() => {
-    http.get('/goods.type/getMainType', {}).then((res) => {
-      console.log(res)
-      setCategory(res)
-    })
+  useDidShow(async () => {
+    const res = await http.get('/goods.type/getMainType', {})
+    setCategory(res)
   })
 
   const goodsList = () => {
@@ -35,7 +33,7 @@ function Category(props: any) {
 
   return (
     <View className='categoryContainer'>
-      {category &&
+      {!!category &&
         category.map((item: ICategoryItem, index: number) => {
           return (
             <View className='itemContainer' key={index} onClick={goodsList}>
@@ -49,24 +47,25 @@ function Category(props: any) {
                 </View>
               </View>
               <View className='itemContainerImg'>
-                <Swiper
-                  className='SwiperContainer'
-                  indicatorColor='#999'
-                  indicatorActiveColor='orange'
-                  vertical={false}
-                  circular
-                  indicatorDots
-                  autoplay
-                >
-                  {item.images.length &&
-                    item.images.map((images, imageIndex) => {
+                {item.images.length && (
+                  <Swiper
+                    className='SwiperContainer'
+                    indicatorColor='#999'
+                    indicatorActiveColor='orange'
+                    vertical={false}
+                    circular
+                    indicatorDots
+                    autoplay
+                  >
+                    {item.images.map((images, imageIndex) => {
                       return (
                         <SwiperItem key={imageIndex}>
                           <Image className='img' src={images.imageurl} />
                         </SwiperItem>
                       )
                     })}
-                </Swiper>
+                  </Swiper>
+                )}
               </View>
             </View>
           )

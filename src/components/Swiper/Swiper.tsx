@@ -14,7 +14,6 @@ export interface ISwiperItem {
 
 function SwiperCustom(props: any) {
   const { data } = props
-
   return (
     <Swiper
       className='swiperContent'
@@ -29,7 +28,7 @@ function SwiperCustom(props: any) {
         data.map((item: ISwiperItem, index: number) => {
           return (
             <SwiperItem key={index} className='swiper-item'>
-              <Image src={item.imageurl} className='item-img' />
+              <Image src={item.imageurl} className='swiper-item-img' />
             </SwiperItem>
           )
         })}
