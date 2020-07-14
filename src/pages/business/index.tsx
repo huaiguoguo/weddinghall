@@ -67,7 +67,7 @@ function Index() {
           </View>
         </View>
         <View className='card_container'>
-          <View className='card'>
+          <View className='card_box'>
             <Text className='card_text'>婚纱馆会员卡</Text>
           </View>
         </View>
@@ -93,9 +93,10 @@ function Index() {
             </View>
           </View>
         </View>
-        <View className='coupon_container'>
-          <View className='coupon'></View>
-        </View>
+      </View>
+
+      <View className='coupon_container'>
+        <View className='coupon'></View>
       </View>
 
       {/* 菜单 */}
@@ -112,7 +113,7 @@ function Index() {
       </View>
 
       {/* 我的订单菜单列有 */}
-      <View className='order_container'>
+      {/* <View className='order_container'>
         <View className='order_header'>
           <View className='header_title'>
             <Text className='header_title_text'>我的订单</Text>
@@ -133,7 +134,7 @@ function Index() {
               )
             })}
         </View>
-      </View>
+      </View> */}
     </View>
   )
 }

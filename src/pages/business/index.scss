@@ -3,7 +3,6 @@
 .container {
   width: 100%;
   height: 100%;
-  padding: 5px 30px;
   padding-bottom: 110px;
   // background-color: olive;
   box-sizing: border-box;
@@ -18,26 +17,21 @@
 
 .container .header_container {
   width: 100%;
-  height: 920px;
+  height: 900px;
   padding: 0px 30px;
-  background-image: url($baseUrl + 'header_background@2x.png');
+  // background-image: url($baseUrl + 'header_background@2x.png');
+  background-color: #e1392d;
+
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.container .header_container::after {
-  content: '';
-  width: 140%;
-  height: 100px;
-  position: absolute;
-  left: -20%;
-  top: 0;
+  position: relative;
   z-index: -1;
-  border-radius: 0 0 50% 50%;
-  background: #1496f1;
+  overflow: hidden;
 }
 
 .header_container .userinfo_container {
@@ -79,7 +73,17 @@
 }
 
 .card_container {
+  width: 100%;
   padding: 0px 30px;
+}
+
+.card_container .card_box {
+  width: 677px;
+  height: 381px;
+  background-color: orange;
+  border-radius: 10px;
+}
+.card_container .card_box .card_text {
 }
 
 .amount_container {
@@ -97,18 +101,45 @@
 }
 
 .coupon_container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.coupon_container::after {
+  content: '';
+  width: 120%;
+  height: 150px;
+  position: absolute;
+  left: -10%;
+  bottom: 0px;
+  z-index: 9;
+  border-radius: 0 0 50% 50%;
+  background-color: #e1392d;
+  // background-color: blue;
+  // background-image: url($baseUrl + 'header_background@2x.png');
 }
 
 .coupon_container .coupon {
-  width: 677px;
-  height: 381px;
-  background-color: orange;
+  width: 90%;
+  height: 100px;
+  background: linear-gradient(85deg, rgba(45, 57, 69, 1), rgba(15, 27, 39, 1));
+  border-radius: 16px;
+  position: relative;
+  z-index: 99;
+  top: 0px;
+  left: 0px;
+  border-radius: 5px 5px 45% 45%;
 }
 
 .coupon_container .coupon .coupon_text {
   text-align: center;
-  position: relative;
-  top: 0px;
 }
 
 .container .menu_container {
