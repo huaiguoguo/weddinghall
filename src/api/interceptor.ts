@@ -24,7 +24,6 @@ const Request = (
   })
 
   return new Promise((resolve, reject) => {
-    // console.log(baseUrl)
     Taro.request({
       url: `https://wd.chenxianlei.com/api/${url}`,
       data: data,
@@ -43,7 +42,10 @@ const Request = (
         return resolve(dataObject)
       },
       fail: function (error) {
-        console.log('这是错误信息', error)
+        Taro.showModal({
+          title: '提示',
+          content: '网络错误',
+        })
       },
       complete: function () {
         Taro.hideLoading()
@@ -52,11 +54,11 @@ const Request = (
   })
 }
 
-const get = (url: string, data: any, header?: any) => {
+const get = (url: string, data?: any, header?: any) => {
   return Request(url, 'GET', data, header)
 }
 
-const post = (url: string, data: any, header?: any) => {
+const post = (url: string, data?: any, header?: any) => {
   return Request(url, 'POST', data, header)
 }
 

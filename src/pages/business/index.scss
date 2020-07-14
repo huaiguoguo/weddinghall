@@ -1,0 +1,234 @@
+@import '@styles/common.scss';
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 5px 30px;
+  padding-bottom: 110px;
+  // background-color: olive;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  text-align: center;
+}
+
+.container .header_container {
+  width: 100%;
+  height: 920px;
+  padding: 0px 30px;
+  background-image: url($baseUrl + 'header_background@2x.png');
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .header_container::after {
+  content: '';
+  width: 140%;
+  height: 100px;
+  position: absolute;
+  left: -20%;
+  top: 0;
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+  background: #1496f1;
+}
+
+.header_container .userinfo_container {
+  width: 100%;
+  height: 80px;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userinfo_container .user_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.userinfo_container .user_info .avatar {
+  width: 76px;
+  height: 76px;
+}
+.userinfo_container .user_info .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 24px;
+}
+.userinfo_container .setting {
+  width: 48px;
+  height: 48px;
+  background-color: olive;
+}
+
+.userinfo_container .setting .pic {
+  width: 100%;
+  height: 100%;
+}
+
+.card_container {
+  padding: 0px 30px;
+}
+
+.amount_container {
+  width: 414px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amount_container .left {
+}
+.amount_container .right {
+}
+
+.coupon_container {
+}
+
+.coupon_container .coupon {
+  width: 677px;
+  height: 381px;
+  background-color: orange;
+}
+
+.coupon_container .coupon .coupon_text {
+  text-align: center;
+  position: relative;
+  top: 0px;
+}
+
+.container .menu_container {
+  width: 689px;
+  height: 166px;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 6px 10px 0px rgba(207, 206, 206, 0.16);
+  border-radius: 16px;
+}
+
+.container .menu_container .menu_item {
+  width: 102px;
+  height: 93px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: palegreen;
+}
+
+.container .menu_container .menu_item .menu_icon {
+  width: 52px;
+  height: 50px;
+}
+
+.container .menu_container .menu_item .menu_name {
+  height: 25px;
+  margin-top: 18px;
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(81, 81, 81, 1);
+  line-height: 34px;
+}
+
+.container .order_container {
+  width: 689px;
+  height: 230px;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: peru;
+  box-shadow: 0px 6px 10px 0px rgba(207, 206, 206, 0.16);
+}
+
+.container .order_container .order_header {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .order_container .order_header .header_title {
+  width: 120px;
+  height: 29px;
+}
+
+.container .order_container .order_header .header_title .header_title_text {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: rgba(81, 81, 81, 1);
+  line-height: 40px;
+}
+.container .order_container .order_header .header_order_more {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .order_container .order_header .header_order_more .more_text {
+  width: 111px;
+  height: 27px;
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(164, 164, 164, 1);
+  line-height: 40px;
+  margin-right: 20px;
+}
+
+.container .order_container .order_header .header_order_more .right_icon {
+  width: 16px;
+  height: 28px;
+}
+
+.container .order_container .order_menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .order_container .order_menu .menu_item {
+  width: 77px;
+  height: 67px;
+}
+.container .order_container .order_menu .menu_item .menu_icon {
+  width: 60px;
+  height: 50px;
+}
+.container .order_container .order_menu .menu_item .menu_name {
+  width: 100%;
+  height: 24px;
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(81, 81, 81, 1);
+  line-height: 34px;
+  margin-top: 17px;
+}

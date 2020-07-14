@@ -3,8 +3,7 @@ import Taro, { useTabItemTap } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 
 function Index() {
-  useTabItemTap((item) => {
-    console.log(item)
+  useTabItemTap(() => {
     Taro.makePhoneCall({
       phoneNumber: '18317183370',
     })

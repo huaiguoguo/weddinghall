@@ -1,10 +1,10 @@
 export default {
   pages: [
+    'pages/business/index',
+    'pages/home/goods/index',
     'pages/home/index',
     'pages/home/category/index',
-    'pages/home/goods/index',
     'pages/appointment/index',
-    'pages/business/index',
   ],
   tabBar: {
     custom: true,

@@ -1,5 +1,184 @@
 .goodsContainer {
   width: 100%;
   height: 100%;
-  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+//过滤器
+.filter {
+  width: 100%;
+  height: 70px;
+  background-color: #ffffff;
+
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+}
+
+.filter_item {
+  flex: 1;
+  height: 70px;
+  line-height: 70px;
+  padding: 20px 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter_item .filter_item_title {
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  color: rgba(81, 81, 81, 1);
+}
+
+.filter_active .filter_item_title {
+  color: rgba(254, 73, 88, 1);
+  // background-color: palegoldenrod;
+}
+
+.goods_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+//商品列表
+.goods_list {
+  width: 690px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+.goods_list .goods {
+}
+
+.goods_list .goods .goods_img {
+}
+
+.dress_list {
+  height: 100%;
+}
+.dress_list .goods {
+  width: 337px;
+  height: 410px;
+}
+.dress_list .goods .goods_img {
+  width: 100%;
+  height: 100%;
+}
+
+.dress_list .goods:nth-child(2n + 2) {
+  margin-left: 16px;
+}
+
+.dress_list .goods:nth-child(n + 3) {
+  margin-top: 15px;
+}
+
+.dress_list .goods:last-child {
+  margin-right: auto;
+}
+
+// 场景
+.scene_list {
+  // background-color: blue;
+}
+
+.scene_list .goods {
+}
+
+.scene_list .goods .goods_img {
+  width: 100%;
+  height: 100%;
+}
+
+//鲜花
+.flower_list {
+  // background-color: plum;
+}
+
+.flower_list .goods {
+}
+
+.flower_list .goods .goods_img {
+  width: 100%;
+  height: 100%;
+}
+
+//底部按钮容器
+.menu_container {
+  width: 635px;
+  height: 87px;
+  // background-color: blue;
+  position: fixed;
+  bottom: 50px;
+  // left: 25%;
+  // right: 25%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu {
+  width: 422px;
+  height: 100%;
+  background: rgba(17, 17, 17, 1);
+  border-radius: 44px;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu_dress {
+}
+.menu_sence {
+}
+.menu_flower {
+}
+
+.place_order {
+  width: 181px;
+  height: 100%;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 43px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.place_order .order_text {
+  color: #000;
 }

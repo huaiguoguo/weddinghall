@@ -22,6 +22,7 @@ function Category(props: any) {
 
   useDidShow(async () => {
     const res = await http.get('/goods.type/getMainType', {})
+    console.log('这是分类获得到的数据:', res)
     setCategory(res)
   })
 
@@ -47,7 +48,7 @@ function Category(props: any) {
                 </View>
               </View>
               <View className='itemContainerImg'>
-                {item.images.length && (
+                {item.images.length > 0 && (
                   <Swiper
                     className='SwiperContainer'
                     indicatorColor='#999'
