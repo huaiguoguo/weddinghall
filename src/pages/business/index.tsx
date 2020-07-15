@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Image, Text, Button } from '@tarojs/components'
 
 import './index.scss'
 
@@ -54,49 +54,60 @@ function Index() {
     <View className='container'>
       {/* 顶部 */}
       <View className='header_container'>
-        <View className='userinfo_container'>
-          <View className='user_info'>
-            <Image src={`${url}avatar@2x.png`} className='avatar' />
-            <View className='info'>
-              <Text>xxxx婚纱摄影公司</Text>
-              <Text>阿訾姑娘</Text>
+        <Image src={`${url}header_background@2x.png`} className='header_bg' />
+        <View className='header_content'>
+          <View className='userinfo_container'>
+            <View className='user_info'>
+              <Image src={`${url}avatar@2x.png`} className='avatar' />
+              <View className='info'>
+                <Text className='company'>xxxx婚纱摄影公司</Text>
+                <Text className='username'>阿訾姑娘</Text>
+              </View>
+            </View>
+            <View className='setting'>
+              <Image src={`${url}setting@2x.png`} className='pic' />
             </View>
           </View>
-          <View className='setting'>
-            <Image src={`${url}setting@2x.png`} className='pic' />
+          <View className='card_container'>
+            <View className='card_box'>
+              <Text className='card_text'></Text>
+            </View>
+          </View>
+          <View className='amount_container'>
+            <View className='left'>
+              <View className='amount'>
+                <Text className='rmb'>¥</Text>
+                <Text className='money'>1556</Text>
+                <Text className='decimal_point'>.00</Text>
+              </View>
+              <View className='account'>
+                <Text>账户余额(元)</Text>
+              </View>
+            </View>
+            <View className='right'>
+              <View className='amount'>
+                <Text className='rmb'>¥</Text>
+                <Text className='money'>5689</Text>
+                <Text className='decimal_point'>.00</Text>
+              </View>
+              <View className='account'>
+                <Text>累积优惠(元)</Text>
+              </View>
+            </View>
+          </View>
+          <View className='coupon_container'>
+            <Image src={`${url}coupon_bg@2x.png`} className='coupon_bg' />
+            <View className='coupon_content'>
+              <View className='coupon_content_left'>
+                <Image src={`${url}victory@2x.png`} className='coupon_vip' />
+                <Text className='coupon_text'>加入会员即可获得丰厚优惠</Text>
+              </View>
+              <View className='coupon_content_right'>
+                <Text className='coupon_btn'>查看会员权益</Text>
+              </View>
+            </View>
           </View>
         </View>
-        <View className='card_container'>
-          <View className='card_box'>
-            <Text className='card_text'>婚纱馆会员卡</Text>
-          </View>
-        </View>
-        <View className='amount_container'>
-          <View className='left'>
-            <View className='amount'>
-              <Text className='rmb'>¥</Text>
-              <Text className='money'>15</Text>
-              <Text className='decimal_point'>.00</Text>
-            </View>
-            <View>
-              <Text>账户余额</Text>
-            </View>
-          </View>
-          <View className='right'>
-            <View className='amount'>
-              <Text className='rmb'>¥</Text>
-              <Text className='money'>15</Text>
-              <Text className='decimal_point'>.00</Text>
-            </View>
-            <View>
-              <Text>账户余额</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View className='coupon_container'>
-        <View className='coupon'></View>
       </View>
 
       {/* 菜单 */}
@@ -113,7 +124,7 @@ function Index() {
       </View>
 
       {/* 我的订单菜单列有 */}
-      {/* <View className='order_container'>
+      <View className='order_container'>
         <View className='order_header'>
           <View className='header_title'>
             <Text className='header_title_text'>我的订单</Text>
@@ -134,7 +145,7 @@ function Index() {
               )
             })}
         </View>
-      </View> */}
+      </View>
     </View>
   )
 }

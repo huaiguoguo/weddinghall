@@ -4,7 +4,8 @@
   width: 100%;
   height: 100%;
   padding-bottom: 110px;
-  // background-color: olive;
+  margin-bottom: 0px;
+  background-color: #ffffff;
   box-sizing: border-box;
 
   display: flex;
@@ -13,14 +14,20 @@
   align-items: center;
 
   text-align: center;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 
 .container .header_container {
   width: 100%;
-  height: 900px;
-  padding: 0px 30px;
+  height: 920px;
+  // padding: 0px 30px;
   // background-image: url($baseUrl + 'header_background@2x.png');
-  background-color: #e1392d;
+  // background-color: #e1392d;
 
   box-sizing: border-box;
 
@@ -28,141 +35,318 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  position: relative;
-  z-index: -1;
-  overflow: hidden;
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 
-.header_container .userinfo_container {
+.header_container .header_bg {
   width: 100%;
-  height: 80px;
-  background-color: red;
+  height: 100%;
+  // background-color: blue;
+
+  position: absolute;
+  z-index: 99;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.header_container .header_content {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  position: absolute;
+  top: 0;
+  z-index: 999;
+}
+
+.header_container .header_content .userinfo_container {
+  width: 100%;
+  height: 90px;
+  padding: 0px 30px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  position: absolute;
+  top: 0px;
 }
 
-.userinfo_container .user_info {
+.header_content .userinfo_container .user_info {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.userinfo_container .user_info .avatar {
+.header_content .userinfo_container .user_info .avatar {
   width: 76px;
   height: 76px;
 }
-.userinfo_container .user_info .info {
+.header_content .userinfo_container .user_info .info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   margin-left: 24px;
 }
-.userinfo_container .setting {
-  width: 48px;
-  height: 48px;
-  background-color: olive;
+
+.userinfo_container .user_info .info .company {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  // line-height: 40px;
 }
 
-.userinfo_container .setting .pic {
+.userinfo_container .user_info .info .username {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  // line-height: 40px;
+}
+
+.header_content .userinfo_container .setting {
+  width: 50px;
+  height: 50px;
+  // background-color: olive;
+}
+
+.header_content .userinfo_container .setting .pic {
   width: 100%;
   height: 100%;
 }
 
-.card_container {
+.header_content .card_container {
   width: 100%;
+  height: 308px;
   padding: 0px 30px;
-}
-
-.card_container .card_box {
-  width: 677px;
-  height: 381px;
-  background-color: orange;
-  border-radius: 10px;
-}
-.card_container .card_box .card_text {
-}
-
-.amount_container {
-  width: 414px;
-  height: 100%;
+  margin: 56px 0px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  // background-color: peru;
+  position: relative;
+  top: -20px;
+}
+
+.header_content .card_container .card_box {
+  width: 604px;
+  height: 308px;
+  background: linear-gradient(
+    85deg,
+    rgba(255, 239, 214, 1),
+    rgba(214, 163, 132, 1)
+  );
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px #ccc;
+}
+.header_content .card_container .card_box .card_text {
+}
+
+.header_content .amount_container {
+  width: 100%;
+  height: 100px;
+  padding: 0px 30px;
+  box-sizing: border-box;
+  margin-bottom: 51px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 
-.amount_container .left {
-}
-.amount_container .right {
+.amount_container .left,
+.right {
+  width: auto;
+  height: auto;
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.coupon_container {
+.amount_container .amount {
+  // background-color: yellowgreen;
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40px;
+}
+
+.amount_container .amount .money {
+  font-size: 28px;
+}
+
+.amount_container .amount .money {
+  font-size: 72px;
+}
+
+.amount_container .amount .decimal_point {
+  font-size: 30px;
+}
+
+.amount_container .account {
+  // background-color: purple;
+
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40px;
+  opacity: 0.8;
+  margin-top: 18px;
+}
+
+.header_content .coupon_container {
   width: 100%;
   height: 100px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  z-index: 1;
-  position: relative;
-  overflow: hidden;
 }
 
-.coupon_container::after {
-  content: '';
-  width: 120%;
-  height: 150px;
-  position: absolute;
-  left: -10%;
-  bottom: 0px;
-  z-index: 9;
-  border-radius: 0 0 50% 50%;
-  background-color: #e1392d;
-  // background-color: blue;
-  // background-image: url($baseUrl + 'header_background@2x.png');
-}
-
-.coupon_container .coupon {
-  width: 90%;
+.header_content .coupon_container {
+  width: 690px;
   height: 100px;
-  background: linear-gradient(85deg, rgba(45, 57, 69, 1), rgba(15, 27, 39, 1));
-  border-radius: 16px;
+  // background-color: blanchedalmond;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
+  top: 50px;
   z-index: 99;
+}
+
+.header_content .coupon_container .coupon_bg {
+  width: 98%;
+  height: 100%;
+  // margin-top: 0%;
+  position: absolute;
   top: 0px;
-  left: 0px;
-  border-radius: 5px 5px 45% 45%;
+  z-index: 999;
 }
 
-.coupon_container .coupon .coupon_text {
-  text-align: center;
-}
-
-.container .menu_container {
-  width: 689px;
-  height: 166px;
+.header_content .coupon_container .coupon_content {
+  width: 100%;
+  height: 100%;
   padding: 0px 30px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: 0px 6px 10px 0px rgba(207, 206, 206, 0.16);
+  position: relative;
+  top: -5px;
+  left: 0px;
+  z-index: 999;
+}
+
+.header_content .coupon_container .coupon_content .coupon_content_left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header_content
+  .coupon_container
+  .coupon_content
+  .coupon_content_left
+  .coupon_vip {
+  width: 40px;
+  height: 40px;
+}
+
+.header_content
+  .coupon_container
+  .coupon_content
+  .coupon_content_left
+  .coupon_text {
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(215, 190, 135, 1);
+  line-height: 40px;
+  margin-left: 22px;
+}
+
+.header_content .coupon_container .coupon_content .coupon_content_right {
+}
+
+.header_content .coupon_container .coupon_content .coupon_btn {
+  display: block;
+  width: 203px;
+  height: 57px;
+  background: linear-gradient(
+    85deg,
+    rgba(255, 239, 214, 1),
+    rgba(214, 163, 132, 1)
+  );
+  border-radius: 29px;
+
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(17, 29, 41, 1);
+  line-height: 57px;
+}
+
+// 这部分是菜单部分
+.container .menu_container {
+  width: 689px;
+  height: 166px;
+  padding: 0px 30px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 6px 10px 5px rgba(207, 206, 206, 0.5);
   border-radius: 16px;
+
+  margin-top: 30px;
+
+  // background-color: purple;
+
+  position: absolute;
+  top: 850px;
+  z-index: 999;
 }
 
 .container .menu_container .menu_item {
-  width: 102px;
+  width: auto;
   height: 93px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: palegreen;
+  // background-color: palegreen;
 }
 
 .container .menu_container .menu_item .menu_icon {
@@ -171,6 +355,7 @@
 }
 
 .container .menu_container .menu_item .menu_name {
+  width: auto;
   height: 25px;
   margin-top: 18px;
   font-size: 26px;
@@ -180,30 +365,43 @@
   line-height: 34px;
 }
 
+//订单菜单部分
 .container .order_container {
   width: 689px;
   height: 230px;
-  padding: 0px 30px;
+  padding: 10px 30px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: peru;
-  box-shadow: 0px 6px 10px 0px rgba(207, 206, 206, 0.16);
+  // background-color: peru;
+  box-shadow: 0px 6px 10px 5px rgba(207, 206, 206, 0.5);
+  border-radius: 16px;
+  position: absolute;
+  top: 1080px;
+  z-index: 999;
+  margin-top: 25px;
 }
 
 .container .order_container .order_header {
   width: 100%;
-  height: 30px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  padding-top: 10px;
+  box-sizing: border-box;
+  // background-color: red;
 }
 
 .container .order_container .order_header .header_title {
   width: 120px;
-  height: 29px;
+  height: 100%;
+  line-height: 35px;
 }
 
 .container .order_container .order_header .header_title .header_title_text {
@@ -214,21 +412,26 @@
   line-height: 40px;
 }
 .container .order_container .order_header .header_order_more {
+  width: 150px;
+  height: 100%;
+  line-height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  // background-color: pink;
 }
 
 .container .order_container .order_header .header_order_more .more_text {
-  width: 111px;
-  height: 27px;
+  width: auto;
+  height: 100%;
   font-size: 28px;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(164, 164, 164, 1);
-  line-height: 40px;
+  line-height: 25px;
   margin-right: 20px;
+  // background-color: red;
 }
 
 .container .order_container .order_header .header_order_more .right_icon {
@@ -241,25 +444,34 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .container .order_container .order_menu .menu_item {
-  width: 77px;
-  height: 67px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .order_container .order_menu .menu_item:nth-child(n + 2) {
+  margin-left: 55px;
 }
 .container .order_container .order_menu .menu_item .menu_icon {
   width: 60px;
   height: 50px;
 }
 .container .order_container .order_menu .menu_item .menu_name {
-  width: 100%;
-  height: 24px;
+  width: auto;
+  height: auto;
   font-size: 26px;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(81, 81, 81, 1);
   line-height: 34px;
   margin-top: 17px;
+  // background-color: red;
 }

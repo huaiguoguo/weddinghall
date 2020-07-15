@@ -4,14 +4,14 @@ module.exports = {
   jsxSingleQuote: true,
 
   /*  prettier的配置 */
-  'prettier.printWidth': 500, // 超过最大值换行
+  'prettier.printWidth': 1000, // 超过最大值换行
   // "prettier.tabWidth": 4, // 缩进字节数
   // "prettier.useTabs": false, // 缩进不使用tab，使用空格
   // "prettier.semi": true, // 句尾添加分号
   // "prettier.singleQuote": true, // 使用单引号代替双引号
   // "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
   // "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
-  // "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
+  'prettier.bracketSpacing': true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
   // "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
   // "prettier.endOfLine": "auto", // 结尾是 \n \r \n\r auto
   // "prettier.eslintIntegration": false, //不让prettier使用eslint的代码格式进行校验
