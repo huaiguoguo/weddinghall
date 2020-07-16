@@ -1,10 +1,18 @@
 export default {
   pages: [
-    'pages/business/authority/index',
-    'pages/business/index',
-    'pages/home/goods/index',
     'pages/home/index',
     'pages/home/category/index',
+    'pages/home/goods/index',
+
+    'pages/business/setting/index',
+    'pages/business/setting/store_profile/index',
+    'pages/business/setting/agreement/index',
+    'pages/business/setting/pay_password/index',
+    'pages/business/setting/bank/index',
+    'pages/business/setting/clear/index',
+
+    'pages/business/authority/index',
+    'pages/business/index',
     'pages/appointment/index',
   ],
   tabBar: {

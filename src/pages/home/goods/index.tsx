@@ -74,9 +74,9 @@ function Goods(props: any) {
         imageurl: `${imgurl}/scene/scene@2x.png`,
       })
     } else if (cid == 3) {
-      scene.push({
-        imageurl: `${imgurl}/flower/flower_@2x.png`,
-      })
+      // scene.push({
+      //   imageurl: `${imgurl}/flower/flower_@2x.png`,
+      // })
     }
 
     setGoods(scene)
@@ -106,7 +106,7 @@ function Goods(props: any) {
       <View className='goods_container'>
         {currentFilterId == 1 && (
           <View className='goods_list dress_list'>
-            {goods.length &&
+            {goods.length > 0 &&
               goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
@@ -119,7 +119,7 @@ function Goods(props: any) {
 
         {currentFilterId == 2 && (
           <View className='goods_list scene_list'>
-            {goods.length &&
+            {goods.length > 0 &&
               goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
@@ -132,7 +132,7 @@ function Goods(props: any) {
 
         {currentFilterId == 3 && (
           <View className='goods_list flower_list'>
-            {goods.length &&
+            {goods.length > 0 &&
               goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
