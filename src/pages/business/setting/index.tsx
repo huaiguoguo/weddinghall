@@ -14,7 +14,7 @@ function Index(props: any) {
     },
     {
       menu_name: '修改支付密码',
-      menu_url: '/pages/business/setting/pay_password/index',
+      menu_url: '/pages/business/setting/change_pay_password/index',
       menu_icon: `${imageUrl}/business/setting/password@2x.png`,
     },
     {

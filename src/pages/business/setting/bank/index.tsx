@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { imageUrl } from '@api/baseUrl'
+import Taro from '@tarojs/taro'
 
 import './index.scss'
 
@@ -40,6 +41,12 @@ function Index(props: any) {
     }
   }
 
+  const addBank = () => {
+    Taro.navigateTo({
+      url: '/pages/business/setting/bank/add_bank/index',
+    })
+  }
+
   return (
     <View className='container'>
       <View className='bank_list'>
@@ -70,13 +77,13 @@ function Index(props: any) {
           })}
       </View>
       <View className='add_container'>
-        <View className='add_icon'>
+        <View className='add_icon' onClick={addBank}>
           <Image
             className='icon'
             src={`${imageUrl}business/setting/plus@2x.png`}
           />
         </View>
-        <View className='add_notice'>
+        <View className='add_notice' onClick={addBank}>
           <Text className='title'>添加银行卡</Text>
           <Text className='notice'>请使用绑定后的银行账户打款</Text>
         </View>

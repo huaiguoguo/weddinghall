@@ -16,7 +16,7 @@ function Index() {
     {
       name: '会员权益',
       icon: `${businessImageUrl}/an_crown@2x.png`,
-      url: '',
+      url: '/pages/business/member_benefits/index',
     },
     {
       name: '预约选片',

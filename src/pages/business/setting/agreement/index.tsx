@@ -1,10 +1,14 @@
 import React from 'react'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Input, Picker } from '@tarojs/components'
 
 function Index(props: any) {
+  const pickerChange = () => {}
+
   return (
     <View className='container'>
-      <Text>这是 用户协议页面</Text>
+      <View>
+        <Text>这是用户协议页面</Text>
+      </View>
     </View>
   )
 }

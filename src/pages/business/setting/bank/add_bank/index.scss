@@ -1,0 +1,131 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 82px;
+
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container .form_item {
+  width: 100%;
+  height: auto;
+  padding: 0px 40px;
+  box-sizing: border-box;
+  // background-color: palegoldenrod;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.form_container .form_item:nth-child(n + 2) {
+  margin-top: 78px;
+}
+
+.form_container .form_item .form_label {
+  width: 115px;
+  // background-color: darkkhaki;
+}
+
+.form_container .form_item .form_label .label {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+
+.form_container .form_item .form_input {
+  margin-left: 65px;
+  // background-color: orange;
+}
+
+.form_container .form_item .form_input .input {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(164, 164, 164, 1);
+}
+
+.btn_container {
+  width: 100%;
+  height: auto;
+  margin-top: 184px;
+  // background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container .btn_container_top {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // background-color: red;
+}
+
+.btn_container_top .agree_icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 22px;
+}
+
+.btn_container_top .agree_text {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+.btn_container_top .agreement {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #6a7cea;
+}
+
+.btn_container .btn_container_bottom {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // background-color: orange;
+}
+
+.btn {
+  width: 690px;
+  height: 99px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 50px;
+  margin-top: 48px;
+}
+
+.btn .next_text {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}

@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.SwiperContainer {
+  // background-color: palegoldenrod;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  // width: 200px;
+  height: 750px;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.demo {
+  width: 90%;
+  height: 90%;
+  padding: 20px 0px;
+  box-sizing: border-box;
+  line-height: 100%;
+  background-color: orange;
+  text-align: center;
+  transition: 100ms;
+  transform: scale(0.9);
+}
+
+.active {
+  height: 750px;
+  background-color: red;
+  transform: scale(1);
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  width: 330px;
+  height: 99px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_text {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}

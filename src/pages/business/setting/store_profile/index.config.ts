@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '个人资料',
+  navigationBarTitleText: '商家资料',
 }
