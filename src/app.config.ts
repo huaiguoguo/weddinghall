@@ -12,9 +12,8 @@ export default {
     'pages/business/setting/bank/add_bank/index',
     'pages/business/setting/bank/set_pay_password/index',
 
-    'pages/business/member_benefits/index',
-
     'pages/business/setting/clear/index',
+    'pages/business/member_benefits/index',
 
     'pages/business/authority/index',
     'pages/business/index',

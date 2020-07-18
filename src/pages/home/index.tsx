@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow, redirectTo } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 
 import http from '@api/interceptor'
@@ -22,6 +22,19 @@ function Index() {
     Taro.redirectTo({
       url: '/pages/home/category/index',
     })
+  }
+
+  const redirectUrl = (url: string) => {
+    if (!url) {
+      Taro.showToast({
+        title: '正在开发中...',
+      })
+      return false
+    }
+    Taro.navigateTo({
+      url,
+    })
+    return false
   }
 
   return (
@@ -66,8 +79,11 @@ function Index() {
           </View>
         </View>
       </View>
-      <View className='coupon_container'>
-        <Text className='coupon_text'>会员优惠</Text>
+      <View
+        className='coupon_container'
+        onClick={() => redirectUrl('/pages/business/member_benefits/index')}
+      >
+        <Text className='coupon_text'>会员权益</Text>
       </View>
     </View>
   )

@@ -142,7 +142,12 @@ function Index() {
                 />
                 <Text className='coupon_text'>加入会员即可获得丰厚优惠</Text>
               </View>
-              <View className='coupon_content_right'>
+              <View
+                className='coupon_content_right'
+                onClick={() =>
+                  redirectTo('/pages/business/member_benefits/index')
+                }
+              >
                 <Text className='coupon_btn'>查看会员权益</Text>
               </View>
             </View>

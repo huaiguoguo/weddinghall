@@ -1,20 +1,53 @@
+@import '../../../styles/common.scss';
 .container {
   width: 100%;
   height: 100%;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.head_bg {
+  width: 100%;
+  height: 100%;
+  // background-image: url($baseUrl + 'head_bg@2x.png');
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // position: relative;
+  // top: 0px;
+  // z-index: 9;
+}
+
+.head_bg .head_bg_img {
+  width: 100%;
+  height: 380px;
 }
 
 .SwiperContainer {
+  height: 800px;
+  // margin-top: 250px;
   // background-color: palegoldenrod;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  position: absolute;
+  top: 300px;
+  left: 0px;
+  right: 0px;
+  z-index: 999;
 }
 
 .item {
-  // width: 200px;
-  height: 750px;
-  background-color: blue;
+  width: 500px;
+  height: 100%;
+  // padding: 30px 0px;
+  // box-sizing: border-box;
+  // background-color: blue;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -22,28 +55,173 @@
 }
 
 .demo {
-  width: 90%;
-  height: 90%;
-  padding: 20px 0px;
+  width: 500px;
+  height: 95%;
+  margin: 100px 0px;
   box-sizing: border-box;
   line-height: 100%;
   background-color: orange;
   text-align: center;
+
   transition: 100ms;
-  transform: scale(0.9);
+  transform: scale(0.95);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gold {
+  background: linear-gradient(to bottom, #f7dec3, #dbb293);
+}
+
+.vip {
+  background: linear-gradient(to bottom, #565964, #353842);
+}
+
+.diamonds {
+  background: linear-gradient(to bottom, #eae9e9, #b5b4b4);
 }
 
 .active {
-  height: 750px;
+  width: 500px;
+  height: 100%;
   background-color: red;
   transform: scale(1);
 }
 
-.btn_container {
+.hot {
+  width: 85px;
+  height: 85px;
+  background-image: url($baseUrl + 'bg_right@2x.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  // align-self: flex-end;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
+.hot .fire {
+  width: 30px;
+  height: 38px;
+}
+
+.member_title_container {
+  margin-top: 54px;
+  width: 427px;
+  height: 60px;
+  // background-color: red;
+  text-align: left;
+  // padding-left: 50px;
+}
+
+.member_title {
+  width: 225px;
+  height: 61px;
+  text-indent: 25px;
+  font-size: 66px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40px;
+
+  background: linear-gradient(
+    -70deg,
+    rgba(255, 253, 253, 1) 5.0048828125%,
+    rgba(210, 212, 212, 1) 45.41015625%,
+    rgba(140, 145, 162, 1) 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.membership_card {
+  width: 427px;
+  height: 204px;
+  margin-top: 21px;
+  background: rgba(86, 89, 100, 1);
+  border-radius: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content_item:first-child {
+  margin-top: 20px;
+}
+
+.content_item:nth-child(n + 2) {
+  margin-top: 30px;
+}
+
+.card_btn_container {
+  width: 410px;
+  height: 90px;
+  opacity: 0.5;
+  border-radius: 45px;
+  margin-bottom: 51px;
+
+  margin-top: 82px;
+  background-color: yellowgreen;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_btn_container_vip {
+  background: #4a4d57;
+  border: 2px solid rgba(191, 194, 206, 1);
+}
+
+.card_btn_container_gold {
+  background: #e1ba9e;
+  border: 2px solid rgba(201, 125, 59, 1);
+}
+
+.card_btn_container_diamonds {
+  background: #dcdadd;
+  border: 2px solid rgba(90, 89, 89, 1);
+}
+
+.card_btn_text {
+  font-size: 46px;
+  font-family: Adobe Heiti Std;
+  font-weight: bold;
+  color: rgba(216, 219, 228, 1);
+  // color: red;
+  line-height: 40px;
+}
+
+// 最下面的充值会员按钮
+.btn_container {
+  width: 100%;
+  // margin-top: 106px;
+  // background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1150px;
+  left: 0px;
+  right: 0px;
+  bottom: 50px;
 }
 
 .btn {
