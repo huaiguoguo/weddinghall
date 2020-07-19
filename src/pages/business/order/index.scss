@@ -1,0 +1,270 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+}
+
+.head_container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.head_container .head_item {
+  width: 130px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.head_container .head_item:last-child {
+  margin-left: 87px;
+}
+
+.head_container .head_item .head_item_label {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 36px;
+}
+.head_container .head_item .head_item_total {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 50, 80, 1);
+  line-height: 36px;
+}
+
+// 订单主体
+.order_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// 订单顶部状态导航
+.order_container .status_nav {
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.order_container .status_nav .status {
+  width: 94px;
+  height: 78px;
+}
+
+.order_container .status_nav .status .status_text {
+  display: block;
+  // background-color: red;
+  box-sizing: border-box;
+  padding-top: 23px;
+  padding-bottom: 26px;
+  text-align: center;
+
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+  line-height: 36px;
+}
+
+.order_container .status_nav .active {
+  color: #fe4958;
+  border-bottom: 2px solid #fe4958;
+}
+
+.order_container .status_nav .active .status_text {
+  color: #fe4958;
+}
+
+// 订单列表
+.order_container .order_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_container .order_list .order_item {
+  width: 100%;
+  height: 100%;
+  background-color: palevioletred;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_container .order_list .order_item:nth-child(n + 2) {
+  margin-top: 20px;
+}
+
+// 订单item 头
+.order_item .item_header {
+  width: 100%;
+  height: 40px;
+
+  padding: 38px 0px;
+
+  box-sizing: border-box;
+  background-color: orange;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order_item .item_header .item_user {
+  width: 274px;
+  height: 37px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order_item .item_header .item_user .photo_icon {
+  width: 37px;
+  height: 37px;
+}
+
+.order_item .item_header .item_user .user_info {
+  width: 218px;
+  height: 27px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_header .item_user .user_info .user_info_label {
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 36px;
+}
+.order_item .item_header .item_user .user_info .user_info_name {
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(81, 81, 81, 1);
+  line-height: 36px;
+}
+
+.order_item .item_header .item_user .name {
+  width: 223px;
+  height: 27px;
+  display: block;
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 36px;
+}
+
+.order_item .item_header .item_status {
+  width: 110px;
+  height: 27px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_header .item_status .item_status_text {
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(254, 73, 88, 1);
+  line-height: 32px;
+  opacity: 0.97;
+}
+
+// 订单item 主体
+.order_item .item_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_content .item_goods {
+  width: 100%;
+  height: 200px;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.order_item .item_content .item_goods .goods_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_content .item_goods .goods_item .goods_image {
+}
+
+.order_item .item_content .item_goods .goods_item .goods_name {
+}
+
+.order_item .item_footer {
+  width: 100%;
+  height: 100%;
+  background-color: olivedrab;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.order_item .item_footer .total {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_footer .total .total_text {
+}
+
+.order_item .item_footer .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item .item_footer .footer .look_logistics {
+}
+
+.order_item .item_footer .footer .confirm_receipt {
+}
+
+.order_item .item_footer .footer .delete_order {
+}
