@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow, redirectTo } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 
 import './index.scss'
@@ -11,43 +11,60 @@ function Index() {
     {
       name: '充值会员',
       icon: `${url}/wallet@2x.png`,
+      url: ''
     },
     {
       name: '会员权益',
       icon: `${url}/an_crown@2x.png`,
+      url: ''
     },
     {
       name: '预约选片',
       icon: `${url}/anappointment@2x.png`,
+      url: ''
     },
     {
       name: '权限管理',
       icon: `${url}/lock@2x.png`,
+      url: '/pages/business/authority/index'
     },
     {
       name: '客服帮助',
       icon: `${url}/service@2x.png`,
-    },
+      url: ''
+    }
   ])
 
   const [orderMenu, setOrderMenu] = useState([
     {
       name: '待确认',
-      icon: `${url}/waitting@2x.png`,
+      icon: `${url}/waitting@2x.png`
     },
     {
       name: '待拍照',
-      icon: `${url}/waitting_photo@2x.png`,
+      icon: `${url}/waitting_photo@2x.png`
     },
     {
       name: '待选片',
-      icon: `${url}/waitting_selecte@2x.png`,
+      icon: `${url}/waitting_selecte@2x.png`
     },
     {
       name: '已邮寄',
-      icon: `${url}/mailed@2x.png`,
-    },
+      icon: `${url}/mailed@2x.png`
+    }
   ])
+
+  const redirectTo = (url: string) => {
+    if (url) {
+      Taro.navigateTo({
+        url
+      })
+      return false
+    }
+    Taro.showToast({
+      title: '正在开发中.....'
+    })
+  }
 
   return (
     // 个人中心一共分为三部分 【顶部, 菜单, 订单菜单】
@@ -115,7 +132,11 @@ function Index() {
         {menu.length &&
           menu.map((item, index) => {
             return (
-              <View key={index} className='menu_item'>
+              <View
+                key={index}
+                className='menu_item'
+                onClick={() => redirectTo(item.url)}
+              >
                 <Image src={item.icon} className='menu_icon' />
                 <Text className='menu_name'>{item.name}</Text>
               </View>
