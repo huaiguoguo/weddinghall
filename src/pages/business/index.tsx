@@ -1,69 +1,74 @@
 import React, { useState } from 'react'
-import Taro, { useDidShow, redirectTo } from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 
 import './index.scss'
 
 function Index() {
-  const url = 'http://wd.chenxianlei.com/wxchat/business/'
+  const businessImageUrl = 'http://wd.chenxianlei.com/wxchat/business/'
 
   const [menu, setMenu] = useState([
     {
       name: '充值会员',
-      icon: `${url}/wallet@2x.png`,
-      url: ''
+      icon: `${businessImageUrl}/wallet@2x.png`,
+      url: '',
     },
     {
       name: '会员权益',
-      icon: `${url}/an_crown@2x.png`,
-      url: ''
+      icon: `${businessImageUrl}/an_crown@2x.png`,
+      url: '/pages/business/member_benefits/index',
     },
     {
       name: '预约选片',
-      icon: `${url}/anappointment@2x.png`,
-      url: ''
+      icon: `${businessImageUrl}/anappointment@2x.png`,
+      url: '',
     },
     {
       name: '权限管理',
-      icon: `${url}/lock@2x.png`,
-      url: '/pages/business/authority/index'
+      icon: `${businessImageUrl}/lock@2x.png`,
+      url: '/pages/business/authority/index',
     },
     {
       name: '客服帮助',
-      icon: `${url}/service@2x.png`,
-      url: ''
-    }
+      icon: `${businessImageUrl}/service@2x.png`,
+      url: '',
+    },
   ])
 
   const [orderMenu, setOrderMenu] = useState([
     {
       name: '待确认',
-      icon: `${url}/waitting@2x.png`
+      icon: `${businessImageUrl}/waitting@2x.png`,
+      url: '',
     },
     {
       name: '待拍照',
-      icon: `${url}/waitting_photo@2x.png`
+      icon: `${businessImageUrl}/waitting_photo@2x.png`,
+      url: '',
     },
     {
       name: '待选片',
-      icon: `${url}/waitting_selecte@2x.png`
+      icon: `${businessImageUrl}/waitting_selecte@2x.png`,
+      url: '',
     },
     {
       name: '已邮寄',
-      icon: `${url}/mailed@2x.png`
-    }
+      icon: `${businessImageUrl}/mailed@2x.png`,
+      url: '',
+    },
   ])
 
   const redirectTo = (url: string) => {
-    if (url) {
-      Taro.navigateTo({
-        url
+    if (!url) {
+      Taro.showToast({
+        title: '正在开发中...',
       })
       return false
     }
-    Taro.showToast({
-      title: '正在开发中.....'
+    Taro.navigateTo({
+      url,
     })
+    return false
   }
 
   return (
@@ -71,18 +76,30 @@ function Index() {
     <View className='container'>
       {/* 顶部 */}
       <View className='header_container'>
-        <Image src={`${url}header_background@2x.png`} className='header_bg' />
+        <Image
+          src={`${businessImageUrl}header_background@2x.png`}
+          className='header_bg'
+        />
         <View className='header_content'>
           <View className='userinfo_container'>
             <View className='user_info'>
-              <Image src={`${url}avatar@2x.png`} className='avatar' />
+              <Image
+                src={`${businessImageUrl}avatar@2x.png`}
+                className='avatar'
+              />
               <View className='info'>
                 <Text className='company'>xxxx婚纱摄影公司</Text>
                 <Text className='username'>阿訾姑娘</Text>
               </View>
             </View>
-            <View className='setting'>
-              <Image src={`${url}setting@2x.png`} className='pic' />
+            <View
+              className='setting'
+              onClick={() => redirectTo('/pages/business/setting/index')}
+            >
+              <Image
+                src={`${businessImageUrl}setting@2x.png`}
+                className='pic'
+              />
             </View>
           </View>
           <View className='card_container'>
@@ -113,13 +130,24 @@ function Index() {
             </View>
           </View>
           <View className='coupon_container'>
-            <Image src={`${url}coupon_bg@2x.png`} className='coupon_bg' />
+            <Image
+              src={`${businessImageUrl}coupon_bg@2x.png`}
+              className='coupon_bg'
+            />
             <View className='coupon_content'>
               <View className='coupon_content_left'>
-                <Image src={`${url}victory@2x.png`} className='coupon_vip' />
+                <Image
+                  src={`${businessImageUrl}victory@2x.png`}
+                  className='coupon_vip'
+                />
                 <Text className='coupon_text'>加入会员即可获得丰厚优惠</Text>
               </View>
-              <View className='coupon_content_right'>
+              <View
+                className='coupon_content_right'
+                onClick={() =>
+                  redirectTo('/pages/business/member_benefits/index')
+                }
+              >
                 <Text className='coupon_btn'>查看会员权益</Text>
               </View>
             </View>
@@ -152,14 +180,21 @@ function Index() {
           </View>
           <View className='header_order_more'>
             <Text className='more_text'>全部订单</Text>
-            <Image src={`${url}right@2x.png`} className='right_icon' />
+            <Image
+              src={`${businessImageUrl}right@2x.png`}
+              className='right_icon'
+            />
           </View>
         </View>
         <View className='order_menu'>
           {orderMenu.length > 0 &&
             orderMenu.map((item, index) => {
               return (
-                <View key={index} className='menu_item'>
+                <View
+                  key={index}
+                  className='menu_item'
+                  onClick={() => redirectTo(item.url)}
+                >
                   <Image src={item.icon} className='menu_icon' />
                   <Text className='menu_name'>{item.name}</Text>
                 </View>

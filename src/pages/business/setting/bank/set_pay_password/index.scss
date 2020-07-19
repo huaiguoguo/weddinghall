@@ -1,0 +1,98 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.password_notice_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notice_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.notice_container .notice {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(164, 164, 164, 1);
+}
+
+.password_container {
+  width: 690px;
+  height: 88px;
+  margin-top: 51px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(209, 213, 216, 1);
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.password_container .passwordItem {
+  width: 16.6%;
+  height: 100%;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.password_container .passwordItem {
+  border-right: 0px;
+}
+
+.password_container .passwordItem:last-child {
+  border-right: 1px;
+}
+
+.btn_container {
+  width: 100%;
+  height: 100px;
+  margin-top: 101px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container .btn {
+  width: 690px;
+  height: 99px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container .btn .btn_text {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}

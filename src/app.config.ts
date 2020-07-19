@@ -3,9 +3,22 @@ export default {
     'pages/home/index',
     'pages/home/category/index',
     'pages/home/goods/index',
-    'pages/business/index',
+
+    'pages/business/setting/index',
+    'pages/business/setting/agreement/index',
+    'pages/business/setting/store_profile/index',
+    'pages/business/setting/change_pay_password/index',
+    'pages/business/setting/bank/index',
+    'pages/business/setting/bank/add_bank/index',
+    'pages/business/setting/bank/set_pay_password/index',
+
+    'pages/business/setting/clear/index',
+    'pages/business/member_benefits/index',
+
     'pages/business/authority/index',
-    'pages/appointment/index'
+    'pages/business/index',
+
+    'pages/appointment/index',
   ],
   tabBar: {
     custom: true,

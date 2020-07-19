@@ -1,0 +1,133 @@
+.container {
+  width: 100%;
+  height: 100%;
+  // background-color: palegoldenrod;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 56px;
+  // background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_container .avatar_container {
+  width: 172px;
+  height: 172px;
+  border-radius: 172px;
+  // background-color: yellowgreen;
+}
+
+.user_container .avatar_container .avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.form_container {
+  width: 100%;
+  height: auto;
+  margin-top: 58px;
+
+  // background-color: red;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container .form_item {
+  width: 681px;
+  height: 107px;
+  border-radius: 10px;
+  border: 0px;
+  // overflow: hidden;
+
+  box-sizing: border-box;
+  // background-color: peru;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container .form_item:nth-child(n + 2) {
+  margin-top: 38px;
+}
+
+.form_container .form_item .form_input {
+  width: 100%;
+  height: 100%;
+  border-style: none;
+  border: 1px solid rgba(214, 214, 214, 1);
+
+  padding: 40px 0px;
+  box-sizing: border-box;
+  // background-color: orchid;
+  border-radius: 10px;
+  text-indent: 33px;
+
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(151, 151, 153, 1);
+  line-height: 40px;
+}
+
+// .form_container .form_item:first-child .form_input {
+//   position: relative;
+//   z-index: 999;
+//   background-color: pink;
+// }
+
+.form_container .form_item .remove {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 50px;
+  z-index: 999;
+}
+
+.btn_container {
+  width: 100%;
+  height: 100%;
+  margin-top: 173px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container .submit_btn {
+  width: 690px;
+  height: 100px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container .submit_btn .submit_btn_text {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 37px;
+}
