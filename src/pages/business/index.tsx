@@ -39,22 +39,22 @@ function Index() {
     {
       name: '待确认',
       icon: `${businessImageUrl}/waitting@2x.png`,
-      url: '',
+      url: '/pages/business/order/index',
     },
     {
       name: '待拍照',
       icon: `${businessImageUrl}/waitting_photo@2x.png`,
-      url: '',
+      url: '/pages/business/order/index',
     },
     {
       name: '待选片',
       icon: `${businessImageUrl}/waitting_selecte@2x.png`,
-      url: '',
+      url: '/pages/business/order/index',
     },
     {
       name: '已邮寄',
       icon: `${businessImageUrl}/mailed@2x.png`,
-      url: '',
+      url: '/pages/business/order/index',
     },
   ])
 
@@ -178,7 +178,10 @@ function Index() {
           <View className='header_title'>
             <Text className='header_title_text'>我的订单</Text>
           </View>
-          <View className='header_order_more'>
+          <View
+            className='header_order_more'
+            onClick={() => redirectTo('/pages/business/order/index')}
+          >
             <Text className='more_text'>全部订单</Text>
             <Image
               src={`${businessImageUrl}right@2x.png`}

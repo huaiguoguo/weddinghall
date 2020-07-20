@@ -6,11 +6,14 @@
   justify-content: center;
   align-items: center;
   background-color: #eeeeee;
+  box-sizing: border-box;
 }
 
 .head_container {
   width: 100%;
   height: 60px;
+  padding: 0px 30px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -59,7 +62,7 @@
 .order_container .status_nav {
   width: 100%;
   height: 100%;
-  background-color: blue;
+  background-color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -108,11 +111,17 @@
 .order_container .order_list .order_item {
   width: 100%;
   height: 100%;
-  background-color: palevioletred;
+  padding: 0px 30px;
+  box-sizing: border-box;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.order_container .order_list .order_item:first-child {
+  padding-top: 37px;
 }
 
 .order_container .order_list .order_item:nth-child(n + 2) {
@@ -127,7 +136,7 @@
   padding: 38px 0px;
 
   box-sizing: border-box;
-  background-color: orange;
+  // background-color: orange;
 
   display: flex;
   flex-direction: row;
@@ -152,6 +161,7 @@
 .order_item .item_header .item_user .user_info {
   width: 218px;
   height: 27px;
+  margin-left: 14px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -163,14 +173,12 @@
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(51, 51, 51, 1);
-  line-height: 36px;
 }
 .order_item .item_header .item_user .user_info .user_info_name {
   font-size: 28px;
   font-family: Source Han Sans CN;
   font-weight: 400;
-  color: rgba(81, 81, 81, 1);
-  line-height: 36px;
+  color: rgba(51, 51, 51, 1);
 }
 
 .order_item .item_header .item_user .name {
@@ -204,6 +212,9 @@
 
 // 订单item 主体
 .order_item .item_content {
+  width: 100%;
+  height: 100%;
+  // background-color: orangered;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,31 +223,48 @@
 
 .order_item .item_content .item_goods {
   width: 100%;
-  height: 200px;
-  background-color: red;
+  height: 100%;
+  // background-color: red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.order_item .item_content .item_goods .goods_item {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
+.order_item .item_content .item_goods .goods_item {
+  width: 100%;
+  height: 150px;
+  margin-top: 40px;
+  // background-color: orchid;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .order_item .item_content .item_goods .goods_item .goods_image {
+  width: 150px;
+  height: 150px;
+  // background-color: green;
 }
 
 .order_item .item_content .item_goods .goods_item .goods_name {
+  // background-color: blue;
+  margin-left: 21px;
+
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
 }
 
 .order_item .item_footer {
   width: 100%;
   height: 100%;
-  background-color: olivedrab;
+  margin-top: 46px;
+  margin-bottom: 30px;
+  // background-color: olivedrab;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -251,20 +279,50 @@
 }
 
 .order_item .item_footer .total .total_text {
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+  line-height: 36px;
 }
 
 .order_item .item_footer .footer {
+  margin-top: 52px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
+.order_item .item_footer .footer .footer_btn {
+  width: 156px;
+  height: 54px;
+  // margin: auto;
+  line-height: 54px;
+
+  border-radius: 27px;
+
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.order_item .item_footer .footer .footer_btn:nth-child(n + 2) {
+  margin-left: 30px;
+}
+
 .order_item .item_footer .footer .look_logistics {
+  color: rgba(215, 190, 135, 1);
+  border: 1px solid rgba(215, 190, 135, 1);
 }
 
 .order_item .item_footer .footer .confirm_receipt {
+  color: rgba(254, 73, 88, 1);
+  border: 1px solid rgba(254, 73, 88, 1);
 }
 
 .order_item .item_footer .footer .delete_order {
+  color: rgba(153, 153, 153, 1);
+  border: 1px solid rgba(153, 153, 153, 1);
 }

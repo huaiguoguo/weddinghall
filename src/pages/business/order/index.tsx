@@ -5,6 +5,7 @@ import './index.scss'
 import { imageUrl } from '@api/baseUrl'
 
 function Index(props: any) {
+  const [currentNav, setCurrentNav] = useState(1)
   const [orderList, setOrderList] = useState([
     {
       status: 1,
@@ -16,9 +17,71 @@ function Index(props: any) {
           goods_image: `${imageUrl}business/order/ttt@2x.png`,
           goods_name: '场景XXXXXXXXXX',
         },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+      ],
+    },
+    {
+      status: 1,
+      userInfo: {
+        username: '张三',
+      },
+      goods: [
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+      ],
+    },
+    {
+      status: 1,
+      userInfo: {
+        username: '张三',
+      },
+      goods: [
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
+        {
+          goods_image: `${imageUrl}business/order/ttt@2x.png`,
+          goods_name: '场景XXXXXXXXXX',
+        },
       ],
     },
   ])
+
+  const redirectUrl = (url: string) => {
+    if (url) {
+      Taro.navigateTo({
+        url,
+      })
+      return false
+    }
+
+    Taro.showToast({
+      title: '正在开发中......',
+    })
+    return false
+  }
 
   return (
     <View className='container'>
@@ -34,19 +97,34 @@ function Index(props: any) {
       </View>
       <View className='order_container'>
         <View className='status_nav'>
-          <View className='status active'>
+          <View
+            className={currentNav == 1 ? 'status active' : 'status'}
+            onClick={() => setCurrentNav(1)}
+          >
             <Text className='status_text'>全部</Text>
           </View>
-          <View className='status'>
+          <View
+            className={currentNav == 2 ? 'status active' : 'status'}
+            onClick={() => setCurrentNav(2)}
+          >
             <Text className='status_text'>待确认</Text>
           </View>
-          <View className='status'>
+          <View
+            className={currentNav == 3 ? 'status active' : 'status'}
+            onClick={() => setCurrentNav(3)}
+          >
             <Text className='status_text'>待拍照</Text>
           </View>
-          <View className='status'>
+          <View
+            className={currentNav == 4 ? 'status active' : 'status'}
+            onClick={() => setCurrentNav(4)}
+          >
             <Text className='status_text'>待选片</Text>
           </View>
-          <View className='status'>
+          <View
+            className={currentNav == 5 ? 'status active' : 'status'}
+            onClick={() => setCurrentNav(5)}
+          >
             <Text className='status_text'>已邮寄</Text>
           </View>
         </View>
@@ -54,13 +132,20 @@ function Index(props: any) {
           {orderList.length > 0 &&
             orderList.map((item, index: number) => {
               return (
-                <View key={index} className='order_item'>
+                <View
+                  key={index}
+                  className='order_item'
+                  onClick={() => redirectUrl('/pages/business/order/detail')}
+                >
                   <View className='item_header'>
                     <View className='item_user'>
-                      <Image className='photo_icon' src='' />
+                      <Image
+                        className='photo_icon'
+                        src={`${imageUrl}business/order/photograph_icon@2x.png`}
+                      />
                       <View className='user_info'>
                         <Text className='user_info_labe'>客户姓名: </Text>
-                        <Text className='user_info_name'>张某</Text>
+                        <Text className='user_info_name'>&nbsp;张某</Text>
                       </View>
                     </View>
                     <View className='item_status'>
@@ -73,9 +158,12 @@ function Index(props: any) {
                         item.goods.map((goods_item, goods_index: number) => {
                           return (
                             <View key={goods_index} className='goods_item'>
-                              <Image className='goods_image' src='' />
+                              <Image
+                                className='goods_image'
+                                src={`${imageUrl}business/order/dress@2x.png`}
+                              />
                               <Text className='goods_name'>
-                                婚纱XXXXXXXXXXXXXXXXXXXXXXXXXX
+                                婚纱XXXXXXXXXXXX
                               </Text>
                             </View>
                           )
@@ -87,9 +175,15 @@ function Index(props: any) {
                       <Text className='total_text'>共3件商品</Text>
                     </View>
                     <View className='footer'>
-                      <Button className='look_logistics'>查看物流</Button>
-                      <Button className='confirm_receipt'>确认收货</Button>
-                      <Button className='delete_order'>删除订单</Button>
+                      <Button className='footer_btn look_logistics'>
+                        查看物流
+                      </Button>
+                      <Button className='footer_btn confirm_receipt'>
+                        确认收货
+                      </Button>
+                      <Button className='footer_btn delete_order'>
+                        删除订单
+                      </Button>
                     </View>
                   </View>
                 </View>

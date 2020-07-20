@@ -1,9 +1,16 @@
 import React from 'react'
 import { View, Text, Input, Textarea } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
 import './index.scss'
 
 function Index(props: any) {
+  const redirectNext = () => {
+    Taro.navigateTo({
+      url: '/pages/business/setting/store_profile/store_agreement/index',
+    })
+  }
+
   return (
     <View className='container'>
       <View className='form_content'>
@@ -46,7 +53,9 @@ function Index(props: any) {
             温馨提示: 相册将邮寄到影楼, 请自行发放给新人
           </Text>
           <View className='btn'>
-            <Text className='btn_text'>提交</Text>
+            <Text className='btn_text' onClick={redirectNext}>
+              下一步
+            </Text>
           </View>
         </View>
       </View>
