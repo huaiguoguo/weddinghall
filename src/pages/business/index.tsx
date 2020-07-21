@@ -21,7 +21,7 @@ function Index() {
     {
       name: '预约选片',
       icon: `${businessImageUrl}/anappointment@2x.png`,
-      url: '',
+      url: '/pages/business/selection/index',
     },
     {
       name: '权限管理',
@@ -31,7 +31,7 @@ function Index() {
     {
       name: '客服帮助',
       icon: `${businessImageUrl}/service@2x.png`,
-      url: '',
+      url: '/pages/business/setting/service/index',
     },
   ])
 

@@ -5,7 +5,8 @@ export default {
     'pages/home/goods/index',
 
     'pages/business/setting/index',
-    'pages/business/setting/service/index',
+
+    'pages/business/selection/index',
 
     'pages/business/setting/store_profile/index',
     'pages/business/setting/store_profile/store_agreement/index',
@@ -14,9 +15,11 @@ export default {
     'pages/business/setting/bank/index',
     'pages/business/setting/bank/add_bank/index',
     'pages/business/setting/bank/set_pay_password/index',
+    'pages/business/setting/service/index',
 
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',
+
     'pages/business/member_benefits/index',
 
     'pages/business/order/index',

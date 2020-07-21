@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, Image, Button } from '@tarojs/components'
 
-import './index.scss'
+import Taro from '@tarojs/taro'
+
 import { imageUrl } from '@api/baseUrl'
+import './index.scss'
 
 function Index(props: any) {
   const [currentNav, setCurrentNav] = useState(1)
@@ -135,7 +137,9 @@ function Index(props: any) {
                 <View
                   key={index}
                   className='order_item'
-                  onClick={() => redirectUrl('/pages/business/order/detail')}
+                  onClick={() =>
+                    redirectUrl('/pages/business/order/detail/index')
+                  }
                 >
                   <View className='item_header'>
                     <View className='item_user'>
