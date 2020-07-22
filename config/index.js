@@ -20,6 +20,7 @@ const config = {
   framework: 'react',
   alias: {
     '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@hooks': path.resolve(__dirname, '..', 'src/hooks'),
     '@api': path.resolve(__dirname, '..', 'src/api'),
     '@assets': path.resolve(__dirname, '..', 'src/assets'),
     '@common': path.resolve(__dirname, '..', 'src/common'),

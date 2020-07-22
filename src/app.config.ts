@@ -1,9 +1,12 @@
 export default {
   pages: [
+    'pages/business/order/search/index',
     'pages/home/index',
     'pages/home/category/index',
     'pages/home/goods/index',
+    'pages/business/order/index',
 
+    'pages/business/service/index',
     'pages/business/setting/index',
 
     'pages/business/selection/index',
@@ -15,14 +18,12 @@ export default {
     'pages/business/setting/bank/index',
     'pages/business/setting/bank/add_bank/index',
     'pages/business/setting/bank/set_pay_password/index',
-    'pages/business/setting/service/index',
 
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',
 
     'pages/business/member_benefits/index',
 
-    'pages/business/order/index',
     'pages/business/order/detail/index',
 
     'pages/business/authority/index',

@@ -31,7 +31,7 @@ function Index() {
     {
       name: '客服帮助',
       icon: `${businessImageUrl}/service@2x.png`,
-      url: '/pages/business/setting/service/index',
+      url: '/pages/business/service/index',
     },
   ])
 
@@ -176,13 +176,13 @@ function Index() {
       <View className='order_container'>
         <View className='order_header'>
           <View className='header_title'>
-            <Text className='header_title_text'>我的订单</Text>
+            <Text className='header_title_text'>我的预约</Text>
           </View>
           <View
             className='header_order_more'
             onClick={() => redirectTo('/pages/business/order/index')}
           >
-            <Text className='more_text'>全部订单</Text>
+            <Text className='more_text'>全部预约</Text>
             <Image
               src={`${businessImageUrl}right@2x.png`}
               className='right_icon'

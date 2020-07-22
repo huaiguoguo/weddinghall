@@ -13,7 +13,7 @@ function Index(props: any) {
       menu_icon: `${imageUrl}/business/setting/user@2x.png`,
     },
     {
-      menu_name: '修改支付密码',
+      menu_name: '修改确认密码',
       menu_url: '/pages/business/setting/change_pay_password/index',
       menu_icon: `${imageUrl}/business/setting/password@2x.png`,
     },

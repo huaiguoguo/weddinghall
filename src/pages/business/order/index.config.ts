@@ -1,3 +1,4 @@
 export default {
-  navigationBarTitleText: '订单中心',
+  navigationBarTitleText: '预约中心',
+  navigationStyle: 'custom',
 }

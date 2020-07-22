@@ -22,6 +22,7 @@
     "typeRoots": ["node_modules/@types", "global.d.ts"],
     "paths": {
       "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@api/*": ["./src/api/*"],
       "@assets/*": ["./src/assets/*"],
       "@common/*": ["./src/common/*"],

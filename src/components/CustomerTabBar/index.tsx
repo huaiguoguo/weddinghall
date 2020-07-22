@@ -43,7 +43,7 @@ function Index(props: any) {
   const switchTab = (item: IItem, index: number) => {
     if (item.text == '专属热线') {
       Taro.makePhoneCall({
-        phoneNumber: '18595820892',
+        phoneNumber: '88888888',
       })
       return false
     }

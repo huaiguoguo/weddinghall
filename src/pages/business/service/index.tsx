@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
-import './index.scss'
 import { imageUrl } from '@api/baseUrl'
+import './index.scss'
 
 function Index(props: any) {
   const [active, setActive] = useState(0)
   const [qsList, setQsList] = useState([
     {
       id: 1,
-      title: '订单问题',
+      title: '预约问题',
       content:
-        '订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,订单问题,',
+        '预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,',
     },
     {
       id: 2,
@@ -38,6 +39,13 @@ function Index(props: any) {
     setActive(id)
   }
 
+  const callPhone = () => {
+    Taro.makePhoneCall({
+      phoneNumber: '88888888',
+    })
+    return false
+  }
+
   return (
     <View className='container'>
       <View className='head'>
@@ -45,7 +53,7 @@ function Index(props: any) {
           className='head_image'
           src={`${imageUrl}business/service_head@2x.png`}
         />
-        <View className='head_btn'>
+        <View className='head_btn' onClick={callPhone}>
           <Image
             className='head_btn_icon'
             src={`${imageUrl}business/service_headset@2x.png`}

@@ -1,0 +1,276 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 75px;
+}
+
+.search_content .search_item {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  // background-color: red;
+}
+
+.search_content .search_item:nth-child(n + 2) {
+  margin-top: 50px;
+}
+
+.search_content .search_item .item_label {
+  width: 120px;
+  margin-left: 31px;
+  // background-color: blue;
+
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+.search_content .search_item .item_input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(170, 170, 170, 1);
+
+  // background-color: green;
+
+  margin-right: 30px;
+}
+
+.search_content .search_item .item_input .selectType {
+  margin-right: 54px;
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+
+.search_content .search_item .item_input .arrow_right {
+  width: 16px;
+  height: 28px;
+  // background-color: tan;
+}
+
+.search_content .search_item .placeholderClass {
+  font-size: 24px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(170, 170, 170, 1);
+  text-align: center;
+}
+
+.search_content .search_item .item_input .date {
+  width: 230px;
+  height: 60px;
+  // background-color: pink;
+
+  // background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(201, 201, 201, 1);
+  border-radius: 16px;
+  text-align: left;
+}
+
+.search_content .search_item .item_input .date_start {
+  margin-right: 22px;
+}
+
+.btn_container {
+  width: 100%;
+  height: 95px;
+
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 999;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  // box-shadow: 0px -1px 5px 0px orange;
+}
+
+.btn_container .btn_item {
+  width: 375px;
+  height: 100%;
+  // border: 1px solid rgba(220, 220, 220, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn_container .btn_item .text {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+}
+
+.btn_container .reset {
+  border: 1px solid rgba(220, 220, 220, 1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.btn_container .reset .reset_text {
+  color: rgba(51, 51, 51, 1);
+}
+
+.btn_container .submit {
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+}
+.btn_container .submit .submit_text {
+  color: rgba(255, 255, 255, 1);
+}
+
+// 向上弹窗
+
+.shadowBContainer {
+  height: 0px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.shadowBContainer .shadowBox {
+  width: 100%;
+  height: 409px;
+  background-color: #ffffff;
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 999999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  position: fixed;
+  bottom: -410px;
+}
+
+.activeShadow {
+  background: rgba(0, 0, 0, 0.8);
+  animation: showShadowBox 3s forwards;
+}
+
+.activeShadow .shadowBox {
+  animation: downDiy 1s forwards;
+}
+
+@keyframes hiddenShadowBox {
+  0% {
+    opacity: 0.47;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+@keyframes showShadowBox {
+  0% {
+    opacity: 0.47;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+@keyframes downDiy {
+  from {
+    bottom: -410px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+
+.shadowBContainer .shadowBox .shadowBoxContent {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 35px;
+}
+
+.shadowBContainer .shadowBox .shadowBoxContent .item {
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+
+.shadowBContainer .shadowBox .shadowBoxContent .active {
+  color: rgba(254, 73, 88, 1);
+}
+
+.shadowBContainer .shadowBox .shadowBoxContent .item:nth-child(2) {
+  border-top: 1px solid rgba(187, 187, 187, 0.47);
+  border-bottom: 1px solid rgba(187, 187, 187, 0.47);
+}
+
+.shadowBContainer .shadowBox .btnContent {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.confirm {
+  width: 100%;
+  height: 100%;
+  line-height: 100px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  color: #ffffff;
+  text-align: center;
+}

@@ -39,6 +39,31 @@
   align-items: center;
 }
 
+.form_content .send_address {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.send_address .form_item_content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  align-items: flex-start;
+  padding: 20px 0px 0px 0px;
+}
+
+.form_content .send_address .notice {
+  font-size: 24px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(254, 73, 88, 1);
+  line-height: 37px;
+}
+
 .form_content .form_item:nth-child(3),
 .form_item:last-child {
   height: 100%;

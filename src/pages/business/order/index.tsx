@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, Image, Button } from '@tarojs/components'
-
 import Taro from '@tarojs/taro'
-
+import { View, Text, Image, Button } from '@tarojs/components'
+import NavBar from '@components/CustomerNavBar/index'
 import { imageUrl } from '@api/baseUrl'
+
+import useNavInfo from '@hooks/useNavInfo'
+
 import './index.scss'
 
 function Index(props: any) {
@@ -85,9 +87,38 @@ function Index(props: any) {
     return false
   }
 
+  const {
+    statusBarHeight,
+    screenWidth,
+    screenHeight,
+    windowHeight,
+  } = Taro.getSystemInfoSync()
+  const {
+    width,
+    height,
+    left,
+    top,
+    right,
+  } = Taro.getMenuButtonBoundingClientRect()
+
+  const { appHeaderHeight } = useNavInfo()
+
+  const headContainerStyle = {
+    top: 5 + appHeaderHeight + 'px',
+  }
+
+  const StatusNavStyle = {
+    top: 5 + 30 + appHeaderHeight + 'px',
+  }
+
+  const orderContainerStyle = {
+    marginTop: 5 + 80 + appHeaderHeight + 'px',
+  }
+
   return (
     <View className='container'>
-      <View className='head_container'>
+      <NavBar />
+      <View className='head_container' style={headContainerStyle}>
         <View className='head_item'>
           <Text className='head_item_label'>本周:</Text>
           <Text className='head_item_total'>5单</Text>
@@ -97,39 +128,39 @@ function Index(props: any) {
           <Text className='head_item_total'>20单</Text>
         </View>
       </View>
-      <View className='order_container'>
-        <View className='status_nav'>
-          <View
-            className={currentNav == 1 ? 'status active' : 'status'}
-            onClick={() => setCurrentNav(1)}
-          >
-            <Text className='status_text'>全部</Text>
-          </View>
-          <View
-            className={currentNav == 2 ? 'status active' : 'status'}
-            onClick={() => setCurrentNav(2)}
-          >
-            <Text className='status_text'>待确认</Text>
-          </View>
-          <View
-            className={currentNav == 3 ? 'status active' : 'status'}
-            onClick={() => setCurrentNav(3)}
-          >
-            <Text className='status_text'>待拍照</Text>
-          </View>
-          <View
-            className={currentNav == 4 ? 'status active' : 'status'}
-            onClick={() => setCurrentNav(4)}
-          >
-            <Text className='status_text'>待选片</Text>
-          </View>
-          <View
-            className={currentNav == 5 ? 'status active' : 'status'}
-            onClick={() => setCurrentNav(5)}
-          >
-            <Text className='status_text'>已邮寄</Text>
-          </View>
+      <View className='status_nav' style={StatusNavStyle}>
+        <View
+          className={currentNav == 1 ? 'status active' : 'status'}
+          onClick={() => setCurrentNav(1)}
+        >
+          <Text className='status_text'>全部</Text>
         </View>
+        <View
+          className={currentNav == 2 ? 'status active' : 'status'}
+          onClick={() => setCurrentNav(2)}
+        >
+          <Text className='status_text'>待确认</Text>
+        </View>
+        <View
+          className={currentNav == 3 ? 'status active' : 'status'}
+          onClick={() => setCurrentNav(3)}
+        >
+          <Text className='status_text'>待拍照</Text>
+        </View>
+        <View
+          className={currentNav == 4 ? 'status active' : 'status'}
+          onClick={() => setCurrentNav(4)}
+        >
+          <Text className='status_text'>待选片</Text>
+        </View>
+        <View
+          className={currentNav == 5 ? 'status active' : 'status'}
+          onClick={() => setCurrentNav(5)}
+        >
+          <Text className='status_text'>已邮寄</Text>
+        </View>
+      </View>
+      <View className='order_container' style={orderContainerStyle}>
         <View className='order_list'>
           {orderList.length > 0 &&
             orderList.map((item, index: number) => {
