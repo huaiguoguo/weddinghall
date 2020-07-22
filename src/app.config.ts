@@ -1,11 +1,10 @@
 export default {
   pages: [
-    'pages/business/order/search/index',
     'pages/home/index',
     'pages/home/category/index',
     'pages/home/goods/index',
-    'pages/business/order/index',
 
+    'pages/business/order/index',
     'pages/business/service/index',
     'pages/business/setting/index',
 
