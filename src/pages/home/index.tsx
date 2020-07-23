@@ -3,7 +3,7 @@ import Taro, { useDidShow, redirectTo } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
 
 import http from '@api/interceptor'
-import { imageUrl } from '@api/baseUrl'
+import { baseUrl, imageUrl } from '@api/baseUrl'
 import SwiperCustom, { ISwiperItem } from '@components/Swiper/Swiper'
 
 import './index.scss'
@@ -16,6 +16,14 @@ function Index() {
       mark: 'wxapp_index',
     })
     setSwiperList(data)
+
+    Taro.login({
+      success: async function (res) {
+        const test = await http.post('wxuser/getTokenByWxcode', {
+          code: res.code,
+        })
+      },
+    })
   })
 
   const category = () => {

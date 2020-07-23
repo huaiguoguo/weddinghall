@@ -31,7 +31,7 @@ function useNavInfo(): INavInfo {
   })
 
   useEffect(() => {
-    console.log('sssss', Taro.getSystemInfoSync())
+    // console.log('sssss', Taro.getSystemInfoSync())
     const {
       statusBarHeight,
       screenWidth,

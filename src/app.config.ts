@@ -5,6 +5,8 @@ export default {
     'pages/home/goods/index',
 
     'pages/business/order/index',
+    'pages/business/order/search/index',
+
     'pages/business/service/index',
     'pages/business/setting/index',
 

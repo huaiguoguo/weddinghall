@@ -9,11 +9,15 @@ function Index(props: any) {
 
   const toggleShadow = () => {
     console.log(showShadow)
-    if (showShadow) {
-      setShowShadow(0)
-      return
-    }
+    // if (showShadow) {
+    //   setShowShadow(0)
+    //   return
+    // }
     setShowShadow(1)
+  }
+
+  const cancelShadow = () => {
+    setShowShadow(0)
   }
 
   return (
@@ -83,7 +87,9 @@ function Index(props: any) {
 
       <View
         className={
-          showShadow ? 'shadowBContainer activeShadow' : 'shadowBContainer'
+          showShadow
+            ? 'shadowBContainer activeShadowBContainer'
+            : 'shadowBContainer'
         }
       >
         <View className='shadowBox'>
@@ -93,7 +99,7 @@ function Index(props: any) {
             <View className='item'>三个月前</View>
           </View>
           <View className='btnContent'>
-            <View className='confirm' onClick={toggleShadow}>
+            <View className='confirm' onClick={cancelShadow}>
               确定
             </View>
           </View>

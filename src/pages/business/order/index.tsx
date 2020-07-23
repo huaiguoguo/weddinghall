@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Text, Image, Button } from '@tarojs/components'
+import { View, Text, Image, Button, Input } from '@tarojs/components'
 import NavBar from '@components/CustomerNavBar/index'
 import { imageUrl } from '@api/baseUrl'
 
@@ -87,20 +87,6 @@ function Index(props: any) {
     return false
   }
 
-  const {
-    statusBarHeight,
-    screenWidth,
-    screenHeight,
-    windowHeight,
-  } = Taro.getSystemInfoSync()
-  const {
-    width,
-    height,
-    left,
-    top,
-    right,
-  } = Taro.getMenuButtonBoundingClientRect()
-
   const { appHeaderHeight } = useNavInfo()
 
   const headContainerStyle = {
@@ -113,6 +99,12 @@ function Index(props: any) {
 
   const orderContainerStyle = {
     marginTop: 5 + 80 + appHeaderHeight + 'px',
+  }
+
+  const handleTouchMove = (e) => {
+    console.log(e)
+    e.stopPropagation()
+    // return false
   }
 
   return (
@@ -160,6 +152,8 @@ function Index(props: any) {
           <Text className='status_text'>已邮寄</Text>
         </View>
       </View>
+
+      {/* 订单列表 */}
       <View className='order_container' style={orderContainerStyle}>
         <View className='order_list'>
           {orderList.length > 0 &&
@@ -226,6 +220,15 @@ function Index(props: any) {
             })}
         </View>
       </View>
+
+      {/* 底部向上弹的 蒙板 */}
+      {/* <View className='maskContainer'>
+        <View className='boxContent'>
+          <View className='box_top'></View>
+          <View className='search_content'></View>
+          <View className='box_btn'></View>
+        </View>
+      </View> */}
     </View>
   )
 }

@@ -7,7 +7,20 @@ import http from '@api/interceptor'
 import './index.scss'
 
 interface IGoods {
-  imageurl: string
+  filter: {
+    tid: string
+    order: string
+    sort: string
+  }
+  goods: {
+    id: number
+    general_code: string
+    title: string
+    category_ids: string
+    price: string
+    brand_id: number
+    images: string[]
+  }
 }
 
 interface IImages {
@@ -21,13 +34,14 @@ interface IImages {
 }
 
 interface IFilter {
-  pid: number
+  id: number
   name: string
+  en_name: string
 }
 
 function Goods(props: any) {
   const [currentFilterId, setCurrentFilterId] = useState<number>(1)
-  const [goods, setGoods] = useState<IGoods[]>([])
+  const [goods, setGoods] = useState<IGoods>()
   const [filter, setFilter] = useState<IFilter[]>([])
 
   useDidShow(async () => {
@@ -36,50 +50,40 @@ function Goods(props: any) {
   })
 
   const getFilter = async () => {
-    // const res = await http.get('/goods.type/getMainType', {})
-    setFilter([
-      {
-        pid: 1,
-        name: '礼服',
-      },
-      {
-        pid: 2,
-        name: '场景',
-      },
-      {
-        pid: 3,
-        name: '鲜花',
-      },
-    ])
+    const res = await http.get('goods.type/getGoodsType', {})
+    console.log(res)
+    setFilter(res)
   }
 
   const getGoods = async (cid: number) => {
-    // const res = await http.get('/goods.lists/index', {
-    //   tid: cid,
-    //   title: '',
-    //   page: 1,
-    //   order: 'create_time',
-    //   sort: 'desc',
-    // })
-    const imgurl = 'http://wd.chenxianlei.com/wxchat/goods/'
-    const scene: IGoods[] = []
-    if (cid == 1) {
-      ;[1, 2, 3, 4, 5, 6].map((item) => {
-        scene.push({
-          imageurl: `${imgurl}/dress/dress_${item}@2x.png`,
-        })
-      })
-    } else if (cid == 2) {
-      scene.push({
-        imageurl: `${imgurl}/scene/scene@2x.png`,
-      })
-    } else if (cid == 3) {
-      // scene.push({
-      //   imageurl: `${imgurl}/flower/flower_@2x.png`,
-      // })
-    }
+    const res = await http.get('/goods.lists/index', {
+      tid: cid,
+      title: '',
+      page: 1,
+      order: 'create_time',
+      sort: 'desc',
+    })
+    console.log(res)
 
-    setGoods(scene)
+    // const imgurl = 'http://wd.chenxianlei.com/wxchat/goods/'
+    // const responseGoods: IGoods[] = []
+    // if (cid == 1) {
+    //   res.goods.map((item) => {
+    //     responseGoods.push({
+    //       imageurl: item.images ? item.images[0] : '',
+    //     })
+    //   })
+    // } else if (cid == 2) {
+    //   responseGoods.push({
+    //     imageurl: `${imgurl}/scene/scene@2x.png`,
+    //   })
+    // } else if (cid == 3) {
+    //   // responseGoods.push({
+    //   //   imageurl: `${imgurl}/flower/flower_@2x.png`,
+    //   // })
+    // }
+
+    setGoods(res)
     setCurrentFilterId(cid)
   }
 
@@ -92,11 +96,11 @@ function Goods(props: any) {
               <View
                 key={index}
                 className={
-                  currentFilterId == item.pid
+                  currentFilterId == item.id
                     ? 'filter_item filter_active'
                     : 'filter_item'
                 }
-                onClick={() => getGoods(item.pid)}
+                onClick={() => getGoods(item.id)}
               >
                 <Text className='filter_item_title'>{item.name}</Text>
               </View>
@@ -106,11 +110,14 @@ function Goods(props: any) {
       <View className='goods_container'>
         {currentFilterId == 1 && (
           <View className='goods_list dress_list'>
-            {goods.length > 0 &&
-              goods.map((item, index: number) => {
+            {goods?.goods.length > 0 &&
+              goods?.goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
-                    <Image src={item.imageurl} className='goods_img' />
+                    <Image
+                      src={item.images.length > 0 ? item.images[0] : ''}
+                      className='goods_img'
+                    />
                   </View>
                 )
               })}
@@ -123,7 +130,10 @@ function Goods(props: any) {
               goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
-                    <Image src={item.imageurl} className='goods_img' />
+                    <Image
+                      src={item.images.length > 0 ? item.images[0] : ''}
+                      className='goods_img'
+                    />
                   </View>
                 )
               })}
@@ -136,7 +146,10 @@ function Goods(props: any) {
               goods.map((item, index: number) => {
                 return (
                   <View key={index} className='goods'>
-                    <Image src={item.imageurl} className='goods_img' />
+                    <Image
+                      src={item.images.length > 0 ? item.images[0] : ''}
+                      className='goods_img'
+                    />
                   </View>
                 )
               })}

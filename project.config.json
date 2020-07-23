@@ -2,8 +2,8 @@
   "miniprogramRoot": "./dist",
   "projectname": "weddingHall",
   "description": "小程序描述",
-  "appid": "wx2ce7e02929cf6837",
-  "appsecret": "7467af86f11376216ff7e2f9c1219a47",
+  "appid": "wx12fe64e962b5db28",
+  "appsecret": "3a52b0f73fabe37b8479baf44e6ecd03",
   "setting": {
     "urlCheck": true,
     "es6": false,
