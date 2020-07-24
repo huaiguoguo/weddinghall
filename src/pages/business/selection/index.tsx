@@ -5,6 +5,7 @@ import { imageUrl } from '@api/baseUrl'
 import './index.scss'
 
 function Index(props: any) {
+  const [isPopup, setIsPopup] = useState<number>(0)
   const [list, setList] = useState([
     {
       status: 1,
@@ -36,6 +37,16 @@ function Index(props: any) {
     },
   ])
 
+  const showPopup = () => {
+    setIsPopup(1)
+    console.log(isPopup)
+  }
+
+  const hiddenPopup = () => {
+    setIsPopup(0)
+    console.log(isPopup)
+  }
+
   return (
     <View className='container'>
       <View className='head'>
@@ -56,7 +67,7 @@ function Index(props: any) {
           {list.length > 0 &&
             list.map((item, index: number) => {
               return (
-                <View key={index} className='item'>
+                <View key={index} className='item' onClick={showPopup}>
                   <View className='item_head'>
                     <View className='item_head_left'>
                       <Image
@@ -102,7 +113,12 @@ function Index(props: any) {
             })}
         </View>
       </View>
-      {/* <View className='popupBox'>
+      <View
+        className={
+          isPopup ? 'popupBox popupBoxShow' : 'popupBox popupBoxHidden'
+        }
+        onClick={hiddenPopup}
+      >
         <View className='popup_container'>
           <View className='popup_icon_container'>
             <Image
@@ -112,20 +128,22 @@ function Index(props: any) {
           </View>
           <Text className='popup_type'>取消预约</Text>
           <View className='popup_content'>
-            <Text className='popup_text'>您确定要取消订单号为</Text>
-            <Text className='order_sn'>210234567821035</Text>
-            <Text className='popup_text'>的预约吗?</Text>
+            <Text className='popup_content_item popup_text'>
+              您确定要取消订单号为
+            </Text>
+            <Text className='popup_content_item order_sn'>210234567821035</Text>
+            <Text className='popup_content_item popup_text'>的预约吗?</Text>
           </View>
           <View className='btn_content'>
-            <View className='back'>
-              <Text>返回</Text>
+            <View className='btn_item back'>
+              <Text className='btn_item_text'>返回</Text>
             </View>
-            <View className='confirm'>
-              <Text>确定</Text>
+            <View className='btn_item confirm'>
+              <Text className='btn_item_text'>确定</Text>
             </View>
           </View>
         </View>
-      </View> */}
+      </View>
     </View>
   )
 }

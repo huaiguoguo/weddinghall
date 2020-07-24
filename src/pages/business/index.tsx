@@ -2,9 +2,29 @@ import React, { useState } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 
+import http from '@api/interceptor'
 import './index.scss'
 
 function Index() {
+  useDidShow(async () => {
+    // const test = await http.post('', {})
+    // Taro.getUserInfo({
+    //   lang: 'zh_CN',
+    //   success: function (res) {
+    //     console.log(res)
+    //   },
+    // })
+    Taro.getSetting({
+      success: function (res) {
+        console.log(res)
+      },
+    })
+  })
+
+  const getUserInfo = (res) => {
+    console.log(res)
+  }
+
   const businessImageUrl = 'http://wd.chenxianlei.com/wxchat/business/'
 
   const [menu, setMenu] = useState([
@@ -90,6 +110,9 @@ function Index() {
               <View className='info'>
                 <Text className='company'>xxxx婚纱摄影公司</Text>
                 <Text className='username'>阿訾姑娘</Text>
+                <Button openType='getUserInfo' onGetUserInfo={getUserInfo}>
+                  获得用户信息
+                </Button>
               </View>
             </View>
             <View
