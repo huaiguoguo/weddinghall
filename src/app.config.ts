@@ -1,10 +1,11 @@
 export default {
   pages: [
-    'pages/business/selection/index',
+    'pages/business/index',
     'pages/home/index',
     'pages/home/category/index',
     'pages/home/goods/index',
 
+    'pages/business/selection/index',
     'pages/business/order/index',
     'pages/business/order/search/index',
 
@@ -22,12 +23,11 @@ export default {
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',
 
-    'pages/business/member_benefits/index',
-
     'pages/business/order/detail/index',
 
     'pages/business/authority/index',
-    'pages/business/index',
+
+    'pages/business/member_benefits/index',
 
     'pages/appointment/index',
   ],

@@ -7,9 +7,12 @@ import {
   Text,
   Image,
 } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { imageUrl } from '@api/baseUrl'
+
+import useNavInfo from '@hooks/useNavInfo'
 
 import './index.scss'
-import { imageUrl } from '@api/baseUrl'
 
 function Index() {
   const [swiperList, setSwiperList] = useState([
@@ -51,9 +54,27 @@ function Index() {
       })
     )
   }
+  const { statusBarHeight } = useNavInfo()
+  const { height } = Taro.getMenuButtonBoundingClientRect()
+
+  const StatusNavStyle = {
+    height: height,
+    top: statusBarHeight + 7 + 'px',
+  }
+
+  const Back = () => {
+    Taro.navigateBack()
+  }
 
   return (
     <View className='container'>
+      <View className='top_container' style={StatusNavStyle}>
+        <Image
+          className='left_arrow_icon'
+          src={`${imageUrl}back@2x.png`}
+          onClick={Back}
+        />
+      </View>
       <View className='head_bg'>
         <Image
           src={`${imageUrl}business/head_bg@2x.png`}

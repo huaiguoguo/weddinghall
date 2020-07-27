@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, CoverView, CoverImage } from '@tarojs/components'
 import './tabbar.scss'
+import { imageUrl } from '@api/baseUrl'
 
 interface IItem {
   index: number
@@ -19,22 +20,22 @@ function CustomTabBar(props: any) {
   const [tabBarList, setTabBarList] = useState<IItem[]>([
     {
       index: 1,
-      iconPath: '/assets/images/millennium_icon@2x.png',
-      selectedIconPath: '/assets/images/millennium_icon@2x.png',
+      iconPath: `${imageUrl}home@2x.png`,
+      selectedIconPath: `${imageUrl}home@2x.png`,
       pagePath: 'pages/home/index',
       text: '',
     },
     {
       index: 2,
-      iconPath: '/assets/images/phone@2x.png',
-      selectedIconPath: '/assets/images/phone@2x.png',
+      iconPath: `${imageUrl}phone@2x.png`,
+      selectedIconPath: `${imageUrl}phone@2x.png`,
       pagePath: 'pages/appointment/index',
       text: '专属热线',
     },
     {
       index: 3,
-      iconPath: '/assets/images/business@2x.png',
-      selectedIconPath: '/assets/images/business@2x.png',
+      iconPath: `${imageUrl}business@2x.png`,
+      selectedIconPath: `${imageUrl}business@2x.png`,
       pagePath: 'pages/business/index',
       text: '商家中心',
     },

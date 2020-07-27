@@ -3,6 +3,8 @@ import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 
 import http from '@api/interceptor'
+import useNavInfo from '@hooks/useNavInfo'
+
 import './index.scss'
 
 function Index() {
@@ -90,6 +92,12 @@ function Index() {
     })
     return false
   }
+  const { appHeaderHeight, statusBarHeight } = useNavInfo()
+  const { height } = Taro.getMenuButtonBoundingClientRect()
+
+  const StatusNavStyle = {
+    top: appHeaderHeight + 'px',
+  }
 
   return (
     // 个人中心一共分为三部分 【顶部, 菜单, 订单菜单】
@@ -100,7 +108,7 @@ function Index() {
           src={`${businessImageUrl}header_background@2x.png`}
           className='header_bg'
         />
-        <View className='header_content'>
+        <View className='header_content' style={StatusNavStyle}>
           <View className='userinfo_container'>
             <View className='user_info'>
               <Image
@@ -110,9 +118,9 @@ function Index() {
               <View className='info'>
                 <Text className='company'>xxxx婚纱摄影公司</Text>
                 <Text className='username'>阿訾姑娘</Text>
-                <Button openType='getUserInfo' onGetUserInfo={getUserInfo}>
+                {/* <Button openType='getUserInfo' onGetUserInfo={getUserInfo}>
                   获得用户信息
-                </Button>
+                </Button> */}
               </View>
             </View>
             <View
@@ -130,7 +138,12 @@ function Index() {
               <Text className='card_text'></Text>
             </View>
           </View>
-          <View className='amount_container'>
+          <View
+            className='amount_container'
+            style={{
+              bottom: `${statusBarHeight}px`,
+            }}
+          >
             <View className='left'>
               <View className='amount'>
                 <Text className='rmb'>¥</Text>
@@ -152,7 +165,12 @@ function Index() {
               </View>
             </View>
           </View>
-          <View className='coupon_container'>
+          <View
+            className='coupon_container'
+            style={{
+              bottom: `${statusBarHeight - 17}px`,
+            }}
+          >
             <Image
               src={`${businessImageUrl}coupon_bg@2x.png`}
               className='coupon_bg'

@@ -71,7 +71,7 @@ function Category(props: any) {
             </View>
           )
         })}
-      <CustomTabBar />
+      {/* <CustomTabBar /> */}
     </View>
   )
 }

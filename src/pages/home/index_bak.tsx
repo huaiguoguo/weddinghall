@@ -49,34 +49,40 @@ function Index() {
     <View className='container'>
       {!!swiperList && <SwiperCustom data={swiperList} />}
       <View className='logo_container'>
-        <Image src={`${imageUrl}home/enjoy_travel@2x.png`} className='logo' />
+        <Image src={`${imageUrl}enjoy.png`} className='leftLogo' />
+        <Image src={`${imageUrl}millennium.png`} className='rightLogo' />
       </View>
       <View className='menu'>
         <View className='item dress' onClick={category}>
           <View className='item_content_top'>
-            <Image
-              src={`${imageUrl}home/clock@2x.png`}
-              className='title_icon'
-            />
-            <Text className='title_text'>立即预约</Text>
+            <Image src={`${imageUrl}dress.png`} className='title_icon' />
+            <Text className='title_text'>礼服预约</Text>
           </View>
           <View className='item_content_bottom'>
             <Text className='item_content_bottom_text'>
-              To Make An Appointment Immediately
+              The Dress To Make An Appointment
             </Text>
           </View>
         </View>
         <View className='item scene' onClick={category}>
           <View className='item_content_top'>
-            <Image
-              src={`${imageUrl}home/photograph@2x.png`}
-              className='title_icon'
-            />
-            <Text className='title_text'>选片预约</Text>
+            <Image src={`${imageUrl}scene.png`} className='title_icon' />
+            <Text className='title_text'>场景预约</Text>
           </View>
           <View className='item_content_bottom'>
             <Text className='item_content_bottom_text'>
-              Selected Photos To Make An Appointment
+              The Scene To Make An Appointment
+            </Text>
+          </View>
+        </View>
+        <View className='item flower' onClick={category}>
+          <View className='item_content_top'>
+            <Image src={`${imageUrl}flower.png`} className='title_icon' />
+            <Text className='title_text'>鲜花预约</Text>
+          </View>
+          <View className='item_content_bottom'>
+            <Text className='item_content_bottom_text'>
+              Flowers To Make An Appointment
             </Text>
           </View>
         </View>
