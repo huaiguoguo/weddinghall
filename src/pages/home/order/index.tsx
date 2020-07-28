@@ -124,18 +124,22 @@ function Index(props: any) {
                 <Text className='item_label_text'>服装套数</Text>
               </View>
               <View className='item_input'>
-                <Image
-                  className='item_input_reducer'
-                  src={`${imageUrl}reducer@2x.png`}
-                />
+                <View className='item_input_reducer_ctn'>
+                  <Image
+                    className='item_input_reducer'
+                    src={`${imageUrl}reducer@2x.png`}
+                  />
+                </View>
                 <Input
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
                 />
-                <Image
-                  className='item_input_plus'
-                  src={`${imageUrl}plus@2x.png`}
-                />
+                <View className='item_input_plus_ctn'>
+                  <Image
+                    className='item_input_plus'
+                    src={`${imageUrl}plus@2x.png`}
+                  />
+                </View>
               </View>
             </View>
 
