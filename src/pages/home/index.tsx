@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Taro, { useDidShow, redirectTo } from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-
-import http from '@api/interceptor'
-import { baseUrl, imageUrl } from '@api/baseUrl'
 import SwiperCustom, { ISwiperItem } from '@components/Swiper/Swiper'
+
+import { imageUrl } from '@api/baseUrl'
+import http from '@api/interceptor'
 
 import './index.scss'
 
@@ -26,10 +26,8 @@ function Index() {
     })
   })
 
-  const category = () => {
-    Taro.redirectTo({
-      url: '/pages/home/category/index',
-    })
+  const category = (url: string) => {
+    Taro.redirectTo({ url })
   }
 
   const redirectUrl = (url: string) => {
@@ -52,7 +50,10 @@ function Index() {
         <Image src={`${imageUrl}home/enjoy_travel@2x.png`} className='logo' />
       </View>
       <View className='menu'>
-        <View className='item dress' onClick={category}>
+        <View
+          className='item dress'
+          onClick={() => category('/pages/home/order/index')}
+        >
           <View className='item_content_top'>
             <Image
               src={`${imageUrl}home/clock@2x.png`}
@@ -66,7 +67,10 @@ function Index() {
             </Text>
           </View>
         </View>
-        <View className='item scene' onClick={category}>
+        <View
+          className='item scene'
+          onClick={() => category('/pages/business/selection/index')}
+        >
           <View className='item_content_top'>
             <Image
               src={`${imageUrl}home/photograph@2x.png`}

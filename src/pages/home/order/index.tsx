@@ -1,16 +1,52 @@
 import React, { useState } from 'react'
 
-import { View, Text, Image, Input, Checkbox } from '@tarojs/components'
-
-import './index.scss'
+import {
+  View,
+  Text,
+  Image,
+  Input,
+  Checkbox,
+  Swiper,
+  SwiperItem,
+} from '@tarojs/components'
 import { imageUrl } from '@api/baseUrl'
 
+import './index.scss'
+
 function Index(props: any) {
-  const [state, setstate] = useState(0)
+  const [pptList, setPPtList] = useState([
+    {
+      image: `${imageUrl}sanya@2x.png`,
+    },
+    {
+      image: `${imageUrl}sanya@2x.png`,
+    },
+    {
+      image: `${imageUrl}sanya@2x.png`,
+    },
+  ])
 
   return (
     <View className='container'>
-      <View className='swiper'></View>
+      <View className='swiper_container'>
+        <Swiper
+          className='swiper_content'
+          indicatorColor='#999'
+          indicatorActiveColor='#333'
+          vertical={false}
+          circular
+          indicatorDots
+        >
+          {pptList.length > 0 &&
+            pptList.map((item, index: number) => {
+              return (
+                <SwiperItem key={index} className='swiper_item'>
+                  <Image className='swiper_item_image' src={item.image} />
+                </SwiperItem>
+              )
+            })}
+        </Swiper>
+      </View>
       <View className='content'>
         <View className='user'>
           <View className='left'>
@@ -302,7 +338,9 @@ function Index(props: any) {
         </View>
         <View className='agreement'>
           <View className='agreement_left'>
-            <View className='agreement_check'></View>
+            <View className='agreement_check'>
+              <Image className='checked' src={`${imageUrl}right_red@2x.png`} />
+            </View>
             <View className='agreement_content_text'>
               <Text className='agreement_title'>我已阅读并同意</Text>
               <Text className='agreement_exemption'>《服务免责协议》</Text>

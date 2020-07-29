@@ -6,10 +6,25 @@
   background-color: #f6f3f7;
 }
 
-.swiper {
+.swiper_container {
   width: 100%;
   height: 400px;
   background-color: #fff;
+}
+
+.swiper_container .swiper_content {
+  width: 100%;
+  height: 400px;
+}
+
+.swiper_container .swiper_content .swiper_item {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper_container .swiper_content .swiper_item .swiper_item_image {
+  width: 100%;
+  height: 100%;
 }
 
 .content {
@@ -25,7 +40,7 @@
   width: 690px;
   height: 125px;
   margin-top: 18px;
-  opacity: 0.6;
+  // opacity: 0.6;
   border-radius: 16px;
 
   background-image: url($imageUrl + 'user_bg@2x.png');
@@ -628,7 +643,7 @@
 
 .insurance .insurance_content .content_item {
   width: 100%;
-  height: auto;
+  height: 48px;
   // background-color: blue;
 
   display: flex;
@@ -686,6 +701,16 @@
   height: 29px;
   border: 1px solid rgba(191, 191, 191, 1);
   border-radius: 50%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.agreement .agreement_left .agreement_check .checked {
+  width: 18px;
+  height: 14px;
 }
 
 .agreement .agreement_left .agreement_content_text {

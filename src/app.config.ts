@@ -1,15 +1,16 @@
 export default {
   pages: [
-    'pages/home/order/index',
-
-    'pages/home/index',
-    'pages/home/category/index',
-    'pages/home/goods/index',
-
     'pages/business/index',
+    'pages/home/index',
+    // 'pages/home/category/index',
+    // 'pages/home/goods/index',
+
+    'pages/home/order/index',
+    'pages/home/order/scene_selection/index',
 
     'pages/business/selection/index',
     'pages/business/order/index',
+    'pages/business/order/detail/index',
     'pages/business/order/search/index',
 
     'pages/business/service/index',
@@ -25,8 +26,6 @@ export default {
 
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',
-
-    'pages/business/order/detail/index',
 
     'pages/business/authority/index',
 
