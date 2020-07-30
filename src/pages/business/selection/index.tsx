@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Taro from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { imageUrl } from '@api/baseUrl'
 
@@ -37,19 +38,27 @@ function Index(props: any) {
     },
   ])
 
-  const showPopup = () => {
+  const showPopup = (e) => {
+    e.stopPropagation()
+    console.log('========start', isPopup)
     setIsPopup(1)
-    console.log(isPopup)
+    console.log('========end', isPopup)
+    // console.log(isPopup);
   }
 
-  const hiddenPopup = () => {
-    setIsPopup(0)
-    console.log(isPopup)
+  const confirm = (e) => {
+    e.stopPropagation()
+    setIsPopup(2)
+  }
+
+  const cancel = (e) => {
+    e.stopPropagation()
+    setIsPopup(2)
   }
 
   return (
     <View className='container'>
-      <View className='head'>
+      {/* <View className='head'>
         <View className='nav_item new'>
           <Text className='item_text'>新建预约</Text>
           <Image className='dropdown' src={`${imageUrl}business/down@2x.png`} />
@@ -61,13 +70,14 @@ function Index(props: any) {
             src={`${imageUrl}business/down_red@2x.png`}
           />
         </View>
-      </View>
+      </View> */}
+
       <View className='content'>
         <View className='list'>
           {list.length > 0 &&
             list.map((item, index: number) => {
               return (
-                <View key={index} className='item' onClick={showPopup}>
+                <View key={index} className='item'>
                   <View className='item_head'>
                     <View className='item_head_left'>
                       <Image
@@ -104,7 +114,7 @@ function Index(props: any) {
                   </View>
 
                   <View className='item_btn'>
-                    <View className='btn_content'>
+                    <View className='btn_content' onClick={(e) => showPopup(e)}>
                       <Text className='btn_content_text'>取消预约</Text>
                     </View>
                   </View>
@@ -113,19 +123,34 @@ function Index(props: any) {
             })}
         </View>
       </View>
+
+      <View
+        className='new_container'
+        onClick={() => Taro.showToast({ title: '正在制作中...' })}
+      >
+        <View className='appointment'>
+          <Text className='appointment_text'>新建预约</Text>
+        </View>
+      </View>
+
       <View
         className={
-          isPopup ? 'popupBox popupBoxShow' : 'popupBox popupBoxHidden'
+          isPopup == 1
+            ? 'popupBox popupBoxShow'
+            : isPopup == 2
+            ? 'popupBox popupBoxHidden'
+            : 'popupBox'
         }
-        onClick={hiddenPopup}
       >
-        <View className='popup_container'>
-          <View className='popup_icon_container'>
-            <Image
-              className='popup_icon'
-              src={`${imageUrl}business/type@2x.png`}
-            />
-          </View>
+        <View
+          className={
+            isPopup == 1
+              ? 'popup_container popup_container_up'
+              : isPopup == 2
+              ? 'popup_container popup_container_down'
+              : 'popup_container'
+          }
+        >
           <Text className='popup_type'>取消预约</Text>
           <View className='popup_content'>
             <Text className='popup_content_item popup_text'>
@@ -134,11 +159,11 @@ function Index(props: any) {
             <Text className='popup_content_item order_sn'>210234567821035</Text>
             <Text className='popup_content_item popup_text'>的预约吗?</Text>
           </View>
-          <View className='btn_content'>
-            <View className='btn_item back'>
+          <View className='popup_btn_content'>
+            <View className='btn_item back' onClick={cancel}>
               <Text className='btn_item_text'>返回</Text>
             </View>
-            <View className='btn_item confirm'>
+            <View className='btn_item confirm' onClick={confirm}>
               <Text className='btn_item_text'>确定</Text>
             </View>
           </View>

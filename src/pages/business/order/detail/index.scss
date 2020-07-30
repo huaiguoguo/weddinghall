@@ -240,3 +240,462 @@
 .container .order_btn .order_btn_item .confirm_btn_text {
   color: rgba(255, 255, 255, 1);
 }
+
+// 初始
+.popupBox {
+  width: 100%;
+  height: 0%;
+
+  position: fixed;
+  z-index: 99;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  touch-action: none;
+  // display: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(81, 81, 81, 0.7);
+}
+
+.popupBoxShow {
+  animation: showPopup 0.5s forwards;
+}
+
+.popupBoxHidden {
+  animation: hiddenPopup 0.5s forwards;
+}
+
+@keyframes showPopup {
+  from {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background-color: rgba(102, 102, 102, 0);
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background-color: rgba(102, 102, 102, 0.6);
+  }
+}
+
+@keyframes hiddenPopup {
+  0% {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 102, 102, 0.6);
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 102, 102, 0);
+    visibility: hidden;
+  }
+}
+
+.popup_container_up {
+  animation: containerUp 0.5s forwards;
+}
+.popup_container_down {
+  animation: containerDown 0.5s forwards;
+}
+
+@keyframes containerUp {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes containerDown {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: hidden;
+    // bottom: -455px;
+  }
+}
+
+.popupBox .save_appoint_ment {
+  width: 653px;
+  height: auto;
+
+  // background: red;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  visibility: hidden;
+
+  // position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  // z-index: 9999;
+}
+
+.popupBox .save_appoint_ment .content {
+  width: 653px;
+  height: auto;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .save_appointment_top_bg {
+  width: 100%;
+  height: 190px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+
+.popupBox .save_appoint_ment .content .save_appointment_top_bg .bg {
+  width: 100%;
+  height: 100%;
+}
+
+.popupBox .save_appoint_ment .content .save_appointment_top_bg .title {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  bottom: 180px;
+  text-align: center;
+}
+
+.popupBox
+  .save_appoint_ment
+  .content
+  .save_appointment_top_bg
+  .title
+  .title_text {
+  // background-color: pink;
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+}
+
+.popupBox .save_appoint_ment .content .content_list {
+  width: 100%;
+  // height: 100%;
+  background: #fff;
+  padding-top: 21px;
+  padding-bottom: 107px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_item {
+  width: 90%;
+
+  padding: 10px 0px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_item .item_label {
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_item .item_value {
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: rgba(81, 81, 81, 1);
+}
+
+.popupBox .save_appoint_ment .bottom_btn {
+  width: 100%;
+  height: 100%;
+  margin-top: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popupBox .save_appoint_ment .bottom_btn .bottom_btn_arrow {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .bottom_btn .bottom_btn_arrow .arrow_icon {
+  width: 40px;
+  height: 40px;
+}
+
+.popupBox .save_appoint_ment .bottom_btn .save_to_mobile {
+  margin-top: 30px;
+}
+
+.popupBox .save_appoint_ment .bottom_btn .save_to_mobile_text {
+  font-size: 30px;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 1);
+}
+
+// 确认支付
+.popupBox .confirm_pay {
+  display: block;
+}
+
+//余额支付
+.popupBox .confirm_pay .balance {
+  width: 100%;
+  height: auto;
+
+  visibility: hidden;
+
+  box-sizing: border-box;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.popupBox .confirm_pay .balance .title {
+  width: 100%;
+  height: auto;
+
+  padding-top: 54px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .confirm_pay .balance .title .title_text {
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}
+
+.popupBox .confirm_pay .balance .balance_content {
+  width: 100%;
+  height: auto;
+  // margin-top: 20px;
+
+  // background-color: palegreen;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .confirm_pay .balance .balance_content .content_item {
+  width: 100%;
+  height: auto;
+
+  padding: 15px 50px;
+  box-sizing: border-box;
+
+  // background-color: darkmagenta;
+
+  border-bottom: 1px solid rgba(238, 238, 238, 0.7);
+
+  margin-top: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance .balance_content .content_item .content_item_label {
+  flex: 1.5;
+  // background-color: pink;
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+.balance .balance_content .content_item .content_item_value {
+  flex: 2;
+  // background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.balance .balance_content .content_item .content_item_value .item_value_item {
+  width: 100%;
+  height: 100%;
+
+  // background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance
+  .balance_content
+  .content_item
+  .content_item_value
+  .item_value_item:nth-child(n + 2) {
+  margin-top: 13px;
+}
+
+.content_item .content_item_value .item_value_item .item_value_label {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(149, 149, 156, 1);
+}
+.content_item .content_item_value .item_value_item .item_value_value {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.content_item .content_item_value .item_value_item .item_value_value .amount {
+  margin-right: 15px;
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(243, 180, 103, 1);
+}
+.content_item .content_item_value .item_value_item .item_value_value .total {
+  font-size: 24px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(187, 187, 187, 1);
+}
+
+.popupBox .confirm_pay .balance .btn_content {
+  width: 100%;
+  height: auto;
+  margin-top: 84px;
+
+  // background-color: red;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .confirm_pay .balance .btn_content .btn_content_title {
+  align-self: flex-start;
+  margin-left: 51px;
+}
+
+.popupBox
+  .confirm_pay
+  .balance
+  .btn_content
+  .btn_content_title
+  .btn_content_title_text {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(187, 187, 187, 1);
+}
+
+.popupBox .confirm_pay .balance .btn_content .btn_content_icon {
+  width: 91px;
+  height: 88px;
+}
+
+.popupBox .confirm_pay .balance .btn_content .btn_content_icon .btn_icon {
+  width: 100%;
+  height: 100%;
+}
+
+.popupBox .confirm_pay .balance .btn_content .balance_pay_btn {
+  width: 100%;
+  height: 35px;
+  // background-color: orange;
+  margin-top: 25px;
+  margin-bottom: 64px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox
+  .confirm_pay
+  .balance
+  .btn_content
+  .balance_pay_btn
+  .balance_pay_btn_text {
+  font-size: 30px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(102, 102, 102, 1);
+}
+
+// 微信支付
+.popupBox .confirm_pay .wepay {
+  display: none;
+}

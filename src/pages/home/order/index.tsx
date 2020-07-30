@@ -5,10 +5,11 @@ import {
   Text,
   Image,
   Input,
-  Checkbox,
   Swiper,
   SwiperItem,
 } from '@tarojs/components'
+
+import Taro from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 
 import './index.scss'
@@ -25,6 +26,10 @@ function Index(props: any) {
       image: `${imageUrl}sanya@2x.png`,
     },
   ])
+
+  const redirectUrl = (url: string) => {
+    Taro.navigateTo({ url })
+  }
 
   return (
     <View className='container'>
@@ -142,7 +147,12 @@ function Index(props: any) {
               <View className='item_label'>
                 <Text className='item_label_text'>具体场景</Text>
               </View>
-              <View className='item_input'>
+              <View
+                className='item_input'
+                onClick={() =>
+                  redirectUrl('/pages/home/order/scene_selection/index')
+                }
+              >
                 <Input
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
@@ -304,7 +314,7 @@ function Index(props: any) {
               </View>
               <View className='content_item_value'>
                 <Text className='content_item_value_title'>保额:</Text>
-                <Text className='content_item_value_amount'>1,000,000元</Text>
+                <Text className='content_item_value_amount'>1000000元</Text>
               </View>
             </View>
             <View className='content_item'>
@@ -313,7 +323,7 @@ function Index(props: any) {
               </View>
               <View className='content_item_value'>
                 <Text className='content_item_value_title'>保额:</Text>
-                <Text className='content_item_value_amount'>10,000元</Text>
+                <Text className='content_item_value_amount'>10000元</Text>
               </View>
             </View>
             <View className='content_item'>
