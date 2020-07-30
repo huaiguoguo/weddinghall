@@ -1,8 +1,8 @@
 export default {
   pages: [
+    'pages/home/index',
     'pages/business/order/detail/index',
     'pages/business/selection/index',
-    'pages/home/index',
     // 'pages/home/category/index',
     // 'pages/home/goods/index',
 
