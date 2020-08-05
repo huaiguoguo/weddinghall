@@ -17,13 +17,13 @@ function Index() {
     })
     setSwiperList(data)
 
-    Taro.login({
-      success: async function (res) {
-        const test = await http.post('wxuser/getTokenByWxcode', {
-          code: res.code,
-        })
-      },
-    })
+    // Taro.login({
+    //   success: async function (res) {
+    //     const test = await http.post('wxuser/getTokenByWxcode', {
+    //       code: res.code,
+    //     })
+    //   },
+    // })
   })
 
   const category = (url: string) => {

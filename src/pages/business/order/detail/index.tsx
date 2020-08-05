@@ -24,7 +24,7 @@ function Index(props: any) {
 
   const confirmPay = (e) => {
     e.stopPropagation()
-    setIsPopup(1)
+    setIsPopup(3)
   }
 
   const showPopup = (e) => {
@@ -153,9 +153,9 @@ function Index(props: any) {
       {/* 弹窗盒子 */}
       <View
         className={
-          isPopup == 1
+          isPopup == 1 || isPopup == 3
             ? 'popupBox popupBoxShow'
-            : isPopup == 2
+            : isPopup == 2 || isPopup == 4
             ? 'popupBox popupBoxHidden'
             : 'popupBox'
         }
@@ -235,15 +235,23 @@ function Index(props: any) {
         {/* 支付弹窗 内容 */}
         <View
           className={
-            isPopup == 1
+            isPopup == 3
               ? 'confirm_pay popup_container_up'
-              : isPopup == 2
+              : isPopup == 4
               ? 'confirm_pay popup_container_down'
               : 'confirm_pay'
           }
         >
           {/* 余额支付 */}
-          <View className='balance'>
+          <View
+            className={
+              isPopup == 3
+                ? 'balance popup_container_up'
+                : isPopup == 4
+                ? 'balance popup_container_down'
+                : 'balance'
+            }
+          >
             <View className='title'>
               <Text className='title_text'>付款详情</Text>
             </View>

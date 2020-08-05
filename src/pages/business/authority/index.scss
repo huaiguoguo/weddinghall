@@ -1,3 +1,5 @@
+@import '@styles/common.scss';
+
 .container {
   width: 100%;
   height: 100%;
@@ -175,6 +177,252 @@
 .add_btn .add_text {
   margin-left: 37px;
   font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}
+
+// 初始
+.popupBox {
+  width: 100%;
+  height: 0%;
+
+  position: fixed;
+  z-index: 99;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  touch-action: none;
+  // display: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(81, 81, 81, 0.7);
+}
+
+.popupBoxShow {
+  animation: showPopup 0.5s forwards;
+}
+
+.popupBoxHidden {
+  animation: hiddenPopup 0.5s forwards;
+}
+
+@keyframes showPopup {
+  from {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background-color: rgba(102, 102, 102, 0);
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background-color: rgba(102, 102, 102, 0.6);
+  }
+}
+
+@keyframes hiddenPopup {
+  0% {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 102, 102, 0.6);
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(102, 102, 102, 0);
+    visibility: hidden;
+  }
+}
+
+.popup_container_up {
+  animation: containerUp 0.5s forwards;
+}
+.popup_container_down {
+  animation: containerDown 0.5s forwards;
+}
+
+@keyframes containerUp {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes containerDown {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: hidden;
+    // bottom: -455px;
+  }
+}
+
+.popupBox .save_appoint_ment {
+  width: 603px;
+  height: 826px;
+
+  // background: red;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url($imageUrl + 'business/authority@2x.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  visibility: hidden;
+
+  // position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  // z-index: 9999;
+}
+
+.popupBox .save_appoint_ment .content {
+  width: 100%;
+  height: 100%;
+
+  // box-sizing: border-box;
+
+  // border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_head {
+  width: 100%;
+  height: auto;
+  background-color: red;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+
+  // align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_head .bg {
+  width: 36px;
+  height: 36px;
+  // background-color: blue;
+  align-self: flex-start;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.popupBox .save_appoint_ment .content .content_head .title {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  // position: relative;
+  // bottom: 180px;
+  // text-align: center;
+  // z-index: 999;
+}
+
+.popupBox
+  .save_appoint_ment
+  .content
+  .save_appointment_top_bg
+  .title
+  .title_text {
+  // background-color: pink;
+  font-size: 36px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+}
+
+.popupBox .save_appoint_ment .content .content_list {
+  // width: 100%;
+  // height: auto;
+  // height: 100%;
+  // background: #fff;
+  background-color: blue;
+
+  // padding-top: 21px;
+  // padding-bottom: 107px;
+
+  // align-self: flex-end;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  // border-bottom-left-radius: 20px;
+  // border-bottom-right-radius: 20px;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_qrcode {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_qrcode .qrcode_image {
+  width: 307px;
+  height: 307px;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_btn {
+  // width: 100%;
+  // padding: 10px 0px;
+  // box-sizing: border-box;
+
+  width: 369px;
+  height: 60px;
+  background: linear-gradient(
+    85deg,
+    rgba(254, 73, 88, 1),
+    rgba(254, 101, 51, 1)
+  );
+  border-radius: 30px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupBox .save_appoint_ment .content .content_list .list_btn .btn_text {
+  font-size: 30px;
   font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);

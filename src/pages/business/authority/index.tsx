@@ -15,6 +15,7 @@ interface IList {
 }
 
 function Index(props: any) {
+  const [isPopup, setIsPopup] = useState<number>(0)
   const [waitingRemoveUser, setWaitingRemoveUser] = useState(0)
   const [show, setShow] = useState(0)
 
@@ -103,6 +104,15 @@ function Index(props: any) {
     console.log(res)
   }
 
+  const addMembers = () => {
+    setIsPopup(1)
+  }
+
+  const cancel = (e) => {
+    e.stopPropagation()
+    setIsPopup(2)
+  }
+
   return (
     <View className='container'>
       <View className='list'>
@@ -129,7 +139,7 @@ function Index(props: any) {
             )
           })}
       </View>
-      <View className='add_btn'>
+      <View className='add_btn' onClick={addMembers}>
         <Image className='add_icon' src={`${imageUrl}add_icon@2x.png`} />
         <Text className='add_text'>添加新成员</Text>
       </View>
@@ -149,6 +159,52 @@ function Index(props: any) {
           </View>
         </View>
       )}
+
+      {/* 弹窗盒子 */}
+      <View
+        className={
+          isPopup == 1 || isPopup == 3
+            ? 'popupBox popupBoxShow'
+            : isPopup == 2 || isPopup == 4
+            ? 'popupBox popupBoxHidden'
+            : 'popupBox'
+        }
+      >
+        {/* 保存预约信息 内容 */}
+        <View
+          className={
+            isPopup == 1
+              ? 'save_appoint_ment popup_container_up'
+              : isPopup == 2
+              ? 'save_appoint_ment popup_container_down'
+              : 'save_appoint_ment'
+          }
+        >
+          <View className='content'>
+            <View className='content_head'>
+              <Image className='bg' src={`${imageUrl}business/close@2x.png`} />
+              <View className='title'>
+                <Text className='title_text'>二维码邀请</Text>
+              </View>
+            </View>
+
+            <View className='content_list'>
+              <View className='list_head'>
+                <Text className='item_label'>扫一扫, 添加新成员</Text>
+              </View>
+              <View className='list_qrcode'>
+                <Image
+                  className='qrcode_image'
+                  src={`${imageUrl}business/qrcode@2x.png`}
+                />
+              </View>
+              <View className='list_btn'>
+                <Text className='btn_text'>长按保存至相册</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   )
 }

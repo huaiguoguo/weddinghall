@@ -5,7 +5,7 @@ import { imageUrl } from '@api/baseUrl'
 import './index.scss'
 
 function Index(props: any) {
-  const [currentIndex, setCurrentIndex] = useState(1)
+  const [currentSelect, setCurrentSelect] = useState<number[]>([])
   const [sceneList, setSceneList] = useState([
     {
       id: 1,
@@ -53,6 +53,16 @@ function Index(props: any) {
       ],
     },
   ])
+
+  const pushSelected = (selectId: number) => {
+    if (!currentSelect.includes(selectId)) {
+      setCurrentSelect([...currentSelect, selectId])
+    } else {
+      const index = currentSelect.indexOf(selectId)
+      currentSelect.splice(index, 1)
+      setCurrentSelect([...currentSelect])
+    }
+  }
 
   return (
     <View className='container'>
@@ -106,23 +116,33 @@ function Index(props: any) {
                 <View
                   key={index}
                   className={
-                    currentIndex == item.id
+                    currentSelect.includes(item.id)
                       ? 'scene_item scene_item_active'
                       : 'scene_item'
                   }
                 >
-                  <View className='scene_item_title'>
+                  <View
+                    className='scene_item_title'
+                    onClick={() => pushSelected(item.id)}
+                  >
                     <View className='title_text_content'>
                       <Text className='title_text'>{item.title}</Text>
                     </View>
                     <View className='title_arrow_content'>
-                      <Image
-                        className='title_arrow'
-                        src={`${imageUrl}arrow_bottom@2x.png`}
-                      />
+                      {currentSelect.includes(item.id) ? (
+                        <Image
+                          className='title_arrow'
+                          src={`${imageUrl}arrow_bottom@2x.png`}
+                        />
+                      ) : (
+                        <Image
+                          className='title_arrow'
+                          src={`${imageUrl}arrow_right@2x.png`}
+                        />
+                      )}
                     </View>
                   </View>
-                  {currentIndex == item.id && (
+                  {currentSelect.includes(item.id) && (
                     <View className='scene_item_content'>
                       <Swiper
                         className='scene_item_swiper'

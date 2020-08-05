@@ -1,13 +1,13 @@
 export default {
   pages: [
+    'pages/business/authority/index',
     'pages/home/index',
+    'pages/home/order/index',
+    'pages/home/order/scene_selection/index',
     'pages/business/order/detail/index',
     'pages/business/selection/index',
     // 'pages/home/category/index',
     // 'pages/home/goods/index',
-
-    'pages/home/order/index',
-    'pages/home/order/scene_selection/index',
 
     'pages/business/index',
     'pages/business/order/index',
@@ -26,8 +26,6 @@ export default {
 
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',
-
-    'pages/business/authority/index',
 
     'pages/business/member_benefits/index',
 

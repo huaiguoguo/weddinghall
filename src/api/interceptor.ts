@@ -25,7 +25,7 @@ const Request = (
 
   return new Promise((resolve, reject) => {
     Taro.request({
-      url: `https://wd.chenxianlei.com/api/${url}`,
+      url: `https://api.wd.chenxianlei.com/${url}`,
       data: data,
       method: method,
       header: header,
