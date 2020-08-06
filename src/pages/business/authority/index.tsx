@@ -198,7 +198,7 @@ function Index(props: any) {
                   src={`${imageUrl}business/qrcode@2x.png`}
                 />
               </View>
-              <View className='list_btn'>
+              <View className='list_btn' onClick={cancel}>
                 <Text className='btn_text'>长按保存至相册</Text>
               </View>
             </View>

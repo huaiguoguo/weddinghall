@@ -1,58 +1,54 @@
 import React, { useState } from 'react'
 import { View, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
+import http from '@api/interceptor'
 
 import './index.scss'
 
+interface IPPtList {
+  expiretime: string
+  id: number
+  imageurl: string
+  linkurl: string
+  target: string
+  title: string
+  weigh: number
+}
+
+interface ISceneList {
+  brand_id: number
+  category_ids: string
+  general_code: string
+  id: number
+  images: string[]
+  price: string
+  sku: {
+    sku_id: number
+    goods_id: number
+    selling_price: string
+    stocks: number
+  }
+  title: string
+}
+
 function Index(props: any) {
   const [currentSelect, setCurrentSelect] = useState<number[]>([])
-  const [sceneList, setSceneList] = useState([
-    {
-      id: 1,
-      title: '天涯海角',
-      scenes: [
-        {
-          image: `${imageUrl}sanya@2x.png`,
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: '大小洞天',
-      scenes: [
-        {
-          image: `${imageUrl}sanya@2x.png`,
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: '蜈支洲岛',
-      scenes: [
-        {
-          image: `${imageUrl}sanya@2x.png`,
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: '小东海',
-      scenes: [
-        {
-          image: `${imageUrl}sanya@2x.png`,
-        },
-      ],
-    },
-    {
-      id: 5,
-      title: '三亚湾',
-      scenes: [
-        {
-          image: `${imageUrl}sanya@2x.png`,
-        },
-      ],
-    },
-  ])
+  const [pptList, setPPtList] = useState<IPPtList[]>([])
+  const [sceneList, setSceneList] = useState<ISceneList[]>([])
+
+  useDidShow(async () => {
+    const { data: pptData } = await http.get('/adszone/getAdsByMark', {
+      mark: 'scenario_main',
+    })
+
+    const { goods } = await http.get('/goods.lists/index', {
+      tid: 3,
+    })
+
+    setPPtList(pptData)
+    setSceneList(goods)
+  })
 
   const pushSelected = (selectId: number) => {
     if (!currentSelect.includes(selectId)) {
@@ -75,15 +71,14 @@ function Index(props: any) {
           circular
           indicatorDots
         >
-          <SwiperItem className='ppt_item'>
-            <Image className='ppt_item_img' src={`${imageUrl}sanya@2x.png`} />
-          </SwiperItem>
-          <SwiperItem className='ppt_item'>
-            <Image className='ppt_item_img' src={`${imageUrl}sanya@2x.png`} />
-          </SwiperItem>
-          <SwiperItem className='ppt_item'>
-            <Image className='ppt_item_img' src={`${imageUrl}sanya@2x.png`} />
-          </SwiperItem>
+          {pptList.length > 0 &&
+            pptList.map((item, index: number) => {
+              return (
+                <SwiperItem key={index} className='ppt_item'>
+                  <Image className='ppt_item_img' src={item.imageurl} />
+                </SwiperItem>
+              )
+            })}
         </Swiper>
       </View>
       <View className='content'>
@@ -152,24 +147,20 @@ function Index(props: any) {
                         circular
                         indicatorDots
                       >
-                        <SwiperItem className='swiper_item'>
-                          <Image
-                            className='swiper_item_img'
-                            src={`${imageUrl}sanya@2x.png`}
-                          />
-                        </SwiperItem>
-                        <SwiperItem className='swiper_item'>
-                          <Image
-                            className='swiper_item_img'
-                            src={`${imageUrl}sanya@2x.png`}
-                          />
-                        </SwiperItem>
-                        <SwiperItem className='swiper_item'>
-                          <Image
-                            className='swiper_item_img'
-                            src={`${imageUrl}sanya@2x.png`}
-                          />
-                        </SwiperItem>
+                        {item.images.length > 0 &&
+                          item.images.map((imgItem, imgIndex: number) => {
+                            return (
+                              <SwiperItem
+                                key={imgIndex}
+                                className='swiper_item'
+                              >
+                                <Image
+                                  className='swiper_item_img'
+                                  src={imgItem}
+                                />
+                              </SwiperItem>
+                            )
+                          })}
                       </Swiper>
                     </View>
                   )}
@@ -179,7 +170,7 @@ function Index(props: any) {
         </View>
 
         <View className='btn_container'>
-          <View className='btn'>
+          <View className='btn' onClick={() => Taro.navigateBack()}>
             <Text className='btn_text'>确认场景</Text>
           </View>
         </View>

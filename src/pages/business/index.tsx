@@ -26,7 +26,7 @@ function Index() {
     console.log(res)
   }
 
-  const businessImageUrl = 'http://wd.chenxianlei.com/wxchat/business/'
+  const businessImageUrl = 'http://api.wd.chenxianlei.com/wxchat/business/'
 
   const [menu, setMenu] = useState([
     {

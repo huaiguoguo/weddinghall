@@ -301,14 +301,14 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .popupBox .save_appoint_ment .content .content_head {
   width: 100%;
   height: auto;
-  background-color: red;
+  // background-color: red;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
@@ -326,13 +326,13 @@
   height: 36px;
   // background-color: blue;
   align-self: flex-start;
-  margin-top: 15px;
-  margin-left: 15px;
+  margin-top: 27px;
+  margin-left: 34px;
 }
 
 .popupBox .save_appoint_ment .content .content_head .title {
   width: 100%;
-  height: 100px;
+  height: 50px;
 
   display: flex;
   flex-direction: row;
@@ -345,30 +345,30 @@
   // z-index: 999;
 }
 
-.popupBox
-  .save_appoint_ment
-  .content
-  .save_appointment_top_bg
-  .title
-  .title_text {
+.popupBox .save_appoint_ment .content .content_head .title .title_text {
   // background-color: pink;
   font-size: 36px;
   font-family: Source Han Sans CN;
-  font-weight: bold;
+  font-weight: 500;
   color: rgba(255, 255, 255, 1);
 }
 
 .popupBox .save_appoint_ment .content .content_list {
-  // width: 100%;
-  // height: auto;
+  width: auto;
+  height: auto;
   // height: 100%;
   // background: #fff;
-  background-color: blue;
+  // background-color: blue;
 
   // padding-top: 21px;
   // padding-bottom: 107px;
 
-  // align-self: flex-end;
+  // align-self: baseline;
+  // justify-self: flex-end;
+  align-self: center;
+
+  margin-top: 60px;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
@@ -386,14 +386,24 @@
   align-items: center;
 }
 
+.popupBox .save_appoint_ment .content .content_list .list_head .item_label {
+  font-size: 26px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(255, 123, 104, 1);
+}
+
 .popupBox .save_appoint_ment .content .content_list .list_qrcode {
-  width: 100%;
-  height: 100%;
+  width: 307px;
+  height: 307px;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  margin-top: 52px;
+  margin-bottom: 68px;
 }
 
 .popupBox .save_appoint_ment .content .content_list .list_qrcode .qrcode_image {
@@ -404,7 +414,7 @@
 .popupBox .save_appoint_ment .content .content_list .list_btn {
   // width: 100%;
   // padding: 10px 0px;
-  // box-sizing: border-box;
+  box-sizing: border-box;
 
   width: 369px;
   height: 60px;

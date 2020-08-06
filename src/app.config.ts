@@ -1,6 +1,5 @@
 export default {
   pages: [
-    'pages/business/authority/index',
     'pages/home/index',
     'pages/home/order/index',
     'pages/home/order/scene_selection/index',
@@ -13,6 +12,7 @@ export default {
     'pages/business/order/index',
     'pages/business/order/search/index',
 
+    'pages/business/authority/index',
     'pages/business/service/index',
     'pages/business/setting/index',
 

@@ -1,3 +1,5 @@
+@import '@styles/common.scss';
+
 .container {
   color: red;
   // background-color: orange;
@@ -95,7 +97,7 @@
 
 // 礼服预约
 .dress {
-  background-image: url('https://wd.chenxianlei.com/wxchat/dress_appointment_bg@2x.png');
+  background-image: url($imageUrl + 'dress_appointment_bg@2x.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -107,7 +109,7 @@
 
 //场景预约
 .scene {
-  background-image: url('https://wd.chenxianlei.com/wxchat/scene_appointment_bg@2x.png');
+  background-image: url($imageUrl + 'scene_appointment_bg@2x.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -119,7 +121,7 @@
 
 //鲜花预约
 .flower {
-  background-image: url('https://wd.chenxianlei.com/wxchat/flower_appointment_bg@2x.png');
+  background-image: url($imageUrl + 'flower_appointment_bg@2x.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -132,7 +134,7 @@
 .coupon_container {
   width: 140px;
   height: 160px;
-  background-image: url('https://wd.chenxianlei.com/wxchat/coupon.png');
+  background-image: url($imageUrl + 'coupon.png');
   background-size: 100%;
   background-repeat: no-repeat;
   position: fixed;

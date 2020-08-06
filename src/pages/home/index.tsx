@@ -15,8 +15,9 @@ function Index() {
     const { data } = await http.get('/adszone/getAdsByMark', {
       mark: 'wxapp_index',
     })
-    setSwiperList(data)
 
+    setSwiperList(data)
+    // console.log(swiperList)
     // Taro.login({
     //   success: async function (res) {
     //     const test = await http.post('wxuser/getTokenByWxcode', {
@@ -37,7 +38,7 @@ function Index() {
       })
       return false
     }
-    Taro.navigateTo({
+    Taro.redirectTo({
       url,
     })
     return false
