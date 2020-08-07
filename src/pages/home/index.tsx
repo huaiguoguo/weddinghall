@@ -17,14 +17,6 @@ function Index() {
     })
 
     setSwiperList(data)
-    // console.log(swiperList)
-    // Taro.login({
-    //   success: async function (res) {
-    //     const test = await http.post('wxuser/getTokenByWxcode', {
-    //       code: res.code,
-    //     })
-    //   },
-    // })
   })
 
   const category = (url: string) => {

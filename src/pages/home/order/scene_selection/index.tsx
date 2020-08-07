@@ -38,6 +38,9 @@ function Index(props: any) {
   const [sceneList, setSceneList] = useState<ISceneList[]>([])
 
   useDidShow(async () => {
+    const sceneIds = Taro.getStorageSync('sceneIds')
+    setCurrentSelect(sceneIds)
+
     const { data: pptData } = await http.get('/adszone/getAdsByMark', {
       mark: 'scenario_main',
     })
@@ -45,6 +48,8 @@ function Index(props: any) {
     const { goods } = await http.get('/goods.lists/index', {
       tid: 3,
     })
+
+    console.log(goods)
 
     setPPtList(pptData)
     setSceneList(goods)
@@ -58,6 +63,11 @@ function Index(props: any) {
       currentSelect.splice(index, 1)
       setCurrentSelect([...currentSelect])
     }
+  }
+
+  const confirmScene = () => {
+    Taro.setStorageSync('sceneIds', currentSelect)
+    Taro.navigateBack()
   }
 
   return (
@@ -111,20 +121,20 @@ function Index(props: any) {
                 <View
                   key={index}
                   className={
-                    currentSelect.includes(item.id)
+                    currentSelect.includes(item.sku.sku_id)
                       ? 'scene_item scene_item_active'
                       : 'scene_item'
                   }
                 >
                   <View
                     className='scene_item_title'
-                    onClick={() => pushSelected(item.id)}
+                    onClick={() => pushSelected(item.sku.sku_id)}
                   >
                     <View className='title_text_content'>
                       <Text className='title_text'>{item.title}</Text>
                     </View>
                     <View className='title_arrow_content'>
-                      {currentSelect.includes(item.id) ? (
+                      {currentSelect.includes(item.sku.sku_id) ? (
                         <Image
                           className='title_arrow'
                           src={`${imageUrl}arrow_bottom@2x.png`}
@@ -137,7 +147,7 @@ function Index(props: any) {
                       )}
                     </View>
                   </View>
-                  {currentSelect.includes(item.id) && (
+                  {currentSelect.includes(item.sku.sku_id) && (
                     <View className='scene_item_content'>
                       <Swiper
                         className='scene_item_swiper'
@@ -170,7 +180,7 @@ function Index(props: any) {
         </View>
 
         <View className='btn_container'>
-          <View className='btn' onClick={() => Taro.navigateBack()}>
+          <View className='btn' onClick={confirmScene}>
             <Text className='btn_text'>确认场景</Text>
           </View>
         </View>

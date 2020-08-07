@@ -1,7 +1,7 @@
 export default {
   pages: [
-    'pages/home/index',
     'pages/home/order/index',
+    'pages/home/index',
     'pages/home/order/scene_selection/index',
     'pages/business/order/detail/index',
     'pages/business/selection/index',

@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { getStorage, getStorageSync } from '@tarojs/taro'
 // import baseUrl from './baseUrl'
 
 interface method {
@@ -15,12 +15,19 @@ interface method {
 const Request = (
   url: string,
   method: keyof method,
-  data: any,
-  header: any
+  data: {},
+  header: {} = {}
 ): Promise<any> => {
   Taro.showLoading({
     title: '加载中...',
     mask: true,
+  })
+
+  const token = getStorageSync('token')
+
+  const head = Object.assign(header, {
+    token,
+    'content-type': 'application/json',
   })
 
   return new Promise((resolve, reject) => {
@@ -28,7 +35,7 @@ const Request = (
       url: `https://api.wd.chenxianlei.com/${url}`,
       data: data,
       method: method,
-      header: header,
+      header: head,
       success: function (res) {
         const { code, msg, data: dataObject } = res.data
         if (code != 1) {
@@ -54,11 +61,11 @@ const Request = (
   })
 }
 
-const get = (url: string, data?: any, header?: any) => {
+const get = (url: string, data?: any, header?: {}) => {
   return Request(url, 'GET', data, header)
 }
 
-const post = (url: string, data?: any, header?: any) => {
+const post = (url: string, data?: any, header?: {}) => {
   return Request(url, 'POST', data, header)
 }
 
