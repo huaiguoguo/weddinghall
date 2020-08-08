@@ -99,9 +99,6 @@ function Index(props: any) {
     const company_name = getStorageSync('company_name')
     const company_mobile = getStorageSync('company_mobile')
 
-    // console.log(company_name)
-    // console.log(company_mobile)
-
     setStoreName(company_name)
     setStoreMobile(company_mobile)
 
