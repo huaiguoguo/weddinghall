@@ -5,7 +5,6 @@ import NavBar from '@components/CustomerNavBar/index'
 import { imageUrl } from '@api/baseUrl'
 
 import useNavInfo from '@hooks/useNavInfo'
-
 import './index.scss'
 
 function Index(props: any) {

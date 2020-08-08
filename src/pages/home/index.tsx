@@ -5,6 +5,7 @@ import SwiperCustom, { ISwiperItem } from '@components/Swiper/Swiper'
 
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
+import refreshToken from '@utils/token'
 
 import './index.scss'
 
@@ -15,7 +16,7 @@ function Index() {
     const { data } = await http.get('/adszone/getAdsByMark', {
       mark: 'wxapp_index',
     })
-
+    refreshToken()
     setSwiperList(data)
   })
 

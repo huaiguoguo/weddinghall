@@ -1,20 +1,72 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
-import { imageUrl } from '@api/baseUrl'
+import { useRouter, useDidShow } from '@tarojs/taro'
 
+import { imageUrl } from '@api/baseUrl'
+import http from '@api/interceptor'
 import './index.scss'
 
+interface ISceneGoods {
+  id: number
+  order_id: number
+  sub_order_id: number
+  goods_id: number
+  sku_id: number
+  number: number
+  title: string
+  picture: string
+}
+
+interface IOrderDetail {
+  order_sn: string
+  company_name: string
+  mobile: string
+  fitting_time: string
+  photo_time: string
+  client_name: string
+  scene_goods: string
+  quantity: number
+  remark: string
+}
+
+const initOrderDetail = {
+  order_sn: '',
+  company_name: '',
+  mobile: '',
+  fitting_time: '',
+  photo_time: '',
+  client_name: '',
+  scene_goods: '',
+  quantity: 0,
+  remark: '',
+}
+
 function Index(props: any) {
+  const [orderDetail, setOrderDetail] = useState<IOrderDetail>(initOrderDetail)
   const [isPopup, setIsPopup] = useState<number>(0)
-  const [orderDetail, setOrderDetail] = useState({
-    order_sn: '210540384564125',
-    order_status: 1,
-    order_goods: [
-      {
-        goods_title: '',
-        goods_image: '',
-      },
-    ],
+
+  const router = useRouter()
+  const { order_id } = router.params
+
+  useDidShow(async () => {
+    const res = await http.get('/order.order/detail', { order_id })
+    const sceneTitleArr: string[] = []
+    res.scene_goods.map((item: ISceneGoods) => {
+      sceneTitleArr.push(item.title)
+    })
+
+    const detail = {
+      order_sn: res.order_sn,
+      company_name: res.company_name,
+      mobile: res.company_name,
+      fitting_time: res.dress.fitting_time,
+      photo_time: res.scene.photo_time,
+      client_name: res.company_name,
+      scene_goods: sceneTitleArr.join(','),
+      quantity: res.dress.quantity,
+      remark: res.remark,
+    }
+    setOrderDetail(detail)
   })
 
   const saveAppointMent = (e) => {
@@ -29,9 +81,9 @@ function Index(props: any) {
 
   const showPopup = (e) => {
     e.stopPropagation()
-    console.log('========start', isPopup)
+    console.log('======== start', isPopup)
     setIsPopup(1)
-    console.log('========end', isPopup)
+    console.log('======== end', isPopup)
     // console.log(isPopup);
   }
 
@@ -54,31 +106,31 @@ function Index(props: any) {
         <View className='order_content_list'>
           <View className='order_item'>
             <Text className='order_item_label'>订单编号:</Text>
-            <Text className='order_item_value'>210540384564125</Text>
+            <Text className='order_item_value'>{orderDetail.order_sn}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>商家店名:</Text>
-            <Text className='order_item_value'>三年二班</Text>
+            <Text className='order_item_value'>{orderDetail.company_name}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>商家电话:</Text>
-            <Text className='order_item_value'>17763962622</Text>
+            <Text className='order_item_value'>{orderDetail.mobile}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>选服装日期:</Text>
-            <Text className='order_item_value'> 6月7日 8:30</Text>
+            <Text className='order_item_value'>{orderDetail.fitting_time}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>拍摄日期:</Text>
-            <Text className='order_item_value'>6月8日 - 6月9日</Text>
+            <Text className='order_item_value'>{orderDetail.photo_time}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>客户姓名:</Text>
-            <Text className='order_item_value'>沈玉蓉</Text>
+            <Text className='order_item_value'>{orderDetail.client_name}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>具体场景:</Text>
-            <Text className='order_item_value'>三亚湾、礁石</Text>
+            <Text className='order_item_value'>{orderDetail.scene_goods}</Text>
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>服装套数:</Text>
@@ -90,6 +142,7 @@ function Index(props: any) {
           </View>
         </View>
       </View>
+      {/*
       <View className='order_insurance'>
         <Image
           className='order_insurance_bg'
@@ -139,10 +192,12 @@ function Index(props: any) {
           </View>
         </View>
       </View>
+    */}
       <View className='order_btn'>
         <View className='order_btn_item save_btn' onClick={saveAppointMent}>
           <Text className='btn_text save_btn_text'>保存预约信息</Text>
         </View>
+
         <View className='order_btn_item confirm_btn'>
           <Text className='btn_text confirm_btn_text' onClick={confirmPay}>
             确认支付
@@ -184,39 +239,39 @@ function Index(props: any) {
             <View className='content_list'>
               <View className='list_item'>
                 <Text className='item_label'>订单编号:</Text>
-                <Text className='item_value'>210540384564125</Text>
+                <Text className='item_value'>{orderDetail.order_sn}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>商家店名:</Text>
-                <Text className='item_value'>三年二班</Text>
+                <Text className='item_value'>{orderDetail.company_name}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>商家电话:</Text>
-                <Text className='item_value'>17763962622</Text>
+                <Text className='item_value'>{orderDetail.mobile}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>选服装日期:</Text>
-                <Text className='item_value'> 6月7日 8:30</Text>
+                <Text className='item_value'> {orderDetail.fitting_time}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>拍摄日期:</Text>
-                <Text className='item_value'>6月8日 - 6月9日</Text>
+                <Text className='item_value'>{orderDetail.photo_time}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>客户姓名:</Text>
-                <Text className='item_value'>沈玉蓉</Text>
+                <Text className='item_value'>{orderDetail.client_name}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>具体场景:</Text>
-                <Text className='item_value'>三亚湾，礁石</Text>
+                <Text className='item_value'>{orderDetail.scene_goods}</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>服装套数:</Text>
-                <Text className='item_value'>3套</Text>
+                <Text className='item_value'>{orderDetail.quantity}套</Text>
               </View>
               <View className='list_item'>
                 <Text className='item_label'>备注:</Text>
-                <Text className='item_value'>abcabc</Text>
+                <Text className='item_value'>{orderDetail.remark}</Text>
               </View>
             </View>
           </View>

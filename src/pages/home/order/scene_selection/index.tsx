@@ -49,8 +49,6 @@ function Index(props: any) {
       tid: 3,
     })
 
-    console.log(goods)
-
     setPPtList(pptData)
     setSceneList(goods)
   })

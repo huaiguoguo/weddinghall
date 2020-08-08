@@ -9,10 +9,11 @@ import {
   SwiperItem,
 } from '@tarojs/components'
 
-import Taro, { useDidShow, getStorageSync } from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 import refreshToken from '@utils/token'
+
 import qs from 'qs'
 
 import './index.scss'
@@ -63,10 +64,7 @@ const initValue = {
 
 function Index(props: any) {
   const [isPopup, setIsPopup] = useState<number>(0)
-  const [isActive, setIsActive] = useState<number>(0)
   const [suitsTotal, setSuitsTotal] = useState<string>('0')
-  const [shuttleTotal, setShuttleTotal] = useState<string>('0')
-  const [caterTotal, setCaterTotal] = useState<string>('0')
 
   const [storeName, setStoreName] = useState<string>('')
   const [storeMobile, setStoreMobile] = useState<string>('')
@@ -77,40 +75,25 @@ function Index(props: any) {
 
   const [clothing, setClothing] = useState<IGoods>(initValue)
   const [flowerList, setFlowerList] = useState<IGoods[]>([])
-  const [shuttleList, setShuttleList] = useState<IGoods[]>([])
-  const [caterList, setCaterList] = useState<IGoods[]>([])
+  const [shuttle, setShuttle] = useState<IGoods>(initValue)
+  const [cater, setCater] = useState<IGoods>(initValue)
   const [agreement, setAgreement] = useState<string>('')
 
-  const [currentFlowerIndex, setCurrentFlowerIndex] = useState<number>(0)
-  const [currentShuttleIndex, setCurrentShuttleIndex] = useState<number>(0)
-  const [currentCaterIndex, setCurrentCaterIndex] = useState<number>(0)
+  const [currentFlowerIndex, setCurrentFlowerIndex] = useState(0)
+  const [currentShuttleService, setCurrentShuttleService] = useState<number>(0)
+  const [currentCaterService, setCurrentCaterService] = useState<number>(0)
   const [pptList, setPPtList] = useState<IPPtList[]>([])
 
   useDidShow(async () => {
-    // Taro.navigateTo({
-    //   url: '/pages/business/order/detail/index?order_id=22',
-    // })
-    refreshToken()
     const { data } = await http.get('/adszone/getAdsByMark', {
       mark: 'dress_main',
     })
     setPPtList(data)
 
-    const company_name = getStorageSync('company_name')
-    const company_mobile = getStorageSync('company_mobile')
-
-    // console.log(company_name)
-    // console.log(company_mobile)
-
-    setStoreName(company_name)
-    setStoreMobile(company_mobile)
-
     const goodsUrl = '/goods.lists/index'
     const { goods } = await http.get(goodsUrl)
 
     const goodsFlowers: IGoods[] = []
-    const goodsShuttles: IGoods[] = []
-    const goodsCaters: IGoods[] = []
 
     goods.map((item: IGoods, index: number) => {
       if (item.goods_type_id == 1) {
@@ -118,15 +101,13 @@ function Index(props: any) {
       } else if (item.goods_type_id == 4) {
         goodsFlowers.push(item)
       } else if (item.goods_type_id == 9) {
-        goodsShuttles.push(item)
+        setShuttle(item)
       } else if (item.goods_type_id == 10) {
-        goodsCaters.push(item)
+        setCater(item)
       }
     })
 
     setFlowerList(goodsFlowers)
-    setShuttleList(goodsShuttles)
-    setCaterList(goodsCaters)
 
     const { content } = await http.get('/article/detailByName', {
       name: 'fuwumianzexieyi',
@@ -134,32 +115,31 @@ function Index(props: any) {
     setAgreement(content)
   })
 
-  const setCurrentShuttleService = (num: number) => {
-    if (num == currentCaterIndex) {
-      setCurrentShuttleIndex(0)
+  const setShuttleService = (num: number) => {
+    if (num == currentShuttleService) {
+      setCurrentShuttleService(0)
       return false
     }
-    setCurrentShuttleIndex(num)
+    setCurrentShuttleService(num)
   }
 
-  const setCurrentCaterService = (num: number) => {
-    if (num == currentCaterIndex) {
-      setCurrentCaterIndex(0)
+  const setCaterService = (num: number) => {
+    if (num == currentCaterService) {
+      setCurrentCaterService(0)
       return false
     }
-    setCurrentCaterIndex(num)
+    setCurrentCaterService(num)
   }
 
   const redirectUrl = (url: string) => {
     Taro.navigateTo({ url })
   }
 
-  // 协议确认
   const confirm = (e) => {
     e.stopPropagation()
     setIsPopup(2)
   }
-  // 服装套数减
+
   const setSuitsReducer = () => {
     if (parseInt(suitsTotal) <= 0) {
       return
@@ -168,7 +148,6 @@ function Index(props: any) {
     setSuitsTotal(suits.toString())
   }
 
-  // 服装套数加
   const setSuitsPlus = () => {
     if (parseInt(suitsTotal) >= 10) {
       return
@@ -176,55 +155,13 @@ function Index(props: any) {
     const suits = parseInt(suitsTotal) + 1
     setSuitsTotal(suits.toString())
   }
-  // 接送车服务减
-  const setShuttleReducer = () => {
-    if (parseInt(shuttleTotal) <= 0) {
-      return
-    }
-    const shuttleTota = parseInt(shuttleTotal) - 1
-    setShuttleTotal(shuttleTota.toString())
-  }
-  // 接送车服务加
-  const setShuttlePlus = () => {
-    if (parseInt(shuttleTotal) >= 10) {
-      return
-    }
-    const shuttleTota = parseInt(shuttleTotal) + 1
-    setShuttleTotal(shuttleTota.toString())
-  }
-  // 接送车服务减
-  const setCaterReducer = () => {
-    if (parseInt(caterTotal) <= 0) {
-      return
-    }
-    const caterTota = parseInt(caterTotal) - 1
-    setCaterTotal(caterTota.toString())
-  }
-  // 接送车服务加
-  const setCaterPlus = () => {
-    console.log(caterTotal)
-    if (parseInt(caterTotal) >= 10) {
-      return
-    }
-    const caterTota = parseInt(caterTotal) + 1
-    setCaterTotal(caterTota.toString())
-  }
-
-  // 配餐服务
-  const toggleActive = () => {
-    if (isActive) {
-      setCaterTotal('0')
-      setIsActive(0)
-    } else {
-      setCaterTotal('5')
-      setIsActive(1)
-    }
-  }
 
   const submitForm = () => {
     // const token = refreshToken()
+
     // console.log(token)
     // return false
+
     //先请求 添加购物车
 
     const datas: { id: number; num: number }[] = []
@@ -234,19 +171,17 @@ function Index(props: any) {
       num: 1,
     })
 
-    // 把接送车服务的数据加入 data数据包
     datas.push({
-      id: shuttleList[currentShuttleIndex].sku.sku_id,
-      num: parseInt(shuttleTotal),
+      id: shuttle.sku.sku_id,
+      num: currentShuttleService,
     })
 
-    // 把配餐的数据加入 data数据包
     datas.push({
-      id: caterList[currentCaterIndex].sku.sku_id,
-      num: parseInt(caterTotal),
+      id: cater.sku.sku_id,
+      num: currentCaterService,
     })
 
-    // 服装套数
+    //服装套数
     datas.push({
       id: clothing.sku.sku_id,
       num: parseInt(suitsTotal),
@@ -269,34 +204,25 @@ function Index(props: any) {
     const dataStringify = JSON.stringify(datas)
 
     http.post('cart/addsome', { datas: dataStringify }).then((res) => {
-      const company_name = getStorageSync('company_name')
-      const company_mobile = getStorageSync('company_mobile')
-
-      const orderData = {
-        fitting_time: selectClothingDate,
-        photo_time: shotDate,
-        client_name: customerName,
-        company_name,
-        company_mobile,
-      }
-      // const orderDataStr = qs.stringify(orderData)
-      http.post('cart/done', orderData).then((doneRes) => {
-        Taro.showToast({
-          title: '订单提交成功',
-          icon: 'success',
-          duration: 5000,
-          success: function () {
-            // redirectUrl('/pages/business/order/detail/index')
-            Taro.navigateTo({
-              url:
-                '/pages/business/order/detail/index?order_id=' +
-                doneRes.order_id,
-            })
-          },
-        })
-      })
+      // console.log(res)
+      // Taro.showModal({
+      //   title: '订单成功...',
+      // })
     })
+
     // Taro.removeStorageSync('sceneIds')
+    // 再请求 提交订单接口
+    const orderData = {
+      fitting_time: selectClothingDate,
+      photo_time: shotDate,
+      client_name: customerName,
+    }
+    const orderDataStr = qs.stringify(orderData)
+
+    http.post('cart/done', orderDataStr).then((res) => {
+      console.log(res)
+    })
+    // redirectUrl('/pages/business/order/detail/index')
   }
 
   return (
@@ -356,7 +282,6 @@ function Index(props: any) {
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
                   placeholder='请输入您的店铺名称'
-                  value={storeName}
                   onInput={(e) => setStoreName(e.detail.value)}
                 />
               </View>
@@ -371,7 +296,6 @@ function Index(props: any) {
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
                   placeholder='请输入您的电话号码'
-                  value={storeMobile}
                   onInput={(e) => setStoreMobile(e.detail.value)}
                 />
               </View>
@@ -512,7 +436,7 @@ function Index(props: any) {
               </View>
             </View>
 
-            {/* <View className='goods_item_content'>
+            <View className='goods_item_content'>
               {flowerList.length > 0 &&
                 flowerList[currentFlowerIndex].images &&
                 flowerList[currentFlowerIndex].images.length > 0 &&
@@ -527,7 +451,7 @@ function Index(props: any) {
                     )
                   }
                 )}
-            </View> */}
+            </View>
           </View>
 
           <View className='goods_item goods_shuttle'>
@@ -536,81 +460,58 @@ function Index(props: any) {
                 <Text className='goods_item_head_title_text'>接送车服务</Text>
               </View>
               <View className='goods_item_head_right'>
-                <View
-                  className='item_input_reducer_ctn'
-                  onClick={setShuttleReducer}
-                >
-                  <Image
-                    className='item_input_reducer'
-                    src={`${imageUrl}reducer@2x.png`}
-                  />
-                </View>
-                <Input
-                  className='item_input_content'
-                  placeholderClass='item_input_placeholder'
-                  value={shuttleTotal}
+                <Image
+                  className='head_arrow_right'
+                  src={`${imageUrl}arrow_bottom@2x.png`}
                 />
-                <View className='item_input_plus_ctn' onClick={setShuttlePlus}>
-                  <Image
-                    className='item_input_plus'
-                    src={`${imageUrl}plus@2x.png`}
-                  />
-                </View>
               </View>
             </View>
             <View className='goods_item_content'>
-              {shuttleList.length > 0 &&
-                shuttleList.map((item, index) => {
-                  return (
-                    <View
-                      key={index}
-                      onClick={() => setCurrentShuttleService(index)}
-                      className={
-                        currentShuttleIndex == index
-                          ? 'content_item active'
-                          : 'content_item'
-                      }
-                    >
-                      <Text className='content_item_text'>{item.title}</Text>
-                    </View>
-                  )
-                })}
+              <View
+                onClick={() => setShuttleService(1)}
+                className={
+                  currentShuttleService == 1
+                    ? 'content_item active'
+                    : 'content_item'
+                }
+              >
+                <Text className='content_item_text'>1天</Text>
+              </View>
+              <View
+                onClick={() => setShuttleService(2)}
+                className={
+                  currentShuttleService == 2
+                    ? 'content_item active'
+                    : 'content_item'
+                }
+              >
+                <Text className='content_item_text'>2天</Text>
+              </View>
+              <View
+                onClick={() => setShuttleService(3)}
+                className={
+                  currentShuttleService == 3
+                    ? 'content_item active'
+                    : 'content_item'
+                }
+              >
+                <Text className='content_item_text'>3天</Text>
+              </View>
             </View>
           </View>
           <View className='goods_item goods_shuttle'>
-            <View
-              className={
-                isActive ? 'goods_item_head active' : 'goods_item_head'
-              }
-              onClick={toggleActive}
-            >
+            <View className='goods_item_head'>
               <View className='goods_item_head_title'>
                 <Text className='goods_item_head_title_text'>配餐</Text>
               </View>
               <View className='goods_item_head_right'>
-                <View
-                  className='item_input_reducer_ctn'
-                  onClick={setCaterReducer}
-                >
-                  <Image
-                    className='item_input_reducer'
-                    src={`${imageUrl}reducer@2x.png`}
-                  />
-                </View>
-                <Input
-                  className='item_input_content'
-                  placeholderClass='item_input_placeholder'
-                  value={caterTotal}
+                <Image
+                  className='head_arrow_right'
+                  src={`${imageUrl}arrow_bottom@2x.png`}
                 />
-                <View className='item_input_plus_ctn' onClick={setCaterPlus}>
-                  <Image
-                    className='item_input_plus'
-                    src={`${imageUrl}plus@2x.png`}
-                  />
-                </View>
               </View>
             </View>
-            {/* <View className='goods_item_content'>
+            <View className='goods_item_content'>
               <View
                 className={
                   currentCaterService == 1
@@ -621,10 +522,29 @@ function Index(props: any) {
               >
                 <Text className='content_item_text'>1天</Text>
               </View>
-            </View> */}
+              <View
+                className={
+                  currentCaterService == 2
+                    ? 'content_item active'
+                    : 'content_item'
+                }
+                onClick={() => setCaterService(2)}
+              >
+                <Text className='content_item_text'>2天</Text>
+              </View>
+              <View
+                className={
+                  currentCaterService == 3
+                    ? 'content_item active'
+                    : 'content_item'
+                }
+                onClick={() => setCaterService(3)}
+              >
+                <Text className='content_item_text'>3天</Text>
+              </View>
+            </View>
           </View>
         </View>
-        {/*  
         <View className='insurance'>
           <View className='insurance_tab'>
             <View className='tab active'>
@@ -679,8 +599,6 @@ function Index(props: any) {
             </View>
           </View>
         </View>
-        
-      */}
         <View className='agreement'>
           <View className='agreement_left'>
             <View className='agreement_check'>

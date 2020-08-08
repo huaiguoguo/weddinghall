@@ -26,10 +26,16 @@ function refreshToken() {
         const response = await http.post('/wxuser/getTokenByWxcode', {
           code: res.code,
         })
+        // console.log(response);
+        console.log('================= start')
+        console.log(response)
+        console.log('================= end')
         try {
           Taro.setStorageSync('isLogin', 1)
           Taro.setStorageSync('token', response.token)
           Taro.setStorageSync('token_expire', response.expiretime)
+          Taro.setStorageSync('company_name', response.company_name)
+          Taro.setStorageSync('company_mobile', response.company_mobile)
         } catch (e) {
           console.log(e)
         }
