@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import {
   View,
@@ -7,6 +7,7 @@ import {
   Input,
   Swiper,
   SwiperItem,
+  Checkbox,
 } from '@tarojs/components'
 
 import Taro, { useDidShow, getStorageSync } from '@tarojs/taro'
@@ -68,6 +69,7 @@ function Index(props: any) {
   const [shuttleTotal, setShuttleTotal] = useState<string>('0')
   const [caterTotal, setCaterTotal] = useState<string>('0')
 
+  const [selectedSceneTitles, setSelectedSceneTitles] = useState<string>('')
   const [storeName, setStoreName] = useState<string>('')
   const [storeMobile, setStoreMobile] = useState<string>('')
   const [customerName, setCustomerName] = useState<string>('')
@@ -80,11 +82,37 @@ function Index(props: any) {
   const [shuttleList, setShuttleList] = useState<IGoods[]>([])
   const [caterList, setCaterList] = useState<IGoods[]>([])
   const [agreement, setAgreement] = useState<string>('')
+  const [agreementActive, setAgreementActive] = useState<number>(0)
 
   const [currentFlowerIndex, setCurrentFlowerIndex] = useState<number>(0)
   const [currentShuttleIndex, setCurrentShuttleIndex] = useState<number>(0)
   const [currentCaterIndex, setCurrentCaterIndex] = useState<number>(0)
   const [pptList, setPPtList] = useState<IPPtList[]>([])
+
+  const ticketList = [
+    {
+      title: '天涯海角',
+    },
+    {
+      title: '大小洞天',
+    },
+    {
+      title: '游艇',
+    },
+  ]
+
+  useEffect(() => {
+    return () => {
+      async function fetchData() {
+        const { content } = await http.get('/article/detailByName', {
+          name: 'fuwumianzexieyi',
+        })
+        console.log(content)
+        setAgreement(content)
+      }
+      fetchData()
+    }
+  }, [])
 
   useDidShow(async () => {
     // Taro.navigateTo({
@@ -99,11 +127,19 @@ function Index(props: any) {
     const company_name = getStorageSync('company_name')
     const company_mobile = getStorageSync('company_mobile')
 
+    const sceneTitles = getStorageSync('sceneTitles')
+    console.log(sceneTitles)
+    if (sceneTitles && sceneTitles.length > 0) {
+      setSelectedSceneTitles(sceneTitles.join('/'))
+    }
+
     setStoreName(company_name)
     setStoreMobile(company_mobile)
 
     const goodsUrl = '/goods.lists/index'
     const { goods } = await http.get(goodsUrl)
+
+    console.log(goods)
 
     const goodsFlowers: IGoods[] = []
     const goodsShuttles: IGoods[] = []
@@ -430,6 +466,7 @@ function Index(props: any) {
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
                   placeholder='请选择场景'
+                  value={selectedSceneTitles}
                 />
                 <Image
                   className='item_input_arrow'
@@ -442,7 +479,10 @@ function Index(props: any) {
               <View className='item_label'>
                 <Text className='item_label_text'>服装套数</Text>
               </View>
-              <View className='item_input'>
+              <View
+                className='item_input'
+                style={{ flex: 0.5, overflow: 'hidden' }}
+              >
                 <View
                   className='item_input_reducer_ctn'
                   onClick={setSuitsReducer}
@@ -456,6 +496,7 @@ function Index(props: any) {
                   className='item_input_content'
                   placeholderClass='item_input_placeholder'
                   value={suitsTotal}
+                  style={{ marginRight: 0 }}
                 />
                 <View className='item_input_plus_ctn' onClick={setSuitsPlus}>
                   <Image
@@ -481,6 +522,45 @@ function Index(props: any) {
             </View>
           </View>
         </View>
+
+        <View className='ticket'>
+          <View className='ticket_head'>
+            <Text className='ticket_head_text'>基地门票</Text>
+          </View>
+          <View className='ticket_content'>
+            <View className='ticket_list'>
+              {ticketList.map((item, index) => {
+                return (
+                  <View key={index} className='ticket_item'>
+                    <View className='ticket_item_label'>
+                      <Text className='ticket_item_label_text'>
+                        {item.title}
+                      </Text>
+                    </View>
+                    <View className='ticket_item_value'>
+                      <View className='ticket_item_reducer'>
+                        <Image
+                          className='ticket_reducer_image'
+                          src={`${imageUrl}reducer@2x.png`}
+                        />
+                      </View>
+                      <View className='ticket_input_content'>
+                        <Input className='ticket_input' placeholder='5套' />
+                      </View>
+                      <View className='ticket_item_plus'>
+                        <Image
+                          className='ticket_plus_image'
+                          src={`${imageUrl}plus@2x.png`}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                )
+              })}
+            </View>
+          </View>
+        </View>
+
         <View className='goods'>
           <View className='goods_item goods_flower'>
             <View className='goods_item_head'>
@@ -575,14 +655,15 @@ function Index(props: any) {
             </View>
           </View>
           <View className='goods_item goods_shuttle'>
-            <View
-              className={
-                isActive ? 'goods_item_head active' : 'goods_item_head'
-              }
-              onClick={toggleActive}
-            >
+            <View className='goods_item_head'>
               <View className='goods_item_head_title'>
-                <Text className='goods_item_head_title_text'>配餐</Text>
+                <Checkbox
+                  onClick={toggleActive}
+                  className='goods_item_head_title_checkbox'
+                  value='1'
+                  color='red'
+                />
+                <Text className='goods_item_head_title_text'>配餐份数</Text>
               </View>
               <View className='goods_item_head_right'>
                 <View
@@ -680,8 +761,22 @@ function Index(props: any) {
       */}
         <View className='agreement'>
           <View className='agreement_left'>
-            <View className='agreement_check'>
-              <Image className='checked' src={`${imageUrl}right_red@2x.png`} />
+            <View
+              className='agreement_check'
+              onClick={() => {
+                if (agreementActive) {
+                  setAgreementActive(0)
+                } else {
+                  setAgreementActive(1)
+                }
+              }}
+            >
+              {!!agreementActive && (
+                <Image
+                  className='checked'
+                  src={`${imageUrl}right_red@2x.png`}
+                />
+              )}
             </View>
             <View
               className='agreement_content_text'
@@ -728,7 +823,7 @@ function Index(props: any) {
             <Text
               dangerouslySetInnerHTML={{ __html: agreement }}
               className='popup_content_item popup_text'
-            />
+            ></Text>
             {/* <Text className='popup_content_item order_sn'>210234567821035</Text>
             <Text className='popup_content_item popup_text'>的预约吗?</Text> */}
           </View>

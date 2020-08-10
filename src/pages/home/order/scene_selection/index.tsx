@@ -32,14 +32,20 @@ interface ISceneList {
   title: string
 }
 
+interface ICurrentSceneList {
+  id: number
+  title: string
+}
+
 function Index(props: any) {
-  const [currentSelect, setCurrentSelect] = useState<number[]>([])
+  const [currentSelectIds, setCurrentSelectIds] = useState<number[]>([])
+  const [currentSelectTitles, setCurrentSelectTitles] = useState<string[]>([])
   const [pptList, setPPtList] = useState<IPPtList[]>([])
   const [sceneList, setSceneList] = useState<ISceneList[]>([])
 
   useDidShow(async () => {
     const sceneIds = Taro.getStorageSync('sceneIds')
-    setCurrentSelect(sceneIds)
+    setCurrentSelectIds(sceneIds)
 
     const { data: pptData } = await http.get('/adszone/getAdsByMark', {
       mark: 'scenario_main',
@@ -53,18 +59,27 @@ function Index(props: any) {
     setSceneList(goods)
   })
 
-  const pushSelected = (selectId: number) => {
-    if (!currentSelect.includes(selectId)) {
-      setCurrentSelect([...currentSelect, selectId])
+  const pushSelected = (selectId: number, selectTitle: string) => {
+    if (!currentSelectIds.includes(selectId)) {
+      setCurrentSelectIds([...currentSelectIds, selectId])
     } else {
-      const index = currentSelect.indexOf(selectId)
-      currentSelect.splice(index, 1)
-      setCurrentSelect([...currentSelect])
+      const index = currentSelectIds.indexOf(selectId)
+      currentSelectIds.splice(index, 1)
+      setCurrentSelectIds([...currentSelectIds])
+    }
+
+    if (!currentSelectTitles.includes(selectTitle)) {
+      setCurrentSelectTitles([...currentSelectTitles, selectTitle])
+    } else {
+      const index = currentSelectTitles.indexOf(selectTitle)
+      currentSelectTitles.splice(index, 1)
+      setCurrentSelectTitles([...currentSelectTitles])
     }
   }
 
   const confirmScene = () => {
-    Taro.setStorageSync('sceneIds', currentSelect)
+    Taro.setStorageSync('sceneIds', currentSelectIds)
+    Taro.setStorageSync('sceneTitles', currentSelectTitles)
     Taro.navigateBack()
   }
 
@@ -119,20 +134,20 @@ function Index(props: any) {
                 <View
                   key={index}
                   className={
-                    currentSelect.includes(item.sku.sku_id)
+                    currentSelectIds.includes(item.sku.sku_id)
                       ? 'scene_item scene_item_active'
                       : 'scene_item'
                   }
                 >
                   <View
                     className='scene_item_title'
-                    onClick={() => pushSelected(item.sku.sku_id)}
+                    onClick={() => pushSelected(item.sku.sku_id, item.title)}
                   >
                     <View className='title_text_content'>
                       <Text className='title_text'>{item.title}</Text>
                     </View>
                     <View className='title_arrow_content'>
-                      {currentSelect.includes(item.sku.sku_id) ? (
+                      {currentSelectIds.includes(item.sku.sku_id) ? (
                         <Image
                           className='title_arrow'
                           src={`${imageUrl}arrow_bottom@2x.png`}
@@ -145,7 +160,7 @@ function Index(props: any) {
                       )}
                     </View>
                   </View>
-                  {currentSelect.includes(item.sku.sku_id) && (
+                  {currentSelectIds.includes(item.sku.sku_id) && (
                     <View className='scene_item_content'>
                       <Swiper
                         className='scene_item_swiper'

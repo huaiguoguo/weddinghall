@@ -175,7 +175,8 @@
 }
 
 .content .business .list .list_item .item_label {
-  width: 200px;
+  // width: 200px;
+  flex: 1;
   height: 27px;
   text-align: left;
   // background-color: orange;
@@ -206,11 +207,12 @@
   align-items: center;
   // background-color: pink;
   box-sizing: border-box;
+  flex: 2;
 }
 
 .content .business .list .list_item .item_input .item_input_content {
   text-align: right;
-  margin-right: 10px;
+  margin-right: 20px;
   // background-color: orange;
 
   font-size: 28px;
@@ -219,7 +221,8 @@
   color: rgba(221, 221, 221, 1);
   // padding: 0px 10px;
   box-sizing: content-box;
-  padding: 0px 20px;
+  // padding: 0px 20px;
+  width: 100%;
 }
 
 .content .business .list .list_item .item_input .item_input_placeholder {
@@ -298,6 +301,157 @@
   // background-color: peru;
 }
 
+// 基地门票
+.content .ticket {
+  width: 100%;
+  height: 100%;
+
+  margin-top: 20px;
+  // background-color: blue;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content .ticket .ticket_head {
+  width: 690px;
+  height: 69px;
+  background: linear-gradient(
+    10deg,
+    rgba(247, 138, 158, 1),
+    rgba(245, 111, 135, 1),
+    rgba(254, 152, 139, 1)
+  );
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.content .ticket .ticket_head .ticket_head_text {
+  margin-left: 20px;
+  font-size: 32px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+}
+
+.content .ticket .ticket_content {
+  width: 690px;
+  height: 100%;
+
+  background-color: #fff;
+
+  // padding-top: 20px;
+  // padding-bottom: 10px;
+
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .ticket .ticket_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .ticket .ticket_list .ticket_item {
+  width: 100%;
+  height: 65px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  // margin-top: 10px;
+
+  // background-color: orchid;
+  border-bottom: 0.5px solid rgba(238, 238, 238, 1);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content .ticket .ticket_list .ticket_item:last-child {
+  border: 0px;
+}
+
+.ticket .ticket_list .ticket_item .ticket_item_label {
+  flex: 4;
+}
+
+.ticket .ticket_list .ticket_item .ticket_item_label .ticket_item_label_text {
+  font-size: 28px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(81, 81, 81, 1);
+}
+
+.ticket .ticket_list .ticket_item .ticket_item_value {
+  border-radius: 16px;
+  // background-color: red;
+  overflow: hidden;
+
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket .ticket_list .ticket_item .ticket_item_value .ticket_item_reducer {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f6f9;
+}
+
+.ticket_item .ticket_item_value .ticket_item_reducer .ticket_reducer_image {
+  width: 16px;
+  height: 4px;
+}
+
+.ticket_item .ticket_item_value .ticket_input_content {
+  width: 80%;
+  height: 40px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.ticket_item .ticket_item_value .ticket_input_content .ticket_input {
+  padding: 0px 0px;
+}
+
+.ticket .ticket_list .ticket_item .ticket_item_value .ticket_item_plus {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f6f9;
+}
+
+.ticket_item .ticket_item_value .ticket_item_plus .ticket_plus_image {
+  width: 17px;
+  height: 17px;
+}
+
 .content .goods {
   width: 690px;
   height: auto;
@@ -360,6 +514,7 @@
   .goods_item_head_right_btn {
   width: 130px;
   height: 43px;
+
   background: rgba(245, 245, 245, 1);
   border-radius: 22px;
 
@@ -367,6 +522,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.goods_flower
+  .goods_item_head
+  .goods_item_head_right
+  .goods_item_head_right_btn:nth-child(n + 2) {
+  margin-left: 10px;
 }
 
 .goods_flower
@@ -409,7 +571,7 @@
   .goods_item_head
   .goods_item_head_right
   .goods_item_head_right_btn:first-child {
-  margin-right: 10px;
+  // margin-right: 10px;
 }
 
 .goods_flower .goods_item_content {
@@ -462,8 +624,19 @@
 }
 
 .goods_shuttle .goods_item_head .goods_item_head_title {
-  width: 140px;
+  width: 200px;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.goods_shuttle
+  .goods_item_head
+  .goods_item_head_title
+  .goods_item_head_title_checkbox {
+  zoom: 80%;
 }
 
 .goods_shuttle
@@ -472,7 +645,7 @@
   .goods_item_head_title_text {
   font-size: 28px;
   font-family: Source Han Sans CN;
-  font-weight: 400;
+  font-weight: 500;
   color: rgba(81, 81, 81, 1);
 }
 

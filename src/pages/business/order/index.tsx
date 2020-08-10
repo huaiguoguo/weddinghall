@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { View, Text, Image, Button, Input } from '@tarojs/components'
 import NavBar from '@components/CustomerNavBar/index'
 import { imageUrl } from '@api/baseUrl'
 
 import useNavInfo from '@hooks/useNavInfo'
+import http from '@api/interceptor'
 import './index.scss'
 
 function Index(props: any) {
@@ -71,6 +72,12 @@ function Index(props: any) {
       ],
     },
   ])
+
+  useDidShow(async () => {
+    // const { filter, orders } = await http.get('order.order/index', {})
+    // console.log(orders)
+    // setOrderList(orders)
+  })
 
   const redirectUrl = (url: string) => {
     if (url) {
@@ -156,13 +163,15 @@ function Index(props: any) {
       <View className='order_container' style={orderContainerStyle}>
         <View className='order_list'>
           {orderList.length > 0 &&
-            orderList.map((item, index: number) => {
+            orderList.map((item: any, index: number) => {
               return (
                 <View
                   key={index}
                   className='order_item'
                   onClick={() =>
-                    redirectUrl('/pages/business/order/detail/index')
+                    redirectUrl(
+                      `/pages/business/order/detail/index?order_id=${item.id}`
+                    )
                   }
                 >
                   <View className='item_header'>

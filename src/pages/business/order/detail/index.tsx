@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
-import { useRouter, useDidShow } from '@tarojs/taro'
+import Taro, { useRouter, useDidShow } from '@tarojs/taro'
 
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
+
 import './index.scss'
 
 interface ISceneGoods {
@@ -46,7 +47,8 @@ function Index(props: any) {
   const [isPopup, setIsPopup] = useState<number>(0)
 
   const router = useRouter()
-  const { order_id } = router.params
+  // const { order_id } = router.params
+  const { order_id } = { order_id: 22 }
 
   useDidShow(async () => {
     const res = await http.get('/order.order/detail', { order_id })
@@ -67,6 +69,22 @@ function Index(props: any) {
       remark: res.remark,
     }
     setOrderDetail(detail)
+
+    // console.log(order_id)
+    // return
+    // if (order_id == 'undefined' || !order_id) {
+    //   Taro.showToast({
+    //     icon: 'none',
+    //     title: '订单id不能为空!!!',
+    //     success: function () {
+    //       setTimeout(function () {
+    //         Taro.navigateBack()
+    //       }, 1000)
+    //     },
+    //   })
+    //   return
+    // } else {
+    // }
   })
 
   const saveAppointMent = (e) => {
@@ -81,10 +99,7 @@ function Index(props: any) {
 
   const showPopup = (e) => {
     e.stopPropagation()
-    console.log('======== start', isPopup)
     setIsPopup(1)
-    console.log('======== end', isPopup)
-    // console.log(isPopup);
   }
 
   const confirm = (e) => {
@@ -94,6 +109,33 @@ function Index(props: any) {
 
   const cancel = (e) => {
     e.stopPropagation()
+    setIsPopup(2)
+  }
+
+  const saveToMobile = async () => {
+    const res = await http.get('/order.order/getorderinfoimage', { order_id })
+    Taro.downloadFile({
+      url: res.image_url,
+      success: function (dres) {
+        if (dres.statusCode == 200) {
+          Taro.saveImageToPhotosAlbum({
+            filePath: dres.tempFilePath,
+            success: function (saveRes) {
+              if (saveRes.errMsg == 'saveImageToPhotosAlbum:ok') {
+                Taro.showToast({ title: '保存成功', icon: 'success' })
+              } else {
+                Taro.showToast({ title: '保存失败', icon: 'none' })
+              }
+            },
+            fail: function () {
+              Taro.showToast({ title: '保存错误', icon: 'none' })
+            },
+          })
+        } else {
+          Taro.showToast({ title: '保存失败' })
+        }
+      },
+    })
     setIsPopup(2)
   }
 
@@ -276,13 +318,13 @@ function Index(props: any) {
             </View>
           </View>
           <View className='bottom_btn'>
-            <View className='bottom_btn_arrow' onClick={(e) => cancel(e)}>
+            <View className='bottom_btn_arrow' onClick={saveToMobile}>
               <Image
                 className='arrow_icon'
                 src={`${imageUrl}save_appointment_arrow@2x.png`}
               />
             </View>
-            <View className='save_to_mobile' onClick={(e) => cancel(e)}>
+            <View className='save_to_mobile' onClick={saveToMobile}>
               <Text className='save_to_mobile_text'>保存到手机</Text>
             </View>
           </View>
