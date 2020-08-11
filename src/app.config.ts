@@ -1,8 +1,9 @@
 export default {
   pages: [
     'pages/home/index',
-    'pages/business/order/index',
+    'pages/business/service/index',
     'pages/home/order/index',
+    'pages/business/order/index',
     'pages/home/order/scene_selection/index',
     'pages/business/order/detail/index',
     'pages/business/selection/index',
@@ -11,12 +12,11 @@ export default {
 
     'pages/business/index',
     'pages/business/order/search/index',
+    'pages/business/setting/store_profile/index',
 
     'pages/business/authority/index',
-    'pages/business/service/index',
     'pages/business/setting/index',
 
-    'pages/business/setting/store_profile/index',
     'pages/business/setting/store_profile/store_agreement/index',
 
     'pages/business/setting/change_pay_password/index',

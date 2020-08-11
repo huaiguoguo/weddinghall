@@ -8,9 +8,10 @@ import {
   Swiper,
   SwiperItem,
   Checkbox,
+  RichText,
 } from '@tarojs/components'
 
-import Taro, { useDidShow, getStorageSync } from '@tarojs/taro'
+import Taro, { useDidShow, getStorageSync, useReady } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 import refreshToken from '@utils/token'
@@ -81,7 +82,7 @@ function Index(props: any) {
   const [flowerList, setFlowerList] = useState<IGoods[]>([])
   const [shuttleList, setShuttleList] = useState<IGoods[]>([])
   const [caterList, setCaterList] = useState<IGoods[]>([])
-  const [agreement, setAgreement] = useState<string>('')
+  const [agreement, setAgreement] = useState<any>('')
   const [agreementActive, setAgreementActive] = useState<number>(0)
 
   const [currentFlowerIndex, setCurrentFlowerIndex] = useState<number>(0)
@@ -101,20 +102,7 @@ function Index(props: any) {
     },
   ]
 
-  useEffect(() => {
-    return () => {
-      async function fetchData() {
-        const { content } = await http.get('/article/detailByName', {
-          name: 'fuwumianzexieyi',
-        })
-        console.log(content)
-        setAgreement(content)
-      }
-      fetchData()
-    }
-  }, [])
-
-  useDidShow(async () => {
+  useReady(async () => {
     // Taro.navigateTo({
     //   url: '/pages/business/order/detail/index?order_id=22',
     // })
@@ -820,10 +808,14 @@ function Index(props: any) {
         >
           {/* <Text className='popup_type'>取消预约</Text> */}
           <View className='popup_content' onClick={confirm}>
-            <Text
+            {/* <Text
               dangerouslySetInnerHTML={{ __html: agreement }}
               className='popup_content_item popup_text'
-            ></Text>
+            ></Text> */}
+            <RichText
+              className='popup_content_item popup_text'
+              nodes={agreement}
+            />
             {/* <Text className='popup_content_item order_sn'>210234567821035</Text>
             <Text className='popup_content_item popup_text'>的预约吗?</Text> */}
           </View>

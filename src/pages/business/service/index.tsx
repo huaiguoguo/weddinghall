@@ -1,35 +1,33 @@
 import React, { useState } from 'react'
-import { View, Text, Image } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import { View, Text, Image, RichText } from '@tarojs/components'
+import Taro, { useReady } from '@tarojs/taro'
 
+import interceptor from '@api/interceptor'
 import { imageUrl } from '@api/baseUrl'
+
 import './index.scss'
+
+interface IQsList {
+  id: number
+  name: string
+  title: string
+  thumbnail: string
+  content: string
+}
 
 function Index(props: any) {
   const [active, setActive] = useState(0)
-  const [qsList, setQsList] = useState([
-    {
-      id: 1,
-      title: '预约问题',
-      content:
-        '预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,预约问题,',
-    },
-    {
-      id: 2,
-      title: '支付问题',
-      content: '支付问题,支付问题,支付问题,支付问题,支付问题,',
-    },
-    {
-      id: 3,
-      title: '费用问题',
-      content: '费用问题,费用问题,费用问题,费用问题,费用问题,',
-    },
-    {
-      id: 4,
-      title: '物流问题',
-      content: '物流问题,物流问题,物流问题,物流问题,物流问题,',
-    },
-  ])
+  const [phoneNumberValue, setPhoneNumber] = useState<string>('')
+  const [qsList, setQsList] = useState<IQsList[]>([])
+
+  useReady(async () => {
+    const responseQsList = await interceptor.get('faq/index')
+    setQsList(responseQsList)
+    console.log(responseQsList)
+
+    const initInfo = await interceptor.get('common/init')
+    setPhoneNumber(initInfo?.tel)
+  })
 
   const toggleHandle = (id: number) => {
     if (active == id) {
@@ -41,7 +39,7 @@ function Index(props: any) {
 
   const callPhone = () => {
     Taro.makePhoneCall({
-      phoneNumber: '88888888',
+      phoneNumber: phoneNumberValue,
     })
     return false
   }
@@ -79,7 +77,14 @@ function Index(props: any) {
                     />
                   </View>
                   <View className='item_content'>
-                    <Text className='item_content_text'>{item.content}</Text>
+                    {/* <Text
+                      className='item_content_text'
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    ></Text> */}
+                    <RichText
+                      className='item_content_text'
+                      nodes={item.content}
+                    />
                   </View>
                 </View>
               )
