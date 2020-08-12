@@ -11,11 +11,10 @@ import {
   RichText,
 } from '@tarojs/components'
 
-import Taro, { useDidShow, getStorageSync, useReady } from '@tarojs/taro'
+import Taro, { getStorageSync, useReady } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 import refreshToken from '@utils/token'
-import qs from 'qs'
 
 import './index.scss'
 
@@ -30,20 +29,20 @@ interface IPPtList {
 }
 
 interface IGoods {
+  id: number
+  title: string
+  images: string[]
+  price: string
   brand_id: number
   category_ids: string
   general_code: string
   goods_type_id: number
-  id: number
-  images: string[]
-  price: string
   sku: {
     sku_id: number
     goods_id: number
     selling_price: string
     stocks: number
-  }
-  title: string
+  }[]
 }
 
 const initValue = {
@@ -54,18 +53,26 @@ const initValue = {
   id: 0,
   images: [],
   price: '',
-  sku: {
-    sku_id: 0,
-    goods_id: 0,
-    selling_price: '',
-    stocks: 0,
-  },
+  sku: [
+    {
+      sku_id: 0,
+      goods_id: 0,
+      selling_price: '',
+      stocks: 0,
+    },
+  ],
   title: '',
+}
+interface ITicketTotal {
+  id: number
+  price: string
+  num: string
 }
 
 function Index(props: any) {
   const [isPopup, setIsPopup] = useState<number>(0)
   const [isActive, setIsActive] = useState<number>(0)
+  const [ticketTotal, setTicketTotal] = useState<ITicketTotal[]>([])
   const [suitsTotal, setSuitsTotal] = useState<string>('0')
   const [shuttleTotal, setShuttleTotal] = useState<string>('0')
   const [caterTotal, setCaterTotal] = useState<string>('0')
@@ -79,6 +86,7 @@ function Index(props: any) {
   const [remark, setRemark] = useState<string>('')
 
   const [clothing, setClothing] = useState<IGoods>(initValue)
+  const [ticketList, setTicketList] = useState<IGoods[]>([])
   const [flowerList, setFlowerList] = useState<IGoods[]>([])
   const [shuttleList, setShuttleList] = useState<IGoods[]>([])
   const [caterList, setCaterList] = useState<IGoods[]>([])
@@ -89,18 +97,6 @@ function Index(props: any) {
   const [currentShuttleIndex, setCurrentShuttleIndex] = useState<number>(0)
   const [currentCaterIndex, setCurrentCaterIndex] = useState<number>(0)
   const [pptList, setPPtList] = useState<IPPtList[]>([])
-
-  const ticketList = [
-    {
-      title: '天涯海角',
-    },
-    {
-      title: '大小洞天',
-    },
-    {
-      title: '游艇',
-    },
-  ]
 
   useReady(async () => {
     // Taro.navigateTo({
@@ -129,6 +125,8 @@ function Index(props: any) {
 
     console.log(goods)
 
+    const goodsTicketTotal: ITicketTotal[] = []
+    const goodsTickets: IGoods[] = []
     const goodsFlowers: IGoods[] = []
     const goodsShuttles: IGoods[] = []
     const goodsCaters: IGoods[] = []
@@ -136,6 +134,20 @@ function Index(props: any) {
     goods.map((item: IGoods, index: number) => {
       if (item.goods_type_id == 1) {
         setClothing(item)
+      } else if (item.goods_type_id == 3) {
+        if (item.sku.length > 0) {
+          item.sku.map((itemSku, indexSku) => {
+            if (itemSku.selling_price == '0.00') {
+              item.sku.splice(indexSku, 1)
+            }
+          })
+        }
+        goodsTicketTotal.push({
+          id: item.sku[0].sku_id,
+          price: item.sku[0].selling_price,
+          num: '0',
+        })
+        goodsTickets.push(item)
       } else if (item.goods_type_id == 4) {
         goodsFlowers.push(item)
       } else if (item.goods_type_id == 9) {
@@ -145,6 +157,9 @@ function Index(props: any) {
       }
     })
 
+    console.log(goodsTicketTotal)
+    setTicketTotal(goodsTicketTotal)
+    setTicketList(goodsTickets)
     setFlowerList(goodsFlowers)
     setShuttleList(goodsShuttles)
     setCaterList(goodsCaters)
@@ -155,6 +170,7 @@ function Index(props: any) {
     setAgreement(content)
   })
 
+  // 接送车
   const setCurrentShuttleService = (num: number) => {
     if (num == currentCaterIndex) {
       setCurrentShuttleIndex(0)
@@ -180,6 +196,29 @@ function Index(props: any) {
     e.stopPropagation()
     setIsPopup(2)
   }
+
+  // 票数减
+  const setTicketReducer = (index: number) => {
+    const temp = ticketTotal
+    const numInt = parseInt(temp[index].num)
+    if (numInt <= 0) {
+      return
+    }
+    temp[index].num = (numInt - 1).toString()
+    setTicketTotal([...temp])
+  }
+
+  // 票数加
+  const setTicketPlus = (index: number) => {
+    const temp = ticketTotal
+    const numInt = parseInt(temp[index].num)
+    if (numInt >= 10) {
+      return
+    }
+    temp[index].num = (numInt + 1).toString()
+    setTicketTotal([...temp])
+  }
+
   // 服装套数减
   const setSuitsReducer = () => {
     if (parseInt(suitsTotal) <= 0) {
@@ -251,25 +290,25 @@ function Index(props: any) {
     const datas: { id: number; num: number }[] = []
 
     datas.push({
-      id: flowerList[currentFlowerIndex].sku.sku_id,
+      id: flowerList[currentFlowerIndex].sku[0].sku_id,
       num: 1,
     })
 
     // 把接送车服务的数据加入 data数据包
     datas.push({
-      id: shuttleList[currentShuttleIndex].sku.sku_id,
+      id: shuttleList[currentShuttleIndex].sku[0].sku_id,
       num: parseInt(shuttleTotal),
     })
 
     // 把配餐的数据加入 data数据包
     datas.push({
-      id: caterList[currentCaterIndex].sku.sku_id,
+      id: caterList[currentCaterIndex].sku[0].sku_id,
       num: parseInt(caterTotal),
     })
 
     // 服装套数
     datas.push({
-      id: clothing.sku.sku_id,
+      id: clothing.sku[0].sku_id,
       num: parseInt(suitsTotal),
     })
 
@@ -526,16 +565,25 @@ function Index(props: any) {
                       </Text>
                     </View>
                     <View className='ticket_item_value'>
-                      <View className='ticket_item_reducer'>
+                      <View
+                        className='ticket_item_reducer'
+                        onClick={() => setTicketReducer(index)}
+                      >
                         <Image
                           className='ticket_reducer_image'
                           src={`${imageUrl}reducer@2x.png`}
                         />
                       </View>
                       <View className='ticket_input_content'>
-                        <Input className='ticket_input' placeholder='5套' />
+                        <Input
+                          className='ticket_input'
+                          value={ticketTotal[index].num}
+                        />
                       </View>
-                      <View className='ticket_item_plus'>
+                      <View
+                        className='ticket_item_plus'
+                        onClick={() => setTicketPlus(index)}
+                      >
                         <Image
                           className='ticket_plus_image'
                           src={`${imageUrl}plus@2x.png`}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useReady } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 
@@ -16,7 +16,7 @@ interface IPPtList {
   weigh: number
 }
 
-interface ISceneList {
+interface IScene {
   brand_id: number
   category_ids: string
   general_code: string
@@ -32,6 +32,22 @@ interface ISceneList {
   title: string
 }
 
+interface ISceneSku {
+  brand_id: number
+  category_ids: string
+  general_code: string
+  id: number
+  images: string[]
+  price: string
+  sku: {
+    sku_id: number
+    goods_id: number
+    selling_price: string
+    stocks: number
+  }[]
+  title: string
+}
+
 interface ICurrentSceneList {
   id: number
   title: string
@@ -41,9 +57,9 @@ function Index(props: any) {
   const [currentSelectIds, setCurrentSelectIds] = useState<number[]>([])
   const [currentSelectTitles, setCurrentSelectTitles] = useState<string[]>([])
   const [pptList, setPPtList] = useState<IPPtList[]>([])
-  const [sceneList, setSceneList] = useState<ISceneList[]>([])
+  const [sceneList, setSceneList] = useState<IScene[]>([])
 
-  useDidShow(async () => {
+  useReady(async () => {
     const sceneIds = Taro.getStorageSync('sceneIds')
     setCurrentSelectIds(sceneIds)
 
@@ -55,8 +71,41 @@ function Index(props: any) {
       tid: 3,
     })
 
+    console.log('====================== start')
+    console.log(goods)
+    console.log('====================== end')
+
+    const rawGoods: IScene[] = []
+    goods.map((item: ISceneSku, index: number) => {
+      const tempGoods: IScene = {
+        id: item.id,
+        brand_id: item.brand_id,
+        images: item.images,
+        general_code: item.general_code,
+        title: item.title,
+        category_ids: item.category_ids,
+        price: item.price,
+        sku: {
+          sku_id: 0,
+          goods_id: 0,
+          selling_price: '',
+          stocks: 0,
+        },
+      }
+      if (item.sku.length > 0) {
+        item.sku.map((skuItem, skuIndex: number) => {
+          if (skuItem.selling_price == '0.00' || skuItem.selling_price == '') {
+            tempGoods.sku = skuItem
+          }
+        })
+      }
+      rawGoods.push(tempGoods)
+    })
+
+    console.log(rawGoods)
+
     setPPtList(pptData)
-    setSceneList(goods)
+    setSceneList(rawGoods)
   })
 
   const pushSelected = (selectId: number, selectTitle: string) => {

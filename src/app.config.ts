@@ -1,10 +1,10 @@
 export default {
   pages: [
     'pages/home/index',
-    'pages/business/service/index',
     'pages/home/order/index',
-    'pages/business/order/index',
     'pages/home/order/scene_selection/index',
+    'pages/business/service/index',
+    'pages/business/order/index',
     'pages/business/order/detail/index',
     'pages/business/selection/index',
     // 'pages/home/category/index',
