@@ -48,20 +48,24 @@ interface ISceneSku {
   title: string
 }
 
-interface ICurrentSceneList {
+interface ICurrentScene {
   id: number
   title: string
 }
 
 function Index(props: any) {
-  const [currentSelectIds, setCurrentSelectIds] = useState<number[]>([])
-  const [currentSelectTitles, setCurrentSelectTitles] = useState<string[]>([])
+  const [currentSelectScenes, setCurrentSelectScenes] = useState<
+    ICurrentScene[]
+  >([])
+
   const [pptList, setPPtList] = useState<IPPtList[]>([])
   const [sceneList, setSceneList] = useState<IScene[]>([])
 
   useReady(async () => {
-    const sceneIds = Taro.getStorageSync('sceneIds')
-    setCurrentSelectIds(sceneIds)
+    const sceneIds = Taro.getStorageSync('selectedScene')
+    if (sceneIds instanceof Array) {
+      setCurrentSelectScenes(sceneIds)
+    }
 
     const { data: pptData } = await http.get('/adszone/getAdsByMark', {
       mark: 'scenario_main',
@@ -70,10 +74,6 @@ function Index(props: any) {
     const { goods } = await http.get('/goods.lists/index', {
       tid: 3,
     })
-
-    console.log('====================== start')
-    console.log(goods)
-    console.log('====================== end')
 
     const rawGoods: IScene[] = []
     goods.map((item: ISceneSku, index: number) => {
@@ -102,33 +102,35 @@ function Index(props: any) {
       rawGoods.push(tempGoods)
     })
 
-    console.log(rawGoods)
-
     setPPtList(pptData)
     setSceneList(rawGoods)
   })
 
   const pushSelected = (selectId: number, selectTitle: string) => {
-    if (!currentSelectIds.includes(selectId)) {
-      setCurrentSelectIds([...currentSelectIds, selectId])
-    } else {
-      const index = currentSelectIds.indexOf(selectId)
-      currentSelectIds.splice(index, 1)
-      setCurrentSelectIds([...currentSelectIds])
-    }
+    const waitPush = { id: selectId, title: selectTitle }
 
-    if (!currentSelectTitles.includes(selectTitle)) {
-      setCurrentSelectTitles([...currentSelectTitles, selectTitle])
+    if (currentSelectScenes.length == 0) {
+      setCurrentSelectScenes([waitPush])
     } else {
-      const index = currentSelectTitles.indexOf(selectTitle)
-      currentSelectTitles.splice(index, 1)
-      setCurrentSelectTitles([...currentSelectTitles])
+      let indexFlag = -1
+      currentSelectScenes.filter((item, index: number) => {
+        if (item.id == selectId && item.title == selectTitle) {
+          indexFlag = index
+          return
+        }
+      })
+
+      if (indexFlag > -1) {
+        currentSelectScenes.splice(indexFlag, 1)
+        setCurrentSelectScenes([...currentSelectScenes])
+      } else {
+        setCurrentSelectScenes([...currentSelectScenes, waitPush])
+      }
     }
   }
 
   const confirmScene = () => {
-    Taro.setStorageSync('sceneIds', currentSelectIds)
-    Taro.setStorageSync('sceneTitles', currentSelectTitles)
+    Taro.setStorageSync('selectedScene', currentSelectScenes)
     Taro.navigateBack()
   }
 
@@ -183,7 +185,12 @@ function Index(props: any) {
                 <View
                   key={index}
                   className={
-                    currentSelectIds.includes(item.sku.sku_id)
+                    JSON.stringify(currentSelectScenes).indexOf(
+                      JSON.stringify({
+                        id: item.sku.sku_id,
+                        title: item.title,
+                      })
+                    ) != -1
                       ? 'scene_item scene_item_active'
                       : 'scene_item'
                   }
@@ -196,20 +203,30 @@ function Index(props: any) {
                       <Text className='title_text'>{item.title}</Text>
                     </View>
                     <View className='title_arrow_content'>
-                      {currentSelectIds.includes(item.sku.sku_id) ? (
+                      {JSON.stringify(currentSelectScenes).indexOf(
+                        JSON.stringify({
+                          id: item.sku.sku_id,
+                          title: item.title,
+                        })
+                      ) != -1 ? (
                         <Image
                           className='title_arrow'
-                          src={`${imageUrl}arrow_bottom@2x.png`}
+                          src={`${imageUrl}arrow_top@2x.png`}
                         />
                       ) : (
                         <Image
                           className='title_arrow'
-                          src={`${imageUrl}arrow_right@2x.png`}
+                          src={`${imageUrl}arrow_bottom@2x.png`}
                         />
                       )}
                     </View>
                   </View>
-                  {currentSelectIds.includes(item.sku.sku_id) && (
+                  {JSON.stringify(currentSelectScenes).indexOf(
+                    JSON.stringify({
+                      id: item.sku.sku_id,
+                      title: item.title,
+                    })
+                  ) != -1 && (
                     <View className='scene_item_content'>
                       <Swiper
                         className='scene_item_swiper'

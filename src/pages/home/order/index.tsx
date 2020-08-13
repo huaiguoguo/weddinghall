@@ -11,7 +11,7 @@ import {
   RichText,
 } from '@tarojs/components'
 
-import Taro, { getStorageSync, useReady } from '@tarojs/taro'
+import Taro, { getStorageSync, useReady, useDidShow } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 import refreshToken from '@utils/token'
@@ -63,6 +63,7 @@ const initValue = {
   ],
   title: '',
 }
+
 interface ITicketTotal {
   id: number
   price: string
@@ -93,16 +94,17 @@ function Index(props: any) {
   const [agreement, setAgreement] = useState<any>('')
   const [agreementActive, setAgreementActive] = useState<number>(0)
 
-  const [currentFlowerIndex, setCurrentFlowerIndex] = useState<number>(0)
-  const [currentShuttleIndex, setCurrentShuttleIndex] = useState<number>(0)
+  const [currentFlowerIndex, setCurrentFlowerIndex] = useState<number>(-1)
+  const [currentShuttleIndex, setCurrentShuttleIndex] = useState<number>(-1)
   const [currentCaterIndex, setCurrentCaterIndex] = useState<number>(0)
   const [pptList, setPPtList] = useState<IPPtList[]>([])
 
-  useReady(async () => {
+  useDidShow(async () => {
     // Taro.navigateTo({
     //   url: '/pages/business/order/detail/index?order_id=22',
     // })
     refreshToken()
+
     const { data } = await http.get('/adszone/getAdsByMark', {
       mark: 'dress_main',
     })
@@ -111,10 +113,16 @@ function Index(props: any) {
     const company_name = getStorageSync('company_name')
     const company_mobile = getStorageSync('company_mobile')
 
-    const sceneTitles = getStorageSync('sceneTitles')
-    console.log(sceneTitles)
-    if (sceneTitles && sceneTitles.length > 0) {
-      setSelectedSceneTitles(sceneTitles.join('/'))
+    const selectedScene = getStorageSync('selectedScene')
+
+    if (selectedScene && selectedScene.length > 0) {
+      const titlesArr: string[] = []
+      selectedScene.map((item: { id: number; title: string }) => {
+        titlesArr.push(item.title)
+      })
+      setSelectedSceneTitles(titlesArr.join('/'))
+    } else {
+      setSelectedSceneTitles('')
     }
 
     setStoreName(company_name)
@@ -123,15 +131,13 @@ function Index(props: any) {
     const goodsUrl = '/goods.lists/index'
     const { goods } = await http.get(goodsUrl)
 
-    console.log(goods)
-
     const goodsTicketTotal: ITicketTotal[] = []
     const goodsTickets: IGoods[] = []
     const goodsFlowers: IGoods[] = []
     const goodsShuttles: IGoods[] = []
     const goodsCaters: IGoods[] = []
 
-    goods.map((item: IGoods, index: number) => {
+    goods.map((item: IGoods) => {
       if (item.goods_type_id == 1) {
         setClothing(item)
       } else if (item.goods_type_id == 3) {
@@ -157,7 +163,6 @@ function Index(props: any) {
       }
     })
 
-    console.log(goodsTicketTotal)
     setTicketTotal(goodsTicketTotal)
     setTicketList(goodsTickets)
     setFlowerList(goodsFlowers)
@@ -172,19 +177,11 @@ function Index(props: any) {
 
   // 接送车
   const setCurrentShuttleService = (num: number) => {
-    if (num == currentCaterIndex) {
+    if (num == currentShuttleIndex) {
       setCurrentShuttleIndex(0)
       return false
     }
     setCurrentShuttleIndex(num)
-  }
-
-  const setCurrentCaterService = (num: number) => {
-    if (num == currentCaterIndex) {
-      setCurrentCaterIndex(0)
-      return false
-    }
-    setCurrentCaterIndex(num)
   }
 
   const redirectUrl = (url: string) => {
@@ -252,7 +249,7 @@ function Index(props: any) {
     const shuttleTota = parseInt(shuttleTotal) + 1
     setShuttleTotal(shuttleTota.toString())
   }
-  // 接送车服务减
+  //  配餐服务减
   const setCaterReducer = () => {
     if (parseInt(caterTotal) <= 0) {
       return
@@ -260,9 +257,8 @@ function Index(props: any) {
     const caterTota = parseInt(caterTotal) - 1
     setCaterTotal(caterTota.toString())
   }
-  // 接送车服务加
+  // 配餐服务加
   const setCaterPlus = () => {
-    console.log(caterTotal)
     if (parseInt(caterTotal) >= 10) {
       return
     }
@@ -270,7 +266,7 @@ function Index(props: any) {
     setCaterTotal(caterTota.toString())
   }
 
-  // 配餐服务
+  // 配餐服务 勾选
   const toggleActive = () => {
     if (isActive) {
       setCaterTotal('0')
@@ -282,6 +278,44 @@ function Index(props: any) {
   }
 
   const submitForm = () => {
+    // console.log(Object.is(parseInt(storeMobile), NaN))
+    // return
+    // 是否勾选服务
+    if (!agreementActive) {
+      Taro.showToast({ icon: 'none', title: '请同意服务协议' })
+      return false
+    }
+
+    if (!storeName) {
+      Taro.showToast({ icon: 'none', title: '请填写商家店名' })
+      return false
+    }
+
+    if (!storeMobile) {
+      Taro.showToast({ icon: 'none', title: '请填写商家电话' })
+      return false
+    }
+
+    if (Object.is(parseInt(storeMobile), NaN)) {
+      Taro.showToast({ icon: 'none', title: '商家电话必须是数字' })
+      return false
+    }
+
+    if (!selectClothingDate) {
+      Taro.showToast({ icon: 'none', title: '请填写选服装日期时间' })
+      return false
+    }
+
+    if (!shotDate) {
+      Taro.showToast({ icon: 'none', title: '请填写拍摄日期' })
+      return false
+    }
+
+    if (!customerName) {
+      Taro.showToast({ icon: 'none', title: '请填写客户姓名' })
+      return false
+    }
+
     // const token = refreshToken()
     // console.log(token)
     // return false
@@ -289,56 +323,85 @@ function Index(props: any) {
 
     const datas: { id: number; num: number }[] = []
 
-    datas.push({
-      id: flowerList[currentFlowerIndex].sku[0].sku_id,
-      num: 1,
-    })
+    if (currentFlowerIndex > -1) {
+      datas.push({
+        id: flowerList[currentFlowerIndex].sku[0].sku_id,
+        num: 1,
+      })
+    }
 
     // 把接送车服务的数据加入 data数据包
-    datas.push({
-      id: shuttleList[currentShuttleIndex].sku[0].sku_id,
-      num: parseInt(shuttleTotal),
-    })
+    if (currentShuttleIndex > -1) {
+      if (parseInt(shuttleTotal) <= 0) {
+        Taro.showToast({ icon: 'none', title: '请填写接送车服务的天数!' })
+        return false
+      } else {
+        datas.push({
+          id: shuttleList[currentShuttleIndex].sku[0].sku_id,
+          num: parseInt(shuttleTotal),
+        })
+      }
+    }
 
     // 把配餐的数据加入 data数据包
-    datas.push({
-      id: caterList[currentCaterIndex].sku[0].sku_id,
-      num: parseInt(caterTotal),
+    if (parseInt(caterTotal) > 0) {
+      datas.push({
+        id: caterList[currentCaterIndex].sku[0].sku_id,
+        num: parseInt(caterTotal),
+      })
+    }
+
+    const sceneList = Taro.getStorageSync('selectedScene')
+    if (sceneList.length <= 0) {
+      Taro.showToast({
+        icon: 'none',
+        title: '请选择场景',
+      })
+      return false
+    }
+    sceneList.map((item: { id: number; title: string }) => {
+      datas.push({
+        id: item.id,
+        num: 1,
+      })
     })
 
     // 服装套数
+    if (parseInt(suitsTotal) <= 0) {
+      Taro.showToast({ icon: 'none', title: '请加服装套数' })
+      return false
+    }
+
     datas.push({
       id: clothing.sku[0].sku_id,
       num: parseInt(suitsTotal),
     })
 
-    const sceneList = Taro.getStorageSync('sceneIds')
-    if (!sceneList) {
-      Taro.showModal({
-        title: '请选择场景',
-      })
-      return false
-    }
-    sceneList.map((item: number) => {
-      datas.push({
-        id: item,
-        num: 1,
-      })
+    // 门票如果数量大于0的 放进 要提交的数据里面
+    ticketTotal.map((item) => {
+      if (parseInt(item.num) > 0) {
+        datas.push({
+          id: item.id,
+          num: parseInt(item.num),
+        })
+      }
     })
 
     const dataStringify = JSON.stringify(datas)
 
     http.post('cart/addsome', { datas: dataStringify }).then((res) => {
-      const company_name = getStorageSync('company_name')
-      const company_mobile = getStorageSync('company_mobile')
+      // const company_name = getStorageSync('company_name')
+      // const company_mobile = getStorageSync('company_mobile')
 
       const orderData = {
         fitting_time: selectClothingDate,
         photo_time: shotDate,
         client_name: customerName,
-        company_name,
-        company_mobile,
+        company_name: storeName,
+        company_mobile: storeMobile,
+        remark,
       }
+
       // const orderDataStr = qs.stringify(orderData)
       http.post('cart/done', orderData).then((doneRes) => {
         Taro.showToast({
@@ -356,7 +419,7 @@ function Index(props: any) {
         })
       })
     })
-    // Taro.removeStorageSync('sceneIds')
+    Taro.removeStorageSync('selectedScene')
   }
 
   return (
@@ -508,7 +571,7 @@ function Index(props: any) {
               </View>
               <View
                 className='item_input'
-                style={{ flex: 0.5, overflow: 'hidden' }}
+                style={{ flex: 0.3, overflow: 'hidden' }}
               >
                 <View
                   className='item_input_reducer_ctn'
@@ -564,7 +627,10 @@ function Index(props: any) {
                         {item.title}
                       </Text>
                     </View>
-                    <View className='ticket_item_value'>
+                    <View
+                      className='ticket_item_value'
+                      style={{ overflow: 'hidden' }}
+                    >
                       <View
                         className='ticket_item_reducer'
                         onClick={() => setTicketReducer(index)}
@@ -614,7 +680,13 @@ function Index(props: any) {
                             ? 'goods_item_head_right_btn active'
                             : 'goods_item_head_right_btn'
                         }
-                        onClick={() => setCurrentFlowerIndex(index)}
+                        onClick={() => {
+                          if (currentFlowerIndex == index) {
+                            setCurrentFlowerIndex(-1)
+                          } else {
+                            setCurrentFlowerIndex(index)
+                          }
+                        }}
                       >
                         <Text className='goods_item_head_right_btn_text'>
                           {item.title}
@@ -677,7 +749,14 @@ function Index(props: any) {
                   return (
                     <View
                       key={index}
-                      onClick={() => setCurrentShuttleService(index)}
+                      onClick={() => {
+                        if (currentShuttleIndex == index) {
+                          setCurrentShuttleService(-1)
+                          setShuttleTotal('0')
+                        } else {
+                          setCurrentShuttleService(index)
+                        }
+                      }}
                       className={
                         currentShuttleIndex == index
                           ? 'content_item active'

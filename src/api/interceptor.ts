@@ -43,6 +43,7 @@ const Request = (
             title: '提示',
             content: msg,
           })
+          // Taro.navigateBack()
 
           return reject(res.data)
         }

@@ -47,10 +47,24 @@ function Index(props: any) {
   const [isPopup, setIsPopup] = useState<number>(0)
 
   const router = useRouter()
-  // const { order_id } = router.params
-  const { order_id } = { order_id: 22 }
+  const { order_id } = router.params
+  // const { order_id } = { order_id: 22 }
 
   useDidShow(async () => {
+    if (!order_id || order_id == 'undefined') {
+      Taro.showModal({
+        title: '非法操作',
+        content: '订单id错误',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            Taro.navigateBack()
+          }
+        },
+      })
+      return
+    }
+
     const res = await http.get('/order.order/detail', { order_id })
     const sceneTitleArr: string[] = []
     res.scene_goods.map((item: ISceneGoods) => {
@@ -69,22 +83,6 @@ function Index(props: any) {
       remark: res.remark,
     }
     setOrderDetail(detail)
-
-    // console.log(order_id)
-    // return
-    // if (order_id == 'undefined' || !order_id) {
-    //   Taro.showToast({
-    //     icon: 'none',
-    //     title: '订单id不能为空!!!',
-    //     success: function () {
-    //       setTimeout(function () {
-    //         Taro.navigateBack()
-    //       }, 1000)
-    //     },
-    //   })
-    //   return
-    // } else {
-    // }
   })
 
   const saveAppointMent = (e) => {
@@ -180,7 +178,7 @@ function Index(props: any) {
           </View>
           <View className='order_item'>
             <Text className='order_item_label'>备注:</Text>
-            <Text className='order_item_value'>210540384564125</Text>
+            <Text className='order_item_value'>{orderDetail.remark}</Text>
           </View>
         </View>
       </View>
