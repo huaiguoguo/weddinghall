@@ -89,31 +89,31 @@ function Index(props: any) {
 
   const submitForm = async () => {
     if (!company_name || company_name == '' || company_name == 'undefined') {
-      Taro.showToast({ title: '请填写商家店名!' })
+      Taro.showToast({ icon: 'none', title: '请填写商家店名!' })
       return false
     }
     if (!mobile || mobile == '' || mobile == 'undefined') {
-      Taro.showToast({ title: '请填写商家电话!' })
+      Taro.showToast({ icon: 'none', title: '请填写商家电话!' })
       return false
     }
     if (!address || address == '' || address == 'undefined') {
-      Taro.showToast({ title: '请填写商家地址!' })
+      Taro.showToast({ icon: 'none', title: '请填写商家地址!' })
       return false
     }
     if (!licensePic || licensePic == '' || licensePic == 'undefined') {
-      Taro.showToast({ title: '请上传商家营业执照!' })
+      Taro.showToast({ icon: 'none', title: '请上传商家营业执照!' })
       return false
     }
     if (!frontIDPic || frontIDPic == '' || frontIDPic == 'undefined') {
-      Taro.showToast({ title: '请上传身份证正面!' })
+      Taro.showToast({ icon: 'none', title: '请上传身份证正面!' })
       return false
     }
     if (!backIDPic || backIDPic == '' || backIDPic == 'undefined') {
-      Taro.showToast({ title: '请上传身份证反面!' })
+      Taro.showToast({ icon: 'none', title: '请上传身份证反面!' })
       return false
     }
     if (!radioActive) {
-      Taro.showToast({ title: '请同意协议' })
+      Taro.showToast({ icon: 'none', title: '请同意协议' })
       return false
     }
     const data = {
@@ -125,7 +125,12 @@ function Index(props: any) {
       corporate_identity_card2: backIDPic,
     }
     const response = await interceptor.post('wxuser/editgroupprofile', { data })
-    // console.log(response)
+    console.log('==================== start')
+    console.log(response)
+    console.log('==================== end')
+    // if(!response){
+    //   Taro.showModal()
+    // }
   }
 
   return (

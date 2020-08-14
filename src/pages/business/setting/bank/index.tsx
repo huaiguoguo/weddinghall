@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { imageUrl } from '@api/baseUrl'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
+import interceptor from '@api/interceptor'
 
 import './index.scss'
 
@@ -9,29 +10,38 @@ function Index(props: any) {
   const [bankList, setBankList] = useState([
     {
       bank_name: '招商',
-      bank_type: 1,
+      card_type: 'CC',
       bank_number: 'xxxx xxxx xxxx 022',
       bank_icon: `${imageUrl}business/setting/zhaoshang_icon@2x.png`,
       bank_icon_bg: `${imageUrl}business/setting/zhaoshang_bg@2x.png`,
       background_color:
         'linear-gradient(224deg,rgba(254,108,127,1),rgba(255,90,96,1));',
     },
-    {
-      bank_name: '建设',
-      bank_type: 2,
-      bank_number: 'xxxx xxxx xxxx 062',
-      bank_icon: `${imageUrl}business/setting/jianshe_icon@2x.png`,
-      bank_icon_bg: `${imageUrl}business/setting/jianshe_bg@2x.png`,
-      background_color:
-        'linear-gradient(241deg,rgba(11,186,251,1),rgba(66,133,236,1));',
-    },
+    // {
+    //   bank_name: '建设',
+    //   bank_type: 2,
+    //   bank_number: 'xxxx xxxx xxxx 062',
+    //   bank_icon: `${imageUrl}business/setting/jianshe_icon@2x.png`,
+    //   bank_icon_bg: `${imageUrl}business/setting/jianshe_bg@2x.png`,
+    //   background_color:
+    //     'linear-gradient(241deg,rgba(11,186,251,1),rgba(66,133,236,1));',
+    // },
   ])
 
-  const BankType = (type: number) => {
-    if (type == 1) {
+  useDidShow(async () => {
+    const bank_list = await interceptor.get('bank/index', {})
+    console.log(bank_list)
+  })
+
+  const BankType = (type: string) => {
+    if (type == 'DC') {
       return <Text className='bank_type_text'>储蓄卡</Text>
-    } else if (type == 2) {
+    } else if (type == 'CC') {
       return <Text className='bank_type_text'>信用卡</Text>
+    } else if (type == 'SCC') {
+      return <Text className='bank_type_text'>准贷记卡</Text>
+    } else if (type == 'PC') {
+      return <Text className='bank_type_text'>预付费卡</Text>
     }
   }
 
@@ -65,7 +75,7 @@ function Index(props: any) {
                   <View className='bank_name'>
                     <Text className='name_text'>{item.bank_name}银行</Text>
                   </View>
-                  <View className='bank_type'>{BankType(item.bank_type)}</View>
+                  <View className='bank_type'>{BankType(item.card_type)}</View>
                   <View className='bank_number'>
                     <Text className='number'>
                       {BankNumber(item.bank_number)}

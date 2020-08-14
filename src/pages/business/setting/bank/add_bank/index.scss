@@ -83,9 +83,10 @@
 }
 
 .btn_container_top .agree_icon {
-  width: 28px;
-  height: 28px;
-  margin-right: 22px;
+  // width: 28px;
+  // height: 28px;
+  // margin-right: 22px;
+  zoom: 0.7;
 }
 
 .btn_container_top .agree_text {
@@ -121,6 +122,11 @@
   );
   border-radius: 50px;
   margin-top: 48px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn .next_text {

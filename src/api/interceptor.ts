@@ -1,4 +1,4 @@
-import Taro, { getStorage, getStorageSync } from '@tarojs/taro'
+import Taro, { getStorageSync } from '@tarojs/taro'
 // import baseUrl from './baseUrl'
 
 interface method {
@@ -38,16 +38,22 @@ const Request = (
       header: head,
       success: function (res) {
         const { code, msg, data: dataObject } = res.data
-        if (code != 1) {
+        if (code == 1) {
+          resolve(dataObject)
+        } else {
           Taro.showModal({
             title: '提示',
             content: msg,
+            showCancel: false,
+            success: function (confirmRes) {
+              if (confirmRes.confirm) {
+                reject(res.data)
+              }
+            },
           })
           // Taro.navigateBack()
-
-          return reject(res.data)
+          // return reject(res.data)
         }
-        return resolve(dataObject)
       },
       fail: function (error) {
         Taro.showModal({

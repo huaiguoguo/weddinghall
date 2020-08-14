@@ -1,6 +1,9 @@
 export default {
   pages: [
+    'pages/business/setting/bank/add_bank/index',
     'pages/home/index',
+    'pages/business/setting/index',
+    'pages/business/setting/store_profile/index',
     'pages/home/order/index',
     'pages/home/order/scene_selection/index',
     'pages/business/service/index',
@@ -12,16 +15,13 @@ export default {
 
     'pages/business/index',
     'pages/business/order/search/index',
-    'pages/business/setting/store_profile/index',
 
     'pages/business/authority/index',
-    'pages/business/setting/index',
 
     'pages/business/setting/store_profile/store_agreement/index',
 
     'pages/business/setting/change_pay_password/index',
     'pages/business/setting/bank/index',
-    'pages/business/setting/bank/add_bank/index',
     'pages/business/setting/bank/set_pay_password/index',
 
     'pages/business/setting/agreement/index',
