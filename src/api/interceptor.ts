@@ -24,7 +24,6 @@ const Request = (
   })
 
   const token = getStorageSync('token')
-
   const head = Object.assign(header, {
     token,
     'content-type': 'application/json',

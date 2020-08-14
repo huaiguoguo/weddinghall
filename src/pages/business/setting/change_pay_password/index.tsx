@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image, Input } from '@tarojs/components'
 
 import { imageUrl } from '@api/baseUrl'
@@ -6,6 +6,9 @@ import { imageUrl } from '@api/baseUrl'
 import './index.scss'
 
 function Index(props: any) {
+  const [password, setPassword] = useState<string | number>('')
+  const [passwordConfirm, setPasswordConfirm] = useState<string | number>('')
+
   return (
     <View className='container'>
       <View className='user_container'>

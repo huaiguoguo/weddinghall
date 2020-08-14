@@ -66,6 +66,10 @@ function Index(props: any) {
   }
 
   const submit = async () => {
+    // Taro.navigateTo({
+    //   url: '/pages/business/setting/bank/set_pay_password/index',
+    // })
+    // return
     if (!isAgree) {
       Taro.showToast({ title: '请同意协议!', icon: 'none' })
       return false
@@ -118,6 +122,7 @@ function Index(props: any) {
     console.log(response)
     Taro.showModal({
       title: '添加成功',
+      showCancel: false,
       success: function (res) {
         if (res.confirm) {
           Taro.navigateTo({
@@ -210,6 +215,7 @@ function Index(props: any) {
               name='mobile'
               placeholder='请输入银行预留手机号'
               value={telPhone}
+              onInput={(e) => setTelPhone(e.detail.value)}
             />
           </View>
         </View>
