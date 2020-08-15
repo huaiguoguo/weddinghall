@@ -426,6 +426,8 @@
   color: rgba(102, 102, 102, 1);
   // line-height: 36px;
   padding-bottom: 100px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .popup_btn_content {

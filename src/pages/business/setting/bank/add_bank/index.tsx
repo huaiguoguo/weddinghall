@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { View, Text, Input, Picker, Button, Radio } from '@tarojs/components'
+import {
+  View,
+  Text,
+  Input,
+  Picker,
+  Button,
+  Radio,
+  RichText,
+} from '@tarojs/components'
 import Taro, { useDidShow, getStorageSync } from '@tarojs/taro'
 
 import interceptor from '@api/interceptor'
@@ -7,6 +15,7 @@ import interceptor from '@api/interceptor'
 import './index.scss'
 
 function Index(props: any) {
+  const [isPopup, setIsPopup] = useState<number>(0)
   const [isAgree, setIsAgree] = useState<number>(0)
   const [cardNumber, setCardNumber] = useState<string>('')
   const [cardName, setCardName] = useState<string>('')
@@ -14,8 +23,15 @@ function Index(props: any) {
   const [telPhone, setTelPhone] = useState<string>('')
   const [type, setType] = useState<number>(-1)
   const [currentBankIndex, setCurrentBankIndex] = useState<number>(-1)
+  const [agreement, setAgreeMent] = useState<string>('')
 
-  useDidShow(() => {})
+  useDidShow(async () => {
+    const { content } = await interceptor.get('article/detailByName', {
+      name: 'yucunxiaofeixieyi',
+    })
+    setAgreeMent(content)
+    // setAgreeMent(content)
+  })
 
   const [bankList, setBankList] = useState([
     '中国银行',
@@ -45,10 +61,10 @@ function Index(props: any) {
     setType(detail.value)
   }
 
-  const setPayPassword = () => {
-    Taro.navigateTo({
-      url: '/pages/business/setting/bank/set_pay_password/index',
-    })
+  // 协议确认
+  const confirm = (e) => {
+    e.stopPropagation()
+    setIsPopup(2)
   }
 
   const handleBlur = async (value: string) => {
@@ -243,12 +259,56 @@ function Index(props: any) {
             }}
           />
           <Text className='agree_text'>同意</Text>
-          <Text className='agreement'>《预存消费协议》</Text>
+          <Text className='agreement' onClick={() => setIsPopup(1)}>
+            《预存消费协议》
+          </Text>
         </View>
         <View className='btn_container_bottom'>
           <Button className='btn' onClick={submit}>
             <Text className='next_text'>下一步</Text>
           </Button>
+        </View>
+      </View>
+
+      <View
+        className={
+          isPopup == 1
+            ? 'popupBox popupBoxShow'
+            : isPopup == 2
+            ? 'popupBox popupBoxHidden'
+            : 'popupBox'
+        }
+      >
+        <View
+          className={
+            isPopup == 1
+              ? 'popup_container popup_container_up'
+              : isPopup == 2
+              ? 'popup_container popup_container_down'
+              : 'popup_container'
+          }
+        >
+          {/* <Text className='popup_type'>取消预约</Text> */}
+          <View className='popup_content' onClick={confirm}>
+            {/* <Text
+              dangerouslySetInnerHTML={{ __html: agreement }}
+              className='popup_content_item popup_text'
+            ></Text> */}
+            <RichText
+              className='popup_content_item popup_text'
+              nodes={agreement}
+            />
+            {/* <Text className='popup_content_item order_sn'>210234567821035</Text>
+            <Text className='popup_content_item popup_text'>的预约吗?</Text> */}
+          </View>
+          {/* <View className='popup_btn_content'>
+            <View className='btn_item back' onClick={cancel}>
+              <Text className='btn_item_text'>返回</Text>
+            </View>
+            <View className='btn_item confirm' onClick={confirm}>
+              <Text className='btn_item_text'>确定</Text>
+            </View>
+          </View> */}
         </View>
       </View>
     </View>

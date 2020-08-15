@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from '@tarojs/components'
-import Taro, { redirectTo } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 
 import './index.scss'
@@ -27,11 +27,11 @@ function Index(props: any) {
       menu_url: '/pages/business/setting/bank/index',
       menu_icon: `${imageUrl}/business/setting/bank@2x.png`,
     },
-    {
-      menu_name: '清理缓存',
-      menu_url: '/pages/business/setting/clear/index',
-      menu_icon: `${imageUrl}/business/setting/clear@2x.png`,
-    },
+    // {
+    //   menu_name: '清理缓存',
+    //   menu_url: '/pages/business/setting/clear/index',
+    //   menu_icon: `${imageUrl}/business/setting/clear@2x.png`,
+    // },
   ])
 
   const redirectUrl = (url: string) => {

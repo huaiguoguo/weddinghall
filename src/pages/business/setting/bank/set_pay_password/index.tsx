@@ -127,6 +127,7 @@ function Index(props: any) {
         </View>
         <View className='password_container'>
           <Input
+            password
             ref={firstRef}
             type='number'
             maxlength={1}
@@ -135,6 +136,7 @@ function Index(props: any) {
             onInput={(e) => handleInput('first', e.detail.value)}
           />
           <Input
+            password
             ref={secondRef}
             type='number'
             maxlength={1}
@@ -143,6 +145,7 @@ function Index(props: any) {
             onInput={(e) => handleInput('second', e.detail.value)}
           />
           <Input
+            password
             ref={thirdRef}
             type='number'
             maxlength={1}
@@ -151,6 +154,7 @@ function Index(props: any) {
             onInput={(e) => handleInput('third', e.detail.value)}
           />
           <Input
+            password
             ref={fourthRef}
             type='number'
             maxlength={1}
@@ -159,6 +163,7 @@ function Index(props: any) {
             onInput={(e) => handleInput('fourth', e.detail.value)}
           />
           <Input
+            password
             ref={fifthRef}
             type='number'
             maxlength={1}
@@ -167,6 +172,7 @@ function Index(props: any) {
             onInput={(e) => handleInput('fifth', e.detail.value)}
           />
           <Input
+            password
             ref={sixthRef}
             type='number'
             maxlength={1}

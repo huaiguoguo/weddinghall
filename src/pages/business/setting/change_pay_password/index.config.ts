@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '修改确认密码',
+  navigationBarTitleText: '修改支付密码',
 }

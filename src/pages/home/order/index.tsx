@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import {
   View,
@@ -11,7 +11,7 @@ import {
   RichText,
 } from '@tarojs/components'
 
-import Taro, { getStorageSync, useReady, useDidShow } from '@tarojs/taro'
+import Taro, { getStorageSync, useDidShow } from '@tarojs/taro'
 import { imageUrl } from '@api/baseUrl'
 import http from '@api/interceptor'
 import refreshToken from '@utils/token'

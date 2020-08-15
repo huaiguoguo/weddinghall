@@ -6,17 +6,31 @@ import interceptor from '@api/interceptor'
 
 import './index.scss'
 
+interface IBank {
+  id: number
+  telphone: string
+  type: number
+  bank_flag: string
+  bank_color: string
+  bank_name: string
+  bank_icon: string
+  bank_icon_bg: string
+  card_name: string
+  card_number: string
+  card_type: string
+}
+
 function Index(props: any) {
-  const [bankList, setBankList] = useState([
-    {
-      bank_name: '招商',
-      card_type: 'CC',
-      bank_number: 'xxxx xxxx xxxx 022',
-      bank_icon: `${imageUrl}business/setting/zhaoshang_icon@2x.png`,
-      bank_icon_bg: `${imageUrl}business/setting/zhaoshang_bg@2x.png`,
-      background_color:
-        'linear-gradient(224deg,rgba(254,108,127,1),rgba(255,90,96,1));',
-    },
+  const [bankList, setBankList] = useState<IBank[]>([
+    // {
+    //   bank_name: '招商',
+    //   card_type: 'CC',
+    //   bank_number: 'xxxx xxxx xxxx 022',
+    //   bank_icon: `${imageUrl}business/setting/zhaoshang_icon@2x.png`,
+    //   bank_icon_bg: `${imageUrl}business/setting/zhaoshang_bg@2x.png`,
+    //   background_color:
+    //     'linear-gradient(224deg,rgba(254,108,127,1),rgba(255,90,96,1));',
+    // },
     // {
     //   bank_name: '建设',
     //   bank_type: 2,
@@ -31,7 +45,43 @@ function Index(props: any) {
   useDidShow(async () => {
     const bank_list = await interceptor.get('bank/index', {})
     console.log(bank_list)
+    bank_list.map((item: IBank) => {
+      item.bank_color = setBankColor(item.bank_flag)
+    })
+    setBankList(bank_list)
   })
+
+  const setBankColor = (bank_flag: string) => {
+    if (bank_flag == 'CCB') {
+      return 'linear-gradient(241deg,rgba(11,186,251,1),rgba(66,133,236,1))'
+    } else if (bank_flag == 'CMB') {
+      return 'linear-gradient(224deg,rgba(254,108,127,1),rgba(255,90,96,1))'
+    } else if (bank_flag == 'BOC') {
+      return 'linear-gradient(224deg,rgba(253,107,127,1),rgba(255,89,95,1))'
+    } else if (bank_flag == 'ABC') {
+      return 'linear-gradient(224deg,rgba(120,217,201,1),rgba(97,232,181,1))'
+    } else if (bank_flag == 'ICBC') {
+      return 'linear-gradient(224deg,rgba(253,107,127,1),rgba(255,89,95,1))'
+    } else if (bank_flag == 'PSBC') {
+      return 'linear-gradient(224deg,rgba(120,217,201,1),rgba(97,232,181,1))'
+    } else if (bank_flag == 'COMM') {
+      return 'linear-gradient(241deg,rgba(11,185,251,1),rgba(66,133,235,1))'
+    } else if (bank_flag == 'CIB') {
+      return 'linear-gradient(241deg,rgba(11,185,251,1),rgba(66,133,235,1))'
+    } else if (bank_flag == 'CITIC') {
+      return 'linear-gradient(224deg,rgba(253,107,127,1),rgba(255,89,95,1))'
+    } else if (bank_flag == 'CEB') {
+      return 'linear-gradient(241deg,rgba(171,92,211,1),rgba(117,96,215,1))'
+    } else if (bank_flag == 'SPDB') {
+      return 'linear-gradient(241deg,rgba(11,185,251,1),rgba(66,133,235,1))'
+    } else if (bank_flag == 'CMBC') {
+      return 'linear-gradient(241deg,rgba(11,185,251,1),rgba(66,133,235,1))'
+    } else if (bank_flag == 'SPABANK') {
+      return 'linear-gradient(224deg,rgba(247,203,107,0.99),rgba(251,169,127,1))'
+    } else {
+      return 'linear-gradient(241deg,rgba(11,185,251,1),rgba(66,133,235,1))'
+    }
+  }
 
   const BankType = (type: string) => {
     if (type == 'DC') {
@@ -66,21 +116,36 @@ function Index(props: any) {
               <View
                 key={index}
                 className='bank_item'
-                style={{ background: item.background_color }}
+                style={{ background: item.bank_color }}
               >
-                <View className='bank_icon'>
-                  <Image className='icon' src={item.bank_icon} />
-                </View>
                 <View className='bank_info'>
-                  <View className='bank_name'>
-                    <Text className='name_text'>{item.bank_name}银行</Text>
+                  <View className='left'>
+                    <View className='bank_icon'>
+                      <Image
+                        className='icon'
+                        src={`${imageUrl}bank/${item.bank_flag}@2x.png`}
+                      />
+                    </View>
                   </View>
-                  <View className='bank_type'>{BankType(item.card_type)}</View>
-                  <View className='bank_number'>
-                    <Text className='number'>
-                      {BankNumber(item.bank_number)}
-                    </Text>
+                  <View className='right'>
+                    <View className='bank_name'>
+                      <Text className='name_text'>{item.bank_name}</Text>
+                    </View>
+                    <View className='bank_type'>
+                      {BankType(item.card_type)}
+                    </View>
+                    <View className='bank_number'>
+                      <Text className='number'>
+                        {BankNumber(item.card_number)}
+                      </Text>
+                    </View>
                   </View>
+                </View>
+                <View className='bank_icon_bg'>
+                  <Image
+                    className='icon_bg'
+                    src={`${imageUrl}bank/${item.bank_flag}_bg@2x.png`}
+                  />
                 </View>
               </View>
             )

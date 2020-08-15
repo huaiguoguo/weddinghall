@@ -173,7 +173,14 @@ function Index(props: any) {
             </View>
           </View>
           <View className='right'>
-            <View className='bind_btn'>
+            <View
+              className='bind_btn'
+              onClick={() =>
+                Taro.navigateTo({
+                  url: '/pages/business/setting/store_profile/index',
+                })
+              }
+            >
               <Text className='bind_btn_text'>去绑定</Text>
             </View>
           </View>

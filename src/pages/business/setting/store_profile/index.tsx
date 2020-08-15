@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { View, Text, Input, Textarea, Image, Radio } from '@tarojs/components'
+import {
+  View,
+  Text,
+  Input,
+  Textarea,
+  Image,
+  Radio,
+  RichText,
+} from '@tarojs/components'
 import Taro, { useReady } from '@tarojs/taro'
 import { imageUrl, baseUrl } from '@api/baseUrl'
 import interceptor from '@api/interceptor'
@@ -34,6 +42,7 @@ function Index(props: any) {
   const [licensePic, setLicensePic] = useState<string>('')
   const [frontIDPic, setFrontIDPic] = useState<string>('')
   const [backIDPic, setBackIDPic] = useState<string>('')
+  const [agreement, setAgreement] = useState<string>('')
 
   useReady(async () => {
     const res: IProfile = await interceptor.get('wxuser/getgroupprofile')
@@ -43,6 +52,10 @@ function Index(props: any) {
     setLicensePic(res.business_license)
     setFrontIDPic(res.corporate_identity_card)
     setBackIDPic(res.corporate_identity_card2)
+    const { content } = await interceptor.get('article/detailByName', {
+      name: 'ruzhuhuiyuanxieyi',
+    })
+    setAgreement(content)
   })
 
   const redirectNext = () => {
@@ -292,10 +305,11 @@ function Index(props: any) {
         >
           {/* <Text className='popup_type'>取消预约</Text> */}
           <View className='popup_content' onClick={confirm}>
-            <Text
-              dangerouslySetInnerHTML={{ __html: 'adfa' }}
+            {/* <Text dangerouslySetInnerHTML={{ __html: 'adfa' }}></Text> */}
+            <RichText
               className='popup_content_item popup_text'
-            ></Text>
+              nodes={agreement}
+            />
             {/* <Text className='popup_content_item order_sn'>210234567821035</Text>
             <Text className='popup_content_item popup_text'>的预约吗?</Text> */}
           </View>
