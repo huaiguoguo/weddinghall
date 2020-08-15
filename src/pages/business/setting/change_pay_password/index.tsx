@@ -102,11 +102,22 @@ function Index(props: any) {
             onInput={(e) => handleOnInput(e.detail.value, 'mobile')}
           />
           {!!mobile && (
-            <Image
-              onClick={() => setMobile('')}
+            <View
               className='remove'
-              src={`${imageUrl}business/setting/remove@2x.png`}
-            />
+              onClick={(e) => {
+                e.stopPropagation()
+                Taro.hideKeyboard({
+                  complete: (res) => {
+                    setMobile('')
+                  },
+                })
+              }}
+            >
+              <Image
+                className='remove_icon'
+                src={`${imageUrl}business/setting/remove@2x.png`}
+              />
+            </View>
           )}
         </View>
         <View className='form_item'>
@@ -120,11 +131,22 @@ function Index(props: any) {
             onInput={(e) => handleOnInput(e.detail.value, 'password')}
           />
           {!!password && (
-            <Image
-              onClick={() => setPassword('')}
+            <View
               className='remove'
-              src={`${imageUrl}business/setting/remove@2x.png`}
-            />
+              onClick={(e) => {
+                e.stopPropagation()
+                Taro.hideKeyboard({
+                  complete: (res) => {
+                    setPassword('')
+                  },
+                })
+              }}
+            >
+              <Image
+                className='remove_icon'
+                src={`${imageUrl}business/setting/remove@2x.png`}
+              />
+            </View>
           )}
         </View>
         <View className='form_item'>
@@ -138,11 +160,22 @@ function Index(props: any) {
             onInput={(e) => handleOnInput(e.detail.value, 'confirm_password')}
           />
           {!!passwordConfirm && (
-            <Image
-              onClick={() => setPasswordConfirm('')}
+            <View
               className='remove'
-              src={`${imageUrl}business/setting/remove@2x.png`}
-            />
+              onClick={(e) => {
+                e.stopPropagation()
+                Taro.hideKeyboard({
+                  complete: (res) => {
+                    setPasswordConfirm('')
+                  },
+                })
+              }}
+            >
+              <Image
+                className='remove_icon'
+                src={`${imageUrl}business/setting/remove@2x.png`}
+              />
+            </View>
           )}
         </View>
       </View>
