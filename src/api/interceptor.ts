@@ -1,4 +1,5 @@
-import Taro, { getStorageSync } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import refreshToken from '@utils/token'
 // import baseUrl from './baseUrl'
 
 interface method {
@@ -23,7 +24,7 @@ const Request = (
     mask: true,
   })
 
-  const token = getStorageSync('token')
+  const token = refreshToken()
   const head = Object.assign(header, {
     token,
     'content-type': 'application/json',
@@ -50,8 +51,6 @@ const Request = (
               }
             },
           })
-          // Taro.navigateBack()
-          // return reject(res.data)
         }
       },
       fail: function (error) {

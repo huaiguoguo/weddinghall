@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import http from '@api/interceptor'
+import { baseUrl } from '@api/baseUrl'
 
 function refreshToken() {
   const dateObj = new Date().getTime()
@@ -9,38 +9,52 @@ function refreshToken() {
   let token = Taro.getStorageSync('token')
   let token_expire = Taro.getStorageSync('token_expire')
 
-  if (isLogin) {
+  if (!isLogin || !token) {
+    Taro.login({
+      success: async function (res) {
+        const { data } = await Taro.request({
+          url: `${baseUrl}/wxuser/getTokenByWxcode`,
+          data: { code: res.code },
+          method: 'POST',
+        })
+        if (data.code == 1) {
+          try {
+            Taro.setStorageSync('isLogin', 1)
+            Taro.setStorageSync('token', data.data.token)
+            Taro.setStorageSync('token_expire', data.data.expiretime)
+            Taro.setStorageSync('company_name', data.data.company_name)
+            Taro.setStorageSync('company_mobile', data.data.company_mobile)
+            Taro.setStorageSync(
+              'is_set_pay_password',
+              data.data.is_set_pay_password
+            )
+          } catch (e) {
+            console.log(e)
+          }
+        } else {
+          Taro.showModal({ title: data.msg, showCancel: false })
+        }
+      },
+    })
+  } else {
     if (token_expire < currentTime) {
       try {
-        http.post('/token/refresh', { token }).then((response) => {
-          Taro.setStorageSync('token', response.token)
-          Taro.setStorageSync('token_expire', response.expiretime)
+        Taro.request({
+          url: `${baseUrl}/token/refresh`,
+          data: { token },
+          method: 'POST',
+        }).then(({ data }) => {
+          if (data.code == 1) {
+            Taro.setStorageSync('token', data.token)
+            Taro.setStorageSync('token_expire', data.expiretime)
+          } else {
+            Taro.showModal({ title: data.msg, showCancel: false })
+          }
         })
       } catch (e) {
         console.log(e)
       }
     }
-  } else {
-    Taro.login({
-      success: async function (res) {
-        const response = await http.post('/wxuser/getTokenByWxcode', {
-          code: res.code,
-        })
-        // console.log(response);
-        console.log('================= start')
-        console.log(response)
-        console.log('================= end')
-        try {
-          Taro.setStorageSync('isLogin', 1)
-          Taro.setStorageSync('token', response.token)
-          Taro.setStorageSync('token_expire', response.expiretime)
-          Taro.setStorageSync('company_name', response.company_name)
-          Taro.setStorageSync('company_mobile', response.company_mobile)
-        } catch (e) {
-          console.log(e)
-        }
-      },
-    })
   }
 
   Taro.getStorageSync('token')

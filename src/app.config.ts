@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/business/setting/bank/index',
     'pages/home/index',
     'pages/business/setting/bank/add_bank/index',
     'pages/business/setting/bank/set_pay_password/index',
@@ -22,7 +23,6 @@ export default {
     'pages/business/setting/store_profile/store_agreement/index',
 
     'pages/business/setting/change_pay_password/index',
-    'pages/business/setting/bank/index',
 
     'pages/business/setting/agreement/index',
     'pages/business/setting/clear/index',

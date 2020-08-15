@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Input, Picker, Button, Radio } from '@tarojs/components'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow, getStorageSync } from '@tarojs/taro'
 
 import interceptor from '@api/interceptor'
 
@@ -118,17 +118,21 @@ function Index(props: any) {
       type,
     }
 
-    const response = await interceptor.post('bank/add', { data })
+    const response = await interceptor.post('bank/add', { ...data })
     console.log(response)
     Taro.showModal({
       title: '添加成功',
       showCancel: false,
       success: function (res) {
+        const is_set_pay_password = getStorageSync('is_set_pay_password')
         if (res.confirm) {
-          Taro.navigateTo({
-            url: '/pages/business/setting/bank/set_pay_password/index',
-          })
-          return
+          if (!is_set_pay_password) {
+            Taro.navigateTo({
+              url: '/pages/business/setting/bank/set_pay_password/index',
+            })
+          } else {
+            Taro.navigateBack({ delta: 1 })
+          }
         }
       },
     })

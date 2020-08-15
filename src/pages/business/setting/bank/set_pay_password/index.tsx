@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { View, Text, Input } from '@tarojs/components'
-import Taro, { useDidShow, useReady } from '@tarojs/taro'
+import Taro, { useDidShow, useReady, getStorageSync } from '@tarojs/taro'
 
 import './index.scss'
 import interceptor from '@api/interceptor'
@@ -111,9 +111,7 @@ function Index(props: any) {
       showCancel: false,
       success: function (res) {
         if (res.confirm) {
-          Taro.navigateTo({
-            url: '/pages/business/setting/bank/index',
-          })
+          Taro.navigateBack({ delta: 2 })
         }
       },
     })
